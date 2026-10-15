@@ -99,7 +99,11 @@ Hosted proof **passed on producer
 [real Core integration](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38807146800)
 (actual Blend and mutable Tansu campaigns). [Durable hosted evidence](docs/hosted-proof.md)
 retains application proof bytes, logs, provenance and an explicit diagnostic redaction in this repository.
-Later documentation or hardening commits do not change that producer attribution.
+The hardened producer
+`615522022c7a8fdcc957b111fb13073cba47094d` also passed [68-test fast CI](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38813239421)
+and [both real Core campaigns](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38813244977); its separate
+[durable bundle and replay command](docs/hosted-proof.md#hardened-producer-validation)
+are retained. Documentation-only commits do not change either producer attribution.
 
 Fast CI runs on pushes and pull requests. Expensive Core integration runs **only
 when manually dispatched**; a green fast check alone is not new live archival proof.

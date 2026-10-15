@@ -102,3 +102,85 @@ The separate `python3 scripts/verify_evidence.py` checks original local Stage 1/
 and preparation proof, preserving its 2546-file/seven-replay scope. Hosted proof is
 not silently added to that historical corpus. See [architecture](architecture.md)
 and [limitations](limitations.md) for exact trust and support boundaries.
+
+## Hardened producer validation
+
+The validation/classification/invariant hardening subsequently passed on exact
+producer [`615522022c7a8fdcc957b111fb13073cba47094d`](https://github.com/mxrtins04/soroban-statecycle/commit/615522022c7a8fdcc957b111fb13073cba47094d):
+
+- [Fast run 38813239421](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38813239421): **68 tests**, compilation, original local
+  proof, original hosted proof and checkout sanity PASS.
+- [Real Core run 38813244977](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38813244977): genuine fresh Blend and mutable Tansu
+  control/archival/restore/negative/retry/raw verification PASS. Both downloaded raw
+  campaigns also pass independent offline recovery replay.
+- [Artifact 12009467151](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38813244977/artifacts/12009467151):
+  SHA-256 `69c28d4dba6e029539731aa8862e28d9d9e43f3cb514e1a6d8fed0d6bc51efc3`; downloaded ZIP matches GitHub's digest.
+
+The [new bundle manifest](hosted-proof/hardening-20261015/manifest.json),
+[original uploaded ZIP](hosted-proof/hardening-20261015/core-artifact.zip),
+[Core run metadata](hosted-proof/hardening-20261015/core-run.json),
+[Core job results](hosted-proof/hardening-20261015/core-jobs.json),
+[artifact metadata](hosted-proof/hardening-20261015/core-artifacts.json),
+[Core logs](hosted-proof/hardening-20261015/core-logs.zip),
+[fast run metadata](hosted-proof/hardening-20261015/fast-run.json),
+[fast job results](hosted-proof/hardening-20261015/fast-jobs.json),
+[fast logs](hosted-proof/hardening-20261015/fast-logs.zip) and
+[runner environment](hosted-proof/hardening-20261015/runner-environments.json) are
+retained in Git. The producing workflow already omitted the standalone root-key
+diagnostic, so this newer ZIP is **byte-identical** to the hosted upload; the manifest
+records an identity mapping for that diagnostic, with no post-download edit.
+Original c19751d evidence above remains separately attributed and unchanged.
+
+Exact new contract IDs, eviction ledgers and first/retry restore ledgers:
+
+```json
+{
+  "blend": {
+    "contract_id": "CBP7OZLS4H6PTB4TWW7LZJP3FKEPCNCPQF4HVLTP2VMJV2WI3K3KWSZE",
+    "evictions": {
+      "instance": 94
+    },
+    "restore_ledgers": [
+      [
+        96
+      ],
+      [
+        98
+      ]
+    ]
+  },
+  "tansu": {
+    "contract_id": "CCUURCUGK3TS4VU7GANYYKKOUPRCAC6K4SXFCFXYNGJI5SKMA7XZ7QGI",
+    "evictions": {
+      "instance": 167,
+      "project": 173,
+      "commit": 175
+    },
+    "restore_ledgers": [
+      [
+        178,
+        180,
+        181,
+        182
+      ],
+      [
+        184,
+        186,
+        187,
+        189
+      ]
+    ]
+  }
+}
+```
+
+Verify the newer bundle independently, without Docker, network or signing keys:
+
+```sh
+python3 scripts/verify_hosted_evidence.py --bundle docs/hosted-proof/hardening-20261015
+```
+
+The default command continues to verify the original c19751d bundle. Neither
+historical producer is silently rewritten to a later documentation-only HEAD.
+The follow-up evidence/documentation commit changes no executable inputs relative
+to this tested hardened producer; fast CI still verifies its public checkout.

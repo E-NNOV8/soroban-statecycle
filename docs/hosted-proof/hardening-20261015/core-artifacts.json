@@ -1,0 +1,25 @@
+{
+  "total_count": 1,
+  "artifacts": [
+    {
+      "id": 12009467151,
+      "node_id": "MDg6QXJ0aWZhY3QxMjAwOTQ2NzE1MQ==",
+      "name": "statecycle-core-evidence",
+      "size_in_bytes": 668955,
+      "url": "https://api.github.com/repos/mxrtins04/soroban-statecycle/actions/artifacts/12009467151",
+      "archive_download_url": "https://api.github.com/repos/mxrtins04/soroban-statecycle/actions/artifacts/12009467151/zip",
+      "expired": false,
+      "digest": "sha256:69c28d4dba6e029539731aa8862e28d9d9e43f3cb514e1a6d8fed0d6bc51efc3",
+      "created_at": "2026-10-15T21:57:12Z",
+      "updated_at": "2026-10-15T21:57:12Z",
+      "expires_at": "2027-01-13T21:53:31Z",
+      "workflow_run": {
+        "id": 38813244977,
+        "repository_id": 1421322357,
+        "head_repository_id": 1421322357,
+        "head_branch": "main",
+        "head_sha": "615522022c7a8fdcc957b111fb13073cba47094d"
+      }
+    }
+  ]
+}

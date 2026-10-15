@@ -35,3 +35,34 @@ then real Core integration on the new executable producer. Evidence parsing and
 invariant validation changed, so documentation-only reuse of old hosted proof is
 insufficient to certify the new SHA. New run results must remain separately attributed.
 The original hosted producer stays c19751d; future hardening CI does not rewrite it.
+
+## Executed validation and file responsibilities
+
+All local fast checks pass (68 tests, compilation, shell/YAML sanity, links, public
+archive secret scan and public-only checkout). Original 2546 retained files and
+seven offline runs still verify; all 1715 original historical file identities are
+unchanged. Original hosted raw evidence verifies under the hardened engine.
+Hardened producer `615522022c7a8fdcc957b111fb13073cba47094d` passed hosted fast run 38813239421 and genuine Core run
+38813244977; both hosted raw campaigns independently replay successfully. The
+uploaded Docker diagnostic contains the omission marker and no Stellar secret key.
+No checks/assertions/archival semantics were weakened, and no target source changed.
+
+The execution commit changes six code/CI/test files: `campaign.py` (type-sensitive
+invariants), `scenario.py` (input classification and actual hook constraints),
+`verify_hosted_evidence.py` (safe retained proof verification), `test_hardening.py`
+(boundary/integrity regressions), `engine-tests.yml` (public proof fast gate), and
+`local-integration.yml` (redact diagnostic before upload). Active documentation is
+README, CONTRIBUTING, architecture, evidence, hosted-proof, limitations, this audit,
+reproducibility and scenario reference; each corrects a documented gap above.
+
+Each of the two public proof directories contains ten files: artifact ZIP (raw
+application proof), artifact metadata (GitHub ID/digest), Core run/job metadata
+(producer and execution outcomes), Core log ZIP (execution trace), fast run/job
+metadata (producer and fast outcomes), fast log ZIP (actual test/verifier output),
+runner environment JSON (exact OS/image/Python), and manifest (hashes, attribution
+and diagnostic mapping). The original ZIP has a disclosed diagnostic-only retention
+redaction; the newer uploaded ZIP is retained byte-identically. The second commit
+adds only captured evidence and documentation, without executable changes. It does
+not require another expensive Core run or claim that the doc HEAD produced earlier
+measurements. No mandatory blocker remains for the explicitly bounded alpha MVP;
+adoption/endorsement and unsupported profiles remain unproven.
