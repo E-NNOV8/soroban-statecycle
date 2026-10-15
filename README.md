@@ -18,6 +18,10 @@ RestoreFootprint transactions. StateCycle requires Core eviction metadata and
 restoration receipts for every declared key; expired TTL or missing RPC data alone
 cannot establish archival.
 
+For Soroban contract developers and reviewers who need a repeatable test of
+persistent-state continuity, the scenario supplies application calls, explicit
+ledger keys and assertions; the engine handles the lifecycle and raw proof.
+
 This is a **0.1.0-alpha local developer tool**, with a deliberately narrow profile.
 [Stage 1](docs/stage1-flagship.md) passed on Blend V2, including five fresh-state
 repetitions. [Stage 2](docs/stage2-reusability.md) passed on Blend and independent
@@ -86,9 +90,28 @@ python3 scripts/check_reproducibility.py
 Evidence verification hashes the retained corpus and replays both Stage 2 campaigns
 and all five Stage 1 records offline in disposable copies. It needs the pinned CLI
 for XDR decoding, but no running node. [Evidence integrity](docs/evidence.md) explains
-historical paths and manifests. All 57 behavior tests pass locally on Python 3.12 and 3.14. Fast hosted CI is configured for these checks;
-**hosted execution has not yet occurred**. A separate manual workflow runs the
-heavier real Core campaigns. Local verification does not establish hosted CI proof.
+historical paths and manifests.
+
+Hosted proof **passed on producer
+`c19751db48702fe075b24da749a65a611ba3d1b6`**:
+[fast checks](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38807089360)
+(57 tests, compilation, retained replay) and
+[real Core integration](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38807146800)
+(actual Blend and mutable Tansu campaigns). [Durable hosted evidence](docs/hosted-proof.md)
+retains application proof bytes, logs, provenance and an explicit diagnostic redaction in this repository.
+Later documentation or hardening commits do not change that producer attribution.
+
+Fast CI runs on pushes and pull requests. Expensive Core integration runs **only
+when manually dispatched**; a green fast check alone is not new live archival proof.
+The hosted retention verifier is also runnable offline:
+
+```sh
+python3 scripts/verify_hosted_evidence.py
+```
+
+[Architecture](docs/architecture.md) explains the actual Core/RPC boundary and
+checkpoint model. [Limitations and trust boundaries](docs/limitations.md) and
+[contributing](CONTRIBUTING.md) describe supported use and substantive future work.
 
 ## Limits
 

@@ -22,7 +22,14 @@ the historical records and retained sources.
 
 ## Fresh checkout
 
-From the repository root:
+Clone the public repository, install Python/Docker and the pinned CLI described
+above, then run from the repository root (including when using `PYTHONPATH=src`):
+
+```sh
+git clone https://github.com/mxrtins04/soroban-statecycle.git
+cd soroban-statecycle
+bash scripts/install_stellar.sh .local/bin
+```
 
 ```sh
 export PATH="$PWD/.local/bin:$PATH"  # if using the optional installer
@@ -69,6 +76,7 @@ infrastructure and must not be pointed at public networks.
 bash scripts/check.sh
 python3 scripts/verify_evidence.py
 python3 scripts/check_reproducibility.py
+python3 scripts/verify_hosted_evidence.py
 ```
 
 The first runs all behavior tests and compilation. Some tests need Stellar CLI;
@@ -77,8 +85,27 @@ The lightweight reproducibility check validates active scenarios, fixture hashes
 version, public documentation requirements and workflow structure without Docker.
 The retained verifier makes no new live-network claim.
 
-Fast hosted CI runs all these checks on Python 3.12. The separate manually triggered
-integration workflow provisions the pinned network and runs both genuine campaigns,
-uploading diagnostics even on failure. It has not been executed on a hosted runner.
-Neither workflow substitutes mocked archival. First publication and hosted execution
-require owner authorization; neither has occurred during local preparation.
+Fast hosted CI runs these checks on Python 3.12 for pushes and pull requests,
+including offline replay of the original hosted artifact. The separate manually
+triggered integration workflow provisions the pinned network and runs both genuine
+campaigns, uploading diagnostics even on failure. Both workflows actually passed
+on producer `c19751db48702fe075b24da749a65a611ba3d1b6`; see
+[hosted proof and retained raw evidence](hosted-proof.md). That proof does not imply
+Core integration runs on every push or that a later SHA has been tested live.
+
+This Linux-container profile is the supported environment. The installer uses
+Linux x86_64 GNU binaries and requires `bash`, `curl`, `tar`, `sha256sum`, `install`
+and `uname` (standard GNU/Linux utilities). macOS/Windows/ARM fresh setup is NOT
+TESTED. No original workspace checkout, global signing alias, pre-funded identity
+or private Codex note is needed: setup resolves retained WASMs from this checkout
+and generates its own ignored CLI configuration. The standalone campaign command
+assumes the documented CLI version; setup enforces 28.1.0 explicitly.
+
+To rerun hosted integration as a repository operator with GitHub CLI permission:
+
+```sh
+gh workflow run local-integration.yml --repo mxrtins04/soroban-statecycle --ref main
+```
+
+This dispatch is a real integration job, not an offline verifier. Retain its exact
+`head_sha`, run/job metadata and artifacts before attributing new hosted proof.

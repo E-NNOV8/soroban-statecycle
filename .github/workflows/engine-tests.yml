@@ -22,5 +22,7 @@ jobs:
         run: bash scripts/check.sh
       - name: Retained hashes, references and offline evidence replay
         run: python3 scripts/verify_evidence.py
+      - name: Retained hosted provenance and raw replay
+        run: python3 scripts/verify_hosted_evidence.py
       - name: Lightweight fresh-checkout sanity
         run: python3 scripts/check_reproducibility.py

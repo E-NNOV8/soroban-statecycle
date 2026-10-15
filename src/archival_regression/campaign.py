@@ -17,6 +17,17 @@ from .preflight import NoRedirect
 
 from .errors import Inconclusive, Violation
 
+def same(left, right):
+    """JSON invariant equality preserves types (not Python's True == 1)."""
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return left.keys() == right.keys() and all(same(left[k], right[k]) for k in left)
+    if isinstance(left, list):
+        return len(left) == len(right) and all(same(a, b) for a, b in zip(left, right))
+    return left == right
+
+
 def scval(value):
     """Decode supported scalar/map SCVals; reject unsupported/missing variants."""
     if not isinstance(value, dict) or len(value) != 1:
@@ -59,7 +70,7 @@ def compare(raw, public, bindings):
                 value=scval(value)
                 for part in binding.get('value_path',[]):
                     value=value[part]
-                if value!=public[fn]:
+                if not same(value, public[fn]):
                     raise Violation('raw/public mismatch: '+fn)
             return
         storage = raw['contract_data']['val']['contract_instance']['storage']
@@ -67,7 +78,7 @@ def compare(raw, public, bindings):
         if len(values) != len(storage):
             raise Inconclusive('duplicate instance key')
         for fn, key in bindings.items():
-            if values[key] != public[fn]:
+            if not same(values[key], public[fn]):
                 raise Violation('raw/public mismatch: '+fn)
     except (KeyError, TypeError, IndexError) as e:
         raise Inconclusive('missing raw/public assertion input') from e
@@ -80,7 +91,7 @@ def require_recovered(state):
         raise Violation('required explicit restoration omitted')
     if not state.get('after'):
         raise Inconclusive('missing post-restore observations')
-    if state['before'] != state['after']:
+    if not same(state['before'], state['after']):
         raise Violation('public invariant changed')
     if state['raw_before'] != state['raw_after']:
         raise Violation('raw instance changed')
@@ -252,11 +263,11 @@ class Campaign:
             initial_raw,_,_=self.raw()
             compare(initial_raw,self.state['initial'],self.config['bindings'])
             self.state['raw_initial']=initial_raw
-            if self.state['initial']!=self.config['expected_initial']:
+            if not same(self.state['initial'], self.config['expected_initial']):
                 raise Violation('initial state does not equal declared X')
             self.state['mutation_transactions']=self.actions('mutate')
         self.public('before')
-        if 'expected_before' in self.config and self.state['before']!=self.config['expected_before']:
+        if 'expected_before' in self.config and not same(self.state['before'], self.config['expected_before']):
             raise Violation('pre-archive state does not equal declared Y')
         raw, entry, ledger = self.raw()
         compare(raw,self.state['before'],self.config['bindings'])
@@ -265,12 +276,12 @@ class Campaign:
         if 'entries' in self.config:
             self.state['live_entries']=entry
         if self.config.get('mutation_required'):
-            if self.state['initial']==self.state['before'] or self.state['raw_initial']==raw:
+            if same(self.state['initial'], self.state['before']) or self.state['raw_initial']==raw:
                 raise Violation('mutable state did not change from X to Y')
         self.public('control')
         control_raw, _, _ = self.raw()
         compare(control_raw,self.state['control'],self.config['bindings'])
-        if self.state['control'] != self.state['before'] or control_raw != raw:
+        if not same(self.state['control'], self.state['before']) or control_raw != raw:
             raise Violation('unchanged live control changed')
         self.state['control_result'] = 'PASS'
         self.save()

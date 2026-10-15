@@ -46,8 +46,12 @@ the normalized SCVal). Paths contain object keys or array indices. Example:
 | Public binding name | Required for each binding. Return JSON representing the invariant value. |
 | `restore` | Required. Real restoration command(s) covering the declared keys and required code dependencies. |
 
-A hook is one argv array or a list of argv arrays executed sequentially. Public
-observations use the final command stdout. `{id}` expands to the deployed contract
+`deploy` and each public observation hook must be **one argv array**. Optional
+`setup`/`mutate` and required `restore` accept one argv or a list executed sequentially.
+Public observation names cannot be reserved phase names (`deploy`, `setup`, `mutate`,
+`restore`, `advance`). Deployment/getters must each produce exactly one transaction
+hash in CLI stderr and a successful receipt; use `--send yes` for getters, as the
+fixtures do. A getter returning cached/simulated stdout alone is insufficient. `{id}` expands to the deployed contract
 ID; `{salt}` expands before deployment. Other brace-containing JSON arguments remain
 literal. Commands must terminate successfully; infrastructure/hook failures classify
 INCONCLUSIVE. Include explicit signer, network and any local CLI config-directory
@@ -59,13 +63,14 @@ arguments. Setup-generated copies do this without altering the engine.
 | --- | --- |
 | `name`, `source` | Descriptive provenance metadata; no engine dispatch by target name. |
 | `archive_timeout_seconds` | 1–3600, default 240. A timeout is INCONCLUSIVE, not archival proof. |
-| `expected_initial` | Map of public binding names to expected values before mutation. |
-| `expected_before` | Map of public binding names to expected values after mutation/before archival. |
+| `expected_initial` | Complete map of public binding names to expected values before mutation; required whenever `mutate` is supplied; used only with that hook. |
+| `expected_before` | Complete map of public binding names to expected values after mutation/before archival. |
 | `mutation_required` | Require `mutate`, distinct `expected_initial` / `expected_before` and observed X → Y. |
 
 Even without explicit expected values, public/raw values must agree before and
 after recovery and preserve the pre-archive invariant. Mutation-required Tansu
-also asserts the initial and changed commit values explicitly. Configuration is
+also asserts the initial and changed commit values explicitly. JSON types matter:
+integer `1` is different from boolean `true`, including inside nested values. Configuration is
 validated before starting; existing campaign output directories are refused.
 
 ## Output and lifecycle
@@ -86,3 +91,10 @@ The lower-level `python3 -m archival_regression.campaign --help` exposes checkpo
 phases for inspection/recovery. Prefer `run` for the complete expected-negative and
 retry sequence. See the two JSON fixtures for full examples; no new target requires
 an engine target-name branch.
+
+`source` is descriptive provenance, not a generic executable WASM attestation.
+The bundled setup verifies fixture hashes before upload and checks uploaded hashes;
+custom setup hooks must supply their own artifact/deployment verification. Arbitrary
+ledger keys need to be known in advance; unsupported SCVal/XDR shapes classify
+INCONCLUSIVE rather than being silently omitted. There is no generic shell sandbox,
+secret scrubber or automatic key discovery. See [trust boundaries](limitations.md).
