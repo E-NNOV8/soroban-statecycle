@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "deploy",
+    "--wasm",
+    "/home/mxr/Documents/Projects/drips_projects/blend-contracts-v2/target/wasm32-unknown-unknown/optimized/pool_factory.wasm",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin",
+    "--",
+    "--pool_init_meta",
+    "{\"pool_hash\": \"274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1\", \"backstop\": \"GDTR7BTCCRJOKFNVR4UARUUITZQM7MPVFQTOXO233ZD2TZPZOYUVXBKL\", \"blnd_id\": \"GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ\"}"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:28.839556+00:00",
+  "exit_code": 0,
+  "stdout": "CA3JX42W32345O6AIUO3GJGBXHP2VZCAHQBZOC3RKJ6QAVSNG2VBKMYC\n",
+  "stderr": "\u2139\ufe0f  Uploading contract WASM\u2026\n\u2139\ufe0f  Skipping install because wasm already installed\n\u2139\ufe0f  Deploying contract using wasm hash e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9\n\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: a757e0bfbe720b740235b49328e290d81adf61a12ce4834c06ae418ea29c59d4\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+}

@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "control": "PASS",
+  "positive": "PASS",
+  "negative": "PASS (required explicit restore omitted; exit 1)",
+  "retry": "PASS (separate process after committed restore)",
+  "raw_verification": "PASS"
+}

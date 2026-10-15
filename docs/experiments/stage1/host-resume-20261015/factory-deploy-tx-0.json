@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "--max-time",
+    "20",
+    "-sS",
+    "http://localhost:8000/rpc",
+    "-H",
+    "Content-Type: application/json",
+    "-d",
+    "{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getTransaction\", \"params\": {\"hash\": \"e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9\"}}"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:37.319971+00:00",
+  "exit_code": 0,
+  "stdout": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"latestLedger\":4032,\"latestLedgerCloseTime\":\"1792084117\",\"oldestLedger\":7,\"oldestLedgerCloseTime\":\"1792076562\",\"status\":\"NOT_FOUND\",\"txHash\":\"e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9\",\"applicationOrder\":0,\"feeBump\":false,\"events\":{},\"ledger\":0,\"createdAt\":\"0\"}}",
+  "stderr": ""
+}

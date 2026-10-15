@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgACZXYAAAtsAAAAUQAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAwAAAAAAAAAAAAAAAF8JQhGW+EfT0C7isx0HB9sDtxDlKUkjEfT4XpVrQeGWUDjYW5gB0u5Lyqek426kN8UElCkoMO+z+7MNGAJKA5AAAAAAeWL0LfUYtqJCidk4s/fi8qRdXQWKd4HQTJodHob8PLYAAAABAAAAEgAAAAAAAAAAXwlCEZb4R9PQLuKzHQcH2wO3EOUpSSMR9PhelWtB4ZYAAAABAAAAAAAAAAIAAAAAAAAAAAAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhllA42FuYAdLuS8qnpONupDfFBJQpKDDvs/uzDRgCSgOQAAAAAHli9C31GLaiQonZOLP34vKkXV0FineB0EyaHR6G/Dy2AAAAAQAAABIAAAAAAAAAAF8JQhGW+EfT0C7isx0HB9sDtxDlKUkjEfT4XpVrQeGWAAAAAQAAAAAAAAABEGuecJ3W7WawhjM7WVchAmPXVlmxsdHMWsmusUsRrJ8AAAANX19jb25zdHJ1Y3RvcgAAAAAAAAEAAAASAAAAAAAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAAAAAAAAABAAAAAQAAAAEAAAABAAAAAAAAAAIAAAAGAAAAARBrnnCd1u1msIYzO1lXIQJj11ZZsbHRzFrJrrFLEayfAAAAFAAAAAEAAAAHeWL0LfUYtqJCidk4s/fi8qRdXQWKd4HQTJodHob8PLYA3j7XAAEnxAABKOQAAAAAAAJlEgAAAAFrQeGWAAAAQMY9i3iSR047hj2FDN6hWcats4thmhdsspBHl0Nih1ieZPvO+VtKiG8MVXWeUvMKBeoaTepHoYVjSaI/umv/Ywk="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"fee\":157046,\"seq_num\":\"12558484373585\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"invoke_host_function\":{\"host_function\":{\"create_contract_v2\":{\"contract_id_preimage\":{\"address\":{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"salt\":\"5038d85b9801d2ee4bcaa7a4e36ea437c50494292830efb3fbb30d18024a0390\"}},\"executable\":{\"wasm\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"},\"constructor_args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"}]}},\"auth\":[{\"credentials\":\"source_account\",\"root_invocation\":{\"function\":{\"create_contract_v2_host_fn\":{\"contract_id_preimage\":{\"address\":{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"salt\":\"5038d85b9801d2ee4bcaa7a4e36ea437c50494292830efb3fbb30d18024a0390\"}},\"executable\":{\"wasm\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"},\"constructor_args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"}]}},\"sub_invocations\":[{\"function\":{\"contract_fn\":{\"contract_address\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"function_name\":\"__constructor\",\"args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"}]}},\"sub_invocations\":[]}]}}]}}}],\"ext\":{\"v1\":{\"ext\":{\"v1\":{\"archived_soroban_entries\":[1]}},\"resources\":{\"footprint\":{\"read_only\":[],\"read_write\":[{\"contract_data\":{\"contract\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}},{\"contract_code\":{\"hash\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"}}]},\"instructions\":14565079,\"disk_read_bytes\":75716,\"write_bytes\":76004},\"resource_fee\":\"156946\"}}},\"signatures\":[{\"hint\":\"6b41e196\",\"signature\":\"c63d8b7892474e3b863d850cdea159c6adb38b619a176cb2904797436287589e64fbcef95b4a886f0c55759e52f30a05ea1a4dea47a1856349a23fba6bff6309\"}]}}\n",
+  "stderr": ""
+}

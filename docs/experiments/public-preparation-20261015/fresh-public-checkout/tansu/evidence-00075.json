@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerCloseMeta",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAAAJyK2lS04c55f/BGg0CXNIKXgTpyayzBMixUmsjXALxAAAABwEmN1zTEjRqDboxKlJ9h8dq8SCkgpEanMp3SCIai8NR0SreOCpe5q7LA8hLETYekN9r32L77oHuZUD33xJ3ULaAAAAAGrRNTcAAAAAAAAAAQAAAACmjx2WifUDMKq1adZ3MnTUv7/pAfI2JSFQzmtMguCT9wAAAEBuWJhoLwVtydQ6gz/xxoMc/roARWtdlSSCXwDunz0tiARZNr5gbVpMrkKZO/TX+FoftZsuDIrWr7TXD1Jg2sgG3z9hmASpL9tAVxktxD3XSOp3itxSvEmM6AUkwBS4ERm1B8dChalBG3I2NzyJR9JlmT9myYt42Sr+jEzPQeS/owAAAJAN4Lazp2QAAAAAAAAFh+Y9AAAAAAAAAAAAAAAAAAAAZABMS0AAAABk/rRckjhvQ7Ot073XvAoVrI+0u96fBKIEJ4yPKOp1ePsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEmN1zTEjRqDboxKlJ9h8dq8SCkgpEanMp3SCIai8NRwAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwvgAAAAAA=="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"v2\":{\"ext\":\"v0\",\"ledger_header\":{\"hash\":\"09c8ada54b4e1ce797ff046834097348297813a726b2cc1322c549ac8d700bc4\",\"header\":{\"ledger_version\":28,\"previous_ledger_hash\":\"0498dd734c48d1a836e8c4a949f61f1dabc482920a446a7329dd20886a2f0d47\",\"scp_value\":{\"tx_set_hash\":\"44ab78e0a97b9abb2c0f212c44d87a437daf7d8befba07b99503df7c49dd42da\",\"close_time\":\"1792095543\",\"upgrades\":[],\"ext\":{\"signed\":{\"node_id\":\"GCTI6HMWRH2QGMFKWVU5M5ZSOTKL7P7JAHZDMJJBKDHGWTEC4CJ7O3DU\",\"signature\":\"6e5898682f056dc9d43a833ff1c6831cfeba00456b5d9524825f00ee9f3d2d88045936be606d5a4cae42993bf4d7f85a1fb59b2e0c8ad6afb4d70f5260dac806\"}}},\"tx_set_result_hash\":\"df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119\",\"bucket_list_hash\":\"b507c74285a9411b7236373c8947d265993f66c98b78d92afe8c4ccf41e4bfa3\",\"ledger_seq\":144,\"total_coins\":\"1000000000000000000\",\"fee_pool\":\"92792381\",\"inflation_seq\":0,\"id_pool\":\"0\",\"base_fee\":100,\"base_reserve\":5000000,\"max_tx_set_size\":100,\"skip_list\":[\"feb45c92386f43b3add3bdd7bc0a15ac8fb4bbde9f04a204278c8f28ea7578fb\",\"0000000000000000000000000000000000000000000000000000000000000000\",\"0000000000000000000000000000000000000000000000000000000000000000\",\"0000000000000000000000000000000000000000000000000000000000000000\"],\"ext\":\"v0\"},\"ext\":\"v0\"},\"tx_set\":{\"v1\":{\"previous_ledger_hash\":\"0498dd734c48d1a836e8c4a949f61f1dabc482920a446a7329dd20886a2f0d47\",\"phases\":[{\"v0\":[]},{\"v1\":{\"base_fee\":null,\"execution_stages\":[]}}]}},\"tx_processing\":[],\"upgrades_processing\":[],\"scp_info\":[],\"total_byte_size_of_live_soroban_state\":\"199648\",\"evicted_keys\":[]}}\n",
+  "stderr": ""
+}

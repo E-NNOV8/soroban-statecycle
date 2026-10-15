@@ -1,0 +1,57 @@
+{
+  "result": "PASS",
+  "results": [
+    {
+      "name": "blend-live",
+      "result": "PASS"
+    },
+    {
+      "name": "tansu-live",
+      "result": "PASS"
+    },
+    {
+      "stage1_run": 1,
+      "exit_code": 0,
+      "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+      "stderr": "",
+      "note": "disposable copy; original corpus unchanged"
+    },
+    {
+      "stage1_run": 2,
+      "exit_code": 0,
+      "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+      "stderr": "",
+      "note": "disposable copy; original corpus unchanged"
+    },
+    {
+      "stage1_run": 3,
+      "exit_code": 0,
+      "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+      "stderr": "",
+      "note": "disposable copy; original corpus unchanged"
+    },
+    {
+      "stage1_run": 4,
+      "exit_code": 0,
+      "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+      "stderr": "",
+      "note": "disposable copy; original corpus unchanged"
+    },
+    {
+      "stage1_run": 5,
+      "exit_code": 0,
+      "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+      "stderr": "",
+      "note": "disposable copy; original corpus unchanged"
+    },
+    {
+      "case": "missing raw post-restore evidence",
+      "exit_code": 2,
+      "stdout": "{\"result\": \"INCONCLUSIVE\", \"reason\": \"[Errno 2] No such file or directory: '/tmp/tmp9k5zlag9/missing-evidence/evidence-00205.json'\", \"phase\": \"verify\", \"exit_code\": 2}\n",
+      "stderr": ""
+    }
+  ],
+  "stage1_preserved_file_count": 1048,
+  "stage1_changed_files": [],
+  "stage1_added_files": []
+}

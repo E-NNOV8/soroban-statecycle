@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "python3",
+    "-m",
+    "archival_regression.campaign",
+    "--config",
+    "docs/experiments/stage2/invalid-phase-config.json",
+    "--output",
+    "/tmp/archival-invalid-config-must-not-create",
+    "--phase",
+    "archive"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T19:43:24.035873+00:00",
+  "exit_code": 2,
+  "stdout": "{\"result\": \"INCONCLUSIVE\", \"reason\": \"missing hook: restore\", \"phase\": \"archive\", \"exit_code\": 2}\n",
+  "stderr": ""
+}

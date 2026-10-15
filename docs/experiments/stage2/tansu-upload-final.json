@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "upload",
+    "--wasm",
+    "docs/experiments/stage2/artifacts/tansu.wasm",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T19:12:56.672873+00:00",
+  "exit_code": 0,
+  "stdout": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: e956a262b167789d13874e491fdeb0df27a21acd149c0371aa032d31ac8621e9\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

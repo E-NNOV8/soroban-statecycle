@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAOL0AAAASAAAAGwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAAAAAAHe8AfMbnRNeER+k3bbCzpKG7MEoO1GVHOT6KK3JZHqhgAAAApnZXRfY29tbWl0AAAAAAABAAAADQAAACC4f42ZPWVAr1egZOy6Ur57uixkHDQrPEcNejFAOTVJtQAAAAAAAAABAAAAAAAAAAQAAAAGAAAAAd7wB8xudE14RH6TdtsLOkobswSg7UZUc5PoorclkeqGAAAAEAAAAAEAAAACAAAADwAAAANLZXkAAAAADQAAACC4f42ZPWVAr1egZOy6Ur57uixkHDQrPEcNejFAOTVJtQAAAAEAAAAGAAAAAd7wB8xudE14RH6TdtsLOkobswSg7UZUc5PoorclkeqGAAAAEAAAAAEAAAACAAAADwAAAAhMYXN0SGFzaAAAAA0AAAAguH+NmT1lQK9XoGTsulK+e7osZBw0KzxHDXoxQDk1SbUAAAABAAAABgAAAAHe8AfMbnRNeER+k3bbCzpKG7MEoO1GVHOT6KK3JZHqhgAAABQAAAABAAAAB3li9C31GLaiQonZOLP34vKkXV0FineB0EyaHR6G/Dy2AAAAAAAPWBwAAAAAAAAAAAAAAAAAADhZAAAAAaCoRDQAAABAj6jrK5tnlYeoHkRWAXNUjrB6IZQw5UOBUhoCGG5v/pPpPDiyZpbt8gmty69sUHOpm+woFbO0iHI3TKqRMgC5CA=="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\",\"fee\":14525,\"seq_num\":\"77309411355\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"invoke_host_function\":{\"host_function\":{\"invoke_contract\":{\"contract_address\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"function_name\":\"get_commit\",\"args\":[{\"bytes\":\"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\"}]}},\"auth\":[]}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[{\"contract_data\":{\"contract\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"key\":{\"vec\":[{\"symbol\":\"Key\"},{\"bytes\":\"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\"}]},\"durability\":\"persistent\"}},{\"contract_data\":{\"contract\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"key\":{\"vec\":[{\"symbol\":\"LastHash\"},{\"bytes\":\"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\"}]},\"durability\":\"persistent\"}},{\"contract_data\":{\"contract\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}},{\"contract_code\":{\"hash\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"}}],\"read_write\":[]},\"instructions\":1005596,\"disk_read_bytes\":0,\"write_bytes\":0},\"resource_fee\":\"14425\"}}},\"signatures\":[{\"hint\":\"a0a84434\",\"signature\":\"8fa8eb2b9b679587a81e44560173548eb07a219430e54381521a02186e6ffe93e93c38b26696edf209adcbaf6c5073a99bec2815b3b48872374caa913200b908\"}]}}\n",
+  "stderr": ""
+}

@@ -1,0 +1,24 @@
+[package]
+name = "moderc3156-example"
+version = "0.1.0"
+edition = "2021"
+description = "Example xycLoans flash loan receiver contract."
+homepage = "https://xycloans.xycloo.com/"
+repository = "https://github.com/xycloo/xycloans"
+authors = ["Tommaso De Ponti <tommaso@xycloans.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[features]
+testutils = ["soroban-sdk/testutils"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
+pool = { path = "../../pool" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features=["testutils"] }

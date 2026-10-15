@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "-m",
+    "archival_regression.campaign",
+    "--config",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/docs/experiments/stage1/host-resume-20261015/run-4-config.json",
+    "--output",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/docs/experiments/stage1/host-resume-20261015/run-4",
+    "--phase",
+    "verify"
+  ],
+  "exit_code": 1,
+  "stdout": "{\"result\": \"FAIL\", \"reason\": \"required explicit restoration omitted\", \"phase\": \"verify\", \"exit_code\": 1}\n",
+  "stderr": "",
+  "expected_exit": 1
+}

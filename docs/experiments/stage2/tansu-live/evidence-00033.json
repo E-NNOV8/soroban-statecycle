@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin",
+    "--send",
+    "yes",
+    "--",
+    "commit",
+    "--maintainer",
+    "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN",
+    "--project_key",
+    "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5",
+    "--hash",
+    "0524376d293be41ee3bf5ca102cee2a88bea3d03"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: c192d84bb329552e0183075ea00c5dda7884c626359c8c41b40122a98ecaf249\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\ud83d\udcc5 CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG - Success - Event: Commit (commit), project_key: \"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\", hash: \"0524376d293be41ee3bf5ca102cee2a88bea3d03\"\n"
+}

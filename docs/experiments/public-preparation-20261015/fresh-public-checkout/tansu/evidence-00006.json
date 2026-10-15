@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X",
+    "--rpc-url",
+    "http://localhost:18002/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--send",
+    "yes",
+    "--",
+    "set_collateral_contract",
+    "--admin",
+    "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+    "--collateral_contract",
+    "{\"address\": \"CCJX4YMW2OGGYJXULMJSIBWWZLKDWXF3EZYFQTZLV4ACFFLEH2OANJJL\", \"wasm_hash\": null}"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: bd2342eece2af4fbb62251e90fe17f5e6a152d004757bcf4c239abf4b51510d0\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\ud83d\udcc5 CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X - Success - Event: ContractUpdated (contract_updated), admin: \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\", contract_key: \"collateral\", address: \"CCJX4YMW2OGGYJXULMJSIBWWZLKDWXF3EZYFQTZLV4ACFFLEH2OANJJL\", wasm_hash: null\n"
+}

@@ -1,0 +1,6 @@
+{
+  "command": "cargo build --locked --release --target wasm32v1-none --manifest-path .local/stage2/tansu-source/Cargo.toml --package tansu --target-dir .local/stage2/tansu-build > docs/experiments/stage2/tansu-build-network.log 2>&1",
+  "exit_code": 0,
+  "provenance": "local Codex CLI host command result; downloads were approved after locked offline build missed a cached dependency",
+  "log": "tansu-build-network.log"
+}

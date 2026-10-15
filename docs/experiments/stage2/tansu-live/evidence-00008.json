@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAAaXUAAAtsAAAAUgAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAAAAAAEQa55wndbtZrCGMztZVyECY9dWWbGx0cxaya6xSxGsnwAAABdzZXRfY29sbGF0ZXJhbF9jb250cmFjdAAAAAACAAAAEgAAAAAAAAAAXwlCEZb4R9PQLuKzHQcH2wO3EOUpSSMR9PhelWtB4ZYAAAARAAAAAQAAAAIAAAAPAAAAB2FkZHJlc3MAAAAAEgAAAAEGZ/RFKRV0rwW55fj0j5MIGgunSFXpKBi4PKsMkfQYFQAAAA8AAAAJd2FzbV9oYXNoAAAAAAAAAQAAAAEAAAAAAAAAAAAAAAEQa55wndbtZrCGMztZVyECY9dWWbGx0cxaya6xSxGsnwAAABdzZXRfY29sbGF0ZXJhbF9jb250cmFjdAAAAAACAAAAEgAAAAAAAAAAXwlCEZb4R9PQLuKzHQcH2wO3EOUpSSMR9PhelWtB4ZYAAAARAAAAAQAAAAIAAAAPAAAAB2FkZHJlc3MAAAAAEgAAAAEGZ/RFKRV0rwW55fj0j5MIGgunSFXpKBi4PKsMkfQYFQAAAA8AAAAJd2FzbV9oYXNoAAAAAAAAAQAAAAAAAAABAAAAAQAAAAEAAAAAAAAAAQAAAAd5YvQt9Ri2okKJ2Tiz9+LypF1dBYp3gdBMmh0ehvw8tgAAAAIAAAAGAAAAAQZn9EUpFXSvBbnl+PSPkwgaC6dIVekoGLg8qwyR9BgVAAAAFAAAAAEAAAAGAAAAARBrnnCd1u1msIYzO1lXIQJj11ZZsbHRzFrJrrFLEayfAAAAFAAAAAEAD+avAAAB6AAAA4QAAAAAAABpEQAAAAFrQeGWAAAAQM+4IMmof+cIoSmS/7h4ITHTql+nIuIt94d06t8FSkvYSec8d8Dpfs2gyBFK9cNfhgc9Nt4JCkguDtxfQjlCAAo="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"fee\":26997,\"seq_num\":\"12558484373586\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"invoke_host_function\":{\"host_function\":{\"invoke_contract\":{\"contract_address\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"function_name\":\"set_collateral_contract\",\"args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"},{\"map\":[{\"key\":{\"symbol\":\"address\"},\"val\":{\"address\":\"CADGP5CFFEKXJLYFXHS7R5EPSMEBUC5HJBK6SKAYXA6KWDER6QMBLOPG\"}},{\"key\":{\"symbol\":\"wasm_hash\"},\"val\":\"void\"}]}]}},\"auth\":[{\"credentials\":\"source_account\",\"root_invocation\":{\"function\":{\"contract_fn\":{\"contract_address\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"function_name\":\"set_collateral_contract\",\"args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"},{\"map\":[{\"key\":{\"symbol\":\"address\"},\"val\":{\"address\":\"CADGP5CFFEKXJLYFXHS7R5EPSMEBUC5HJBK6SKAYXA6KWDER6QMBLOPG\"}},{\"key\":{\"symbol\":\"wasm_hash\"},\"val\":\"void\"}]}]}},\"sub_invocations\":[]}}]}}}],\"ext\":{\"v1\":{\"ext\":{\"v1\":{\"archived_soroban_entries\":[0]}},\"resources\":{\"footprint\":{\"read_only\":[{\"contract_code\":{\"hash\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"}}],\"read_write\":[{\"contract_data\":{\"contract\":\"CADGP5CFFEKXJLYFXHS7R5EPSMEBUC5HJBK6SKAYXA6KWDER6QMBLOPG\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}},{\"contract_data\":{\"contract\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}}]},\"instructions\":1042095,\"disk_read_bytes\":488,\"write_bytes\":900},\"resource_fee\":\"26897\"}}},\"signatures\":[{\"hint\":\"6b41e196\",\"signature\":\"cfb820c9a87fe708a12992ffb8782131d3aa5fa722e22df78774eadf054a4bd849e73c77c0e97ecda0c8114af5c35f86073d36de090a482e0edc5f423942000a\"}]}}\n",
+  "stderr": ""
+}

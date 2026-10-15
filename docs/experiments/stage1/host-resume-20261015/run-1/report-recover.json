@@ -1,0 +1,6 @@
+{
+  "result": "INCONCLUSIVE",
+  "reason": "restore did not target observed key",
+  "phase": "recover",
+  "exit_code": 2
+}

@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+    "contract",
+    "deploy",
+    "--wasm-hash",
+    "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+    "--salt",
+    "6a618119686232c3d2d1f58d83200b34615ccadf0b29c6d91f7b2e123ab7dd85",
+    "--rpc-url",
+    "http://localhost:18001/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--",
+    "--admin",
+    "GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\n",
+  "stderr": "\u2139\ufe0f  Deploying contract using wasm hash 7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\n\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 5d61583fdd0fb936f60dc39624885530475251e23e5ba2335e18f60fa6860fcf\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+}

@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "--max-time",
+    "20",
+    "-sS",
+    "http://localhost:8000/rpc",
+    "-H",
+    "Content-Type: application/json",
+    "-d",
+    "{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getNetwork\"}"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T19:27:31.673817+00:00",
+  "exit_code": 0,
+  "stdout": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"friendbotUrl\":\"http://localhost:8000/friendbot\",\"passphrase\":\"Standalone Network ; February 2017\",\"protocolVersion\":28}}",
+  "stderr": ""
+}

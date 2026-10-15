@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-m",
+    "archival_regression",
+    "run",
+    "scenarios/tansu-project-commit.json",
+    "--output",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/docs/experiments/stage2/tansu-live"
+  ],
+  "exit_code": 0,
+  "stdout": "archive {\"result\": \"INCONCLUSIVE\", \"reason\": \"checkpoint preserved; recovery is not complete\", \"phase\": \"archive\", \"exit_code\": 2}\nnegative {\"result\": \"FAIL\", \"reason\": \"required explicit restoration omitted\", \"phase\": \"verify\", \"exit_code\": 1}\nrestore-checkpoint {\"result\": \"INCONCLUSIVE\", \"reason\": \"checkpoint preserved; recovery is not complete\", \"phase\": \"restore\", \"exit_code\": 2}\nresume-retry {\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"recover\", \"exit_code\": 0}\nverify {\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+  "stderr": ""
+}

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sh",
+    "-c",
+    "sed \"/^NODE_SEED=/d\" /opt/stellar/core/etc/stellar-core.cfg"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:10:11.130597+00:00",
+  "exit_code": 0,
+  "stdout": "# simple configuration for a local test \"network\"\n# see stellar-core_example.cfg for a description of the configuration parameters\n\nHTTP_PORT=11626\nPUBLIC_HTTP_PORT=true\nLOG_FILE_PATH=\"/var/log/stellar-core/stellar-core-{datetime:%Y-%m-%d_%H-%M-%S}.log\"\nMANUAL_CLOSE=false\nARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING=true\n\nNETWORK_PASSPHRASE=\"Standalone Network ; February 2017\"\nNODE_IS_VALIDATOR=true\n\nDATABASE=\"sqlite3:///opt/stellar/core/stellar.db\"\n\nFAILURE_SAFETY=0\nUNSAFE_QUORUM=true\n#The public keys of the Stellar testnet servers\n[QUORUM_SET]\nTHRESHOLD_PERCENT=100\nVALIDATORS=[\"$self\"]\n\n[HISTORY.vs]\nget=\"cp /opt/stellar/history-archive/data/{0} {1}\"\nput=\"cp {0} /opt/stellar/history-archive/data/{1}\"\nmkdir=\"mkdir -p /opt/stellar/history-archive/data/{0}\"\n",
+  "stderr": ""
+}

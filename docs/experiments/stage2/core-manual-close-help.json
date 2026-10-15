@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "stellar-core",
+    "http-command",
+    "manualclose?ledgerSeq=0&closeTime=0"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:07:50.421244+00:00",
+  "exit_code": 0,
+  "stdout": "Content-Length: 117\nContent-Type: application/json\n\n{\"exception\": \"The 'manualclose' command accepts parameters only if the configuration includes RUN_STANDALONE=true.\"}\n",
+  "stderr": "2026-10-15T18:07:50.735 [default INFO] Config from stellar-core.cfg\n2026-10-15T18:07:50.738 [default INFO] 'ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING' enabled in configuration file - node will not function properly with most networks\n2026-10-15T18:07:50.739 [default INFO] Using QUORUM_SET: {\n   \"t\" : 1,\n   \"v\" : [ \"self\" ]\n}\n\n"
+}

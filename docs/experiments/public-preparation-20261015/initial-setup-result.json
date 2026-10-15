@@ -1,0 +1,15 @@
+{
+  "note": "Command result transcribed from local CLI tool output; signing-key output was never retained",
+  "argv": [
+    "python3",
+    "scripts/setup_local.py",
+    "--port",
+    "18000",
+    "--container",
+    "statecycle-repro",
+    "--output",
+    ".local/repro-check"
+  ],
+  "exit_code": 2,
+  "stdout": "{\"result\": \"INCONCLUSIVE\", \"reason\": \"HTTP Error 502: Bad Gateway\"}\n"
+}

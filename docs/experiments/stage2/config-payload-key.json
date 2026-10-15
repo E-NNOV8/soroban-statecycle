@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "encode",
+    "--type",
+    "LedgerKey"
+  ],
+  "stdin": "{\"contract_data\": {\"contract\": \"CCNP4YJQRICXLK6TFQ7QUUAIQPBEALS7YMC5ADEZPZPNZ2DDTWNMIAND\", \"key\": {\"bytes\": \"b25e179c26e80a6767162c9edcba83218744ed3f0f62fbf9c2d780009ec84009\"}, \"durability\": \"temporary\"}}",
+  "started_at": "2026-10-15T18:04:41.362433+00:00",
+  "exit_code": 0,
+  "stdout": "AAAABgAAAAGa/mEwigV1q9MsPwpQCIPCQC5fwwXQDJl+XtzoY52axAAAAA0AAAAgsl4XnCboCmdnFiye3LqDIYdE7T8PYvv5wteAAJ7IQAkAAAAA\n",
+  "stderr": ""
+}

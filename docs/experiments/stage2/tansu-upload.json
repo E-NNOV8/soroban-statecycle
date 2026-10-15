@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "upload",
+    "--wasm",
+    "docs/experiments/stage2/artifacts/tansu.wasm",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:12:41.981847+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "\u274c error: reading file docs/experiments/stage2/artifacts/tansu.wasm: No such file or directory (os error 2)\n"
+}

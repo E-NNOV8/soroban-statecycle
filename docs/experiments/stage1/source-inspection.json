@@ -1,0 +1,30 @@
+{
+  "requested_at": "2026-10-15T14:44:56.960598+00:00",
+  "method": "web tool, rendered public source (cached crawl possible)",
+  "sources": [
+    {
+      "url": "https://github.com/blend-capital/blend-contracts-v2/blob/main/pool/src/contract.rs",
+      "retrieved": true,
+      "immutable_revision": null,
+      "finding": "get_config and get_admin public calls; update_pool is admin-authorized; __constructor delegates to execute_initialize. Not compiled or executed."
+    },
+    {
+      "url": "https://api.github.com/repos/blend-capital/blend-contracts-v2/commits/main",
+      "retrieved": false,
+      "error": "URL not accessible via web tool"
+    },
+    {
+      "url": "https://github.com/stellar/stellar-core/releases/latest",
+      "retrieved": true,
+      "redirect": "https://github.com/stellar/stellar-core/releases/tag/v29.0.0",
+      "finding": "Release metadata only; no binary downloaded or executed."
+    }
+  ],
+  "not_evidence_of": [
+    "Blend artifact availability",
+    "working provisioning",
+    "real archival",
+    "restoration",
+    "external compatibility"
+  ]
+}

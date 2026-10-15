@@ -1,0 +1,224 @@
+{
+  "stage": "Stage 1",
+  "result": "PASS",
+  "recorded_at": "2026-10-15T17:30:17.779400+00:00",
+  "source_revision": null,
+  "source_revision_note": "main is unborn; exact final file identities are retained below",
+  "source_hashes": {
+    "src/archival_regression/__init__.py": "7202ba06c491ee7eec8ea239550124893732ef7ea4efbb2a2c1e709f3eb8323f",
+    "src/archival_regression/campaign.py": "f62ecc2927d310f37af2d8591ba708d753c117923a5f83d631d6f7aa2c91d718",
+    "src/archival_regression/preflight.py": "7da6ded93ae3b54b983446cb44a02918fc921d66b700df28d3c239db949133ba",
+    "tests/test_campaign.py": "cdf04d39dfae7b480499400b075faf05e0df0e1eeb2ce965cfc058a4084f892a",
+    "tests/test_preflight.py": "01e28c227dc21aef0c47f47559f1275c7f1f27045378187b4f1d3534a958c535"
+  },
+  "repetitions": [
+    {
+      "run": 1,
+      "pool": "CDXTNWGN2ZM2LMCH4ZTL74CBTD4DDKMBAIAD7UJPWY7DQLZAY72GRW3X",
+      "deployment": {
+        "hash": "2869424baddac18fa78317379aa5986af4f887b43abab94104bd44babc450315",
+        "ledger": 4838
+      },
+      "live_ledger": 4844,
+      "live_until": 4901,
+      "archive": {
+        "ledger": 4902,
+        "hash": "8c73911af63ed6a479a1d56d1154d03f562b30cc3b674edc9055bbcfcc5fd863",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CDXTNWGN2ZM2LMCH4ZTL74CBTD4DDKMBAIAD7UJPWY7DQLZAY72GRW3X",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      "restoration": [
+        {
+          "hash": "4fedb5074f34916ff2daebb543036018ad38db8a12dfdff98431a71d7da009e9",
+          "ledger": 4906
+        },
+        {
+          "hash": "56f6eae5f65bf0f19992a371d83abbc1f8b4ef8b375a2e3593e9f09a522212b3",
+          "ledger": 4947
+        }
+      ],
+      "restored_ledger": 4953,
+      "control": "PASS",
+      "omission_negative_exit": 1,
+      "interruption": "separate process exit after committed restore checkpoint before application recovery",
+      "retry": "PASS; already-live empty-footprint RestoreFootprint and unchanged live raw state",
+      "public_raw_invariant": "PASS",
+      "final_verifier_exit": 0
+    },
+    {
+      "run": 2,
+      "pool": "CCYKZIH7LTRXHPSLVUR3SQPL4ZFPTJAMWXIBSM6MHZ567W4OAOKFVY6H",
+      "deployment": {
+        "hash": "a21d1c566a682920a6103e38d7e9653f5f3a0616922925429b4d3d0125ae3ee1",
+        "ledger": 4982
+      },
+      "live_ledger": 4988,
+      "live_until": 5045,
+      "archive": {
+        "ledger": 5046,
+        "hash": "b8edcb916a1fb52d8627933d078e29f03ff52afa0483521e71c899bcea585fb7",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CCYKZIH7LTRXHPSLVUR3SQPL4ZFPTJAMWXIBSM6MHZ567W4OAOKFVY6H",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      "restoration": [
+        {
+          "hash": "99cb4b943cf2dc4302dbfa7cd23e502c386691698295bbd5be5b3079610da242",
+          "ledger": 5050
+        },
+        {
+          "hash": "51a4af915efb89f4ce0425f76cad69afc7c7dd569ed82eb2ebcbfa0c8feadf15",
+          "ledger": 5052
+        }
+      ],
+      "restored_ledger": 5059,
+      "control": "PASS",
+      "omission_negative_exit": 1,
+      "interruption": "separate process exit after committed restore checkpoint before application recovery",
+      "retry": "PASS; already-live empty-footprint RestoreFootprint and unchanged live raw state",
+      "public_raw_invariant": "PASS",
+      "final_verifier_exit": 0
+    },
+    {
+      "run": 3,
+      "pool": "CDCS6IS2ZGBDTZRFUHPBEWYUWXJUMCHLAUBAWMVSJUQ6J55LDTN5NFAJ",
+      "deployment": {
+        "hash": "b42a5a124b6076055e988e98259111228a8a44d14239ca2e163045abdc26a297",
+        "ledger": 5061
+      },
+      "live_ledger": 5067,
+      "live_until": 5124,
+      "archive": {
+        "ledger": 5125,
+        "hash": "123e4ce9010040c0c46a38b4ba20473bbef2431e858ef41bd1a4a2bfdbfaf7d9",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CDCS6IS2ZGBDTZRFUHPBEWYUWXJUMCHLAUBAWMVSJUQ6J55LDTN5NFAJ",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      "restoration": [
+        {
+          "hash": "c1ba834f94b66eb559264189c140a7ac9b935f524d6f2a05785836a350d5d14f",
+          "ledger": 5129
+        },
+        {
+          "hash": "b219ddc20ebbdd54705359bad6d873dde2386824ed9272e9a72c16c1297d84d6",
+          "ledger": 5131
+        }
+      ],
+      "restored_ledger": 5137,
+      "control": "PASS",
+      "omission_negative_exit": 1,
+      "interruption": "separate process exit after committed restore checkpoint before application recovery",
+      "retry": "PASS; already-live empty-footprint RestoreFootprint and unchanged live raw state",
+      "public_raw_invariant": "PASS",
+      "final_verifier_exit": 0
+    },
+    {
+      "run": 4,
+      "pool": "CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI",
+      "deployment": {
+        "hash": "826d30002bf36761637f0e72e631ebe406ffada10f1a159003cf3d2d955c46a3",
+        "ledger": 5139
+      },
+      "live_ledger": 5145,
+      "live_until": 5202,
+      "archive": {
+        "ledger": 5203,
+        "hash": "8134c619c744e8e93baf002f5347a8a4432d238a6bece87b55944695a48e9042",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      "restoration": [
+        {
+          "hash": "dda0f58ff6cacad1f9faec8d3e079ccee3b4714278dab8654cae013941b1b8bf",
+          "ledger": 5208
+        },
+        {
+          "hash": "1b8d6ad4d0fe0536f28b9b4add8a41f2b5cd112e6122afdeb72442870f3f910e",
+          "ledger": 5211
+        }
+      ],
+      "restored_ledger": 5217,
+      "control": "PASS",
+      "omission_negative_exit": 1,
+      "interruption": "separate process exit after committed restore checkpoint before application recovery",
+      "retry": "PASS; already-live empty-footprint RestoreFootprint and unchanged live raw state",
+      "public_raw_invariant": "PASS",
+      "final_verifier_exit": 0
+    },
+    {
+      "run": 5,
+      "pool": "CAUZLF2W3MGXHERIHYAMKNBZFJJUBV6YXAYFRK5ECI3MSTYV3IJRBE6S",
+      "deployment": {
+        "hash": "74bbb148a2db35c42ffea3b5648446b123ae2c93542987140e498384109e7cbf",
+        "ledger": 5219
+      },
+      "live_ledger": 5224,
+      "live_until": 5282,
+      "archive": {
+        "ledger": 5283,
+        "hash": "517c9393fd72bd6914bd84cc2b2daa20ec6a4b75946d80abf52a7f8df2d93023",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CAUZLF2W3MGXHERIHYAMKNBZFJJUBV6YXAYFRK5ECI3MSTYV3IJRBE6S",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      "restoration": [
+        {
+          "hash": "a29555b378f5a6cfe67b486c313b801e232823ba6b48a9955ec77d66782834f9",
+          "ledger": 5287
+        },
+        {
+          "hash": "68542e332732f5fc0f50207251526ad9f87a43761746b92bd96e5123248dac1d",
+          "ledger": 5290
+        }
+      ],
+      "restored_ledger": 5297,
+      "control": "PASS",
+      "omission_negative_exit": 1,
+      "interruption": "separate process exit after committed restore checkpoint before application recovery",
+      "retry": "PASS; already-live empty-footprint RestoreFootprint and unchanged live raw state",
+      "public_raw_invariant": "PASS",
+      "final_verifier_exit": 0
+    }
+  ],
+  "fresh_state_repetitions": 5,
+  "independent_target_builds_executed": 0,
+  "build_test_provenance": "owner reports Blend build/tests passed; agent verified revision, clean tracked diff, artifact hashes and actual unchanged deployment",
+  "integration_classification": "SMALL GENERAL PRODUCT GAP",
+  "profile": "Core v29.0.0; RPC local; active protocol 28; ledger-close metadata v2 and transaction metadata v4",
+  "boundaries": [
+    "configuration/admin instance only; no lending position or real oracle/backstop calls",
+    "five fresh pools share one factory/code/network",
+    "controlled interruption between committed lifecycle phases, not an in-flight crash",
+    "negative checks required explicit restoration policy, not a Blend defect or auto-restore failure",
+    "local short-TTL/scan settings remain applied; existing long TTLs not reduced",
+    "no public network, remote, push, PR, release, outreach or Stage 2"
+  ]
+}

@@ -1,0 +1,40 @@
+name: Real Core integration (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned Stellar CLI
+        run: |
+          bash scripts/install_stellar.sh "$RUNNER_TEMP/stellar-bin"
+          echo "$RUNNER_TEMP/stellar-bin" >> "$GITHUB_PATH"
+      - name: Provision isolated local Quickstart
+        run: python3 scripts/setup_local.py
+      - name: Blend real archival campaign
+        env:
+          PYTHONPATH: src
+        run: python3 -m archival_regression run .local/statecycle/scenarios/blend-config-admin.json --output outputs/blend
+      - name: Tansu mutable-state archival campaign
+        env:
+          PYTHONPATH: src
+        run: python3 -m archival_regression run .local/statecycle/scenarios/tansu-project-commit.json --output outputs/tansu
+      - name: Collect diagnostics (exclude signing identities)
+        if: always()
+        run: |
+          mkdir -p outputs/setup
+          cp .local/statecycle/setup-*.json outputs/setup/ 2>/dev/null || true
+          docker logs statecycle-local > outputs/setup/docker.log 2>&1 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: statecycle-core-evidence
+          path: outputs/
+          if-no-files-found: error

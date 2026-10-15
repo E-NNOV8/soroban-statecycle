@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "docker",
+    "cp",
+    "stellar-local:/opt/stellar/core/buckets/bucket-d179d2a922cb49a316ae96ac132ae95e46d73616b9e9a7a2f03dbec19cce8c58.xdr",
+    "docs/experiments/stage1/host-resume-20261015/hot-archive-d179d2a922cb49a316ae96ac132ae95e46d73616b9e9a7a2f03dbec19cce8c58.xdr"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:21:33.644325+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

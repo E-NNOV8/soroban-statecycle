@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sed",
+    "-n",
+    "690,790p",
+    "/start"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:09:41.832083+00:00",
+  "exit_code": 0,
+  "stdout": "    local status\n\n    response=\"$(curl -sG 'http://localhost:11626/tx' --data-urlencode \"blob=$tx\")\"\n    status=\"$(echo \"$response\" | jq -r '.status')\"\n\n    echo \"upgrades: soroban config: $label: $txid .. $status\"\n\n    case \"$status\" in\n      PENDING|DUPLICATE)\n        return 0\n        ;;\n      TRY_AGAIN_LATER)\n        if [ \"$attempt\" -ge \"$max_attempts\" ]; then\n          echo \"$response\"\n          fail_soroban_config_upgrade \"Unable to submit Soroban config transaction '$label' after $attempt attempts\"\n        fi\n\n        attempt=$((attempt+1))\n        sleep 1\n        ;;\n      ERROR|FILTERED)\n        echo \"$response\"\n        fail_soroban_config_upgrade \"Unable to submit Soroban config transaction '$label'\"\n        ;;\n      *)\n        echo \"$response\"\n        fail_soroban_config_upgrade \"Unexpected status '$status' while submitting Soroban config transaction '$label'\"\n        ;;\n    esac\n  done\n}\n\nfunction apply_soroban_config_tx() {\n  submit_soroban_config_tx \"$1\" \"$2\" \"$3\"\n  wait_for_ledger_transaction_count \"$4\"\n}\n\nfunction set_soroban_config_upgrade() {\n  local key=\"$1\"\n  local attempt=1\n  local max_attempts=10\n\n  while true; do\n    local output\n\n    output=\"$(curl -sG 'http://localhost:11626/upgrades?mode=set&upgradetime=1970-01-01T00:00:00Z' --data-urlencode \"configupgradesetkey=$key\")\"\n    echo \"$output\"\n\n    if [ \"$output\" != \"Error setting configUpgradeSet\" ]; then\n      return 0\n    fi\n\n    if [ \"$attempt\" -ge \"$max_attempts\" ]; then\n      fail_soroban_config_upgrade \"Unable to upgrade Soroban Config Settings\"\n    fi\n\n    attempt=$((attempt+1))\n    sleep 1\n  done\n}\n\nfunction upgrade_soroban_config() {\n  local config_file_path=\"$1\"\n  local seq_num=\"$2\"\n  local upgrade_output\n  local line_count\n  \n  # Generate txs for installing, deploying and executing the contract that\n  # uploads a new config. Use the network root account to submit the txs.\n  upgrade_output=\"$(echo \"$NETWORK_ROOT_SECRET_KEY\" \\\n    | stellar-core get-settings-upgrade-txs \\\n      \"$NETWORK_ROOT_ACCOUNT_ID\" \\\n      \"$seq_num\" \\\n      \"$NETWORK_PASSPHRASE\" \\\n      --xdr \"$(stellar-xdr encode --type ConfigUpgradeSet < \"$config_file_path\")\" \\\n      --signtxs)\"\n\n  line_count=\"$(echo \"$upgrade_output\" | wc -l | tr -d ' ')\"\n\n  if [ \"$line_count\" -ne 7 ] && [ \"$line_count\" -ne 9 ]; then\n    echo \"$upgrade_output\"\n    fail_soroban_config_upgrade \"Unexpected output from stellar-core get-settings-upgrade-txs\"\n  fi\n\n  echo \"$upgrade_output\" | {\n    local expected_tx_count\n    local tx\n    local txid\n    local key\n\n    expected_tx_count=$(( $(get_ledger_transaction_count) + 1 ))\n\n    # If 9 lines are returned instead of 7, core included a restore transaction.\n    if [ \"$line_count\" -eq 9 ]; then\n      read tx\n      read txid\n      apply_soroban_config_tx \"restore contract\" \"$tx\" \"$txid\" \"$expected_tx_count\"\n      expected_tx_count=$((expected_tx_count+1))\n    fi\n\n    read tx\n",
+  "stderr": ""
+}

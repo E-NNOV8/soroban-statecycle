@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS",
+    "--rpc-url",
+    "http://localhost:18001/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--send",
+    "yes",
+    "--",
+    "set_collateral_contract",
+    "--admin",
+    "GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ",
+    "--collateral_contract",
+    "{\"address\": \"CDBIDYTPVLSPJSCI5MWXAUOWY75NKSBNEKB4UJEYOODL65X3G4WPSYWI\", \"wasm_hash\": null}"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: f84c418bff7cbf83d1e35003d5137aa6e8a09f7e8c450b21664a29d6134c45d8\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\ud83d\udcc5 CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS - Success - Event: ContractUpdated (contract_updated), admin: \"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\", contract_key: \"collateral\", address: \"CDBIDYTPVLSPJSCI5MWXAUOWY75NKSBNEKB4UJEYOODL65X3G4WPSYWI\", wasm_hash: null\n"
+}

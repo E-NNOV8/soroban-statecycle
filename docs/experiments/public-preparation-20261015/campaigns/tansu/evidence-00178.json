@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+    "contract",
+    "restore",
+    "--id",
+    "CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS",
+    "--key-xdr",
+    "AAAAEAAAAAEAAAACAAAADwAAAANLZXkAAAAADQAAACC4f42ZPWVAr1egZOy6Ur57uixkHDQrPEcNejFAOTVJtQ==",
+    "--rpc-url",
+    "http://localhost:18001/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "New ttl ledger: 317\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 946db44e5d0eebcd90f65874c0b8ff87cf5f45e6aa5196a9dd4e997b767e4911\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2139\ufe0f  No changes detected, transaction was a no-op.\n"
+}

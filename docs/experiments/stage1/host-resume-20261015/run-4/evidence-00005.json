@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "encode",
+    "--type",
+    "LedgerKey"
+  ],
+  "stdin": "{\"contract_data\": {\"contract\": \"CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI\", \"key\": \"ledger_key_contract_instance\", \"durability\": \"persistent\"}}",
+  "exit_code": 0,
+  "stdout": "AAAABgAAAAFA52S5wLGoMu5bJ9JA9w8f09hFm01XzxRqTREGJ910hgAAABQAAAAB\n",
+  "stderr": ""
+}

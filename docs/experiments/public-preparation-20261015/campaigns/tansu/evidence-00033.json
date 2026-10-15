@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS",
+    "--rpc-url",
+    "http://localhost:18001/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--send",
+    "yes",
+    "--",
+    "commit",
+    "--maintainer",
+    "GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ",
+    "--project_key",
+    "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5",
+    "--hash",
+    "0524376d293be41ee3bf5ca102cee2a88bea3d03"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 1c9ab9a5bd4e7498f3604767c6c01ccd4d4b8f0e006ae567f193ecd47f577534\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\ud83d\udcc5 CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS - Success - Event: Commit (commit), project_key: \"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\", hash: \"0524376d293be41ee3bf5ca102cee2a88bea3d03\"\n"
+}

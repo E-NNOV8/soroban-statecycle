@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+    "contract",
+    "restore",
+    "--wasm-hash",
+    "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+    "--rpc-url",
+    "http://localhost:18002/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "New ttl ledger: 120981\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 994195ec1e7e750533383619002549b6e30ceb302664e44704b27467021113e2\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2139\ufe0f  No changes detected, transaction was a no-op.\n"
+}

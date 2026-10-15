@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "--max-time",
+    "20",
+    "-sS",
+    "http://localhost:8000/rpc",
+    "-H",
+    "Content-Type: application/json",
+    "-d",
+    "{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getLedgerEntries\", \"params\": {\"keys\": [\"AAAABgAAAAF5RuDEycVQD3OCI253Ls/kTg8XzSarDYXUz2jR57nxyAAAAA0AAAAgUzzUVSEbAY8+Dn5E2TX/m5pmqmlnRaE39QRDM5Gc3WoAAAAA\"]}}"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:14:57.282840+00:00",
+  "exit_code": 0,
+  "stdout": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"entries\":[],\"latestLedger\":4412}}",
+  "stderr": ""
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerEntryData",
+    "--input",
+    "single-base64",
+    "AAAABgAAAAAAAAABZzyjd5OP+ht4jONHI0xjR0e1uP+U2bDyHZE6eeqz/pUAAAAUAAAAAQAAABMAAAAAJ02Fg2xOmt+JlfkkDGRSywzi5HUeGxC6///b+5Axm6EAAAABAAAABQAAAA8AAAAFQWRtaW4AAAAAAAASAAAAAAAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAAAA8AAAAHQkxORFRrbgAAAAASAAAAAAAAAADQZPnEaeZ3v9PIOi62uh9SPsyHRlVp+didH/xIPMnqqgAAAA8AAAAIQmFja3N0b3AAAAASAAAAAAAAAADnH4ZiFFLlFbWPKAjSiJ5gz7H1LCbru1veR6nl+XYpWwAAAA8AAAAGQ29uZmlnAAAAAAARAAAAAQAAAAUAAAAPAAAACmJzdG9wX3JhdGUAAAAAAAMAD0JAAAAADwAAAA1tYXhfcG9zaXRpb25zAAAAAAAAAwAAAAQAAAAPAAAADm1pbl9jb2xsYXRlcmFsAAAAAAAKAAAAAAAAAAAAAAAAAJiWgAAAAA8AAAAGb3JhY2xlAAAAAAASAAAAAAAAAADQZPnEaeZ3v9PIOi62uh9SPsyHRlVp+didH/xIPMnqqgAAAA8AAAAGc3RhdHVzAAAAAAADAAAABgAAAA8AAAAETmFtZQAAAA4AAAAQU3RhZ2UgMSBiYXNlbGluZQ=="
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:14:01.052535+00:00",
+  "exit_code": 0,
+  "stdout": "{\"contract_data\":{\"ext\":\"v0\",\"contract\":\"CBTTZI3XSOH7UG3YRTRUOI2MMNDUPNNY76KNTMHSDWITU6PKWP7JKI7I\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\",\"val\":{\"contract_instance\":{\"executable\":{\"wasm\":\"274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1\"},\"storage\":[{\"key\":{\"symbol\":\"Admin\"},\"val\":{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"}},{\"key\":{\"symbol\":\"BLNDTkn\"},\"val\":{\"address\":\"GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ\"}},{\"key\":{\"symbol\":\"Backstop\"},\"val\":{\"address\":\"GDTR7BTCCRJOKFNVR4UARUUITZQM7MPVFQTOXO233ZD2TZPZOYUVXBKL\"}},{\"key\":{\"symbol\":\"Config\"},\"val\":{\"map\":[{\"key\":{\"symbol\":\"bstop_rate\"},\"val\":{\"u32\":1000000}},{\"key\":{\"symbol\":\"max_positions\"},\"val\":{\"u32\":4}},{\"key\":{\"symbol\":\"min_collateral\"},\"val\":{\"i128\":\"10000000\"}},{\"key\":{\"symbol\":\"oracle\"},\"val\":{\"address\":\"GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ\"}},{\"key\":{\"symbol\":\"status\"},\"val\":{\"u32\":6}}]}},{\"key\":{\"symbol\":\"Name\"},\"val\":{\"string\":\"Stage 1 baseline\"}}]}}}}\n",
+  "stderr": ""
+}

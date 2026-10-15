@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAARzwAAAARAAAAFQAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAGAAAAAYcRvJ/I6cFSWXjcXPasZhtyYCIrWMLuH+PwoEUBrGWkAAAAEAAAAAEAAAACAAAADwAAAANLZXkAAAAADQAAACC4f42ZPWVAr1egZOy6Ur57uixkHDQrPEcNejFAOTVJtQAAAAEAAAAAAAABmAAAAZgAAAAAAABG2AAAAAGNjFv1AAAAQK+PJ3gSKE2e+/suTst0fx8qzx+bBxdMB/A68sW6eNFmX5SMUfA+9m+n3bTlMBkTslhCiEdWvP89cT+jgIv9iQk="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\"fee\":18236,\"seq_num\":\"73014444053\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"restore_footprint\":{\"ext\":\"v0\"}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[],\"read_write\":[{\"contract_data\":{\"contract\":\"CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X\",\"key\":{\"vec\":[{\"symbol\":\"Key\"},{\"bytes\":\"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\"}]},\"durability\":\"persistent\"}}]},\"instructions\":0,\"disk_read_bytes\":408,\"write_bytes\":408},\"resource_fee\":\"18136\"}}},\"signatures\":[{\"hint\":\"8d8c5bf5\",\"signature\":\"af8f277812284d9efbfb2e4ecb747f1f2acf1f9b07174c07f03af2c5ba78d1665f948c51f03ef66fa7ddb4e5301913b25842884756bcff3d713fa3808bfd8909\"}]}}\n",
+  "stderr": ""
+}

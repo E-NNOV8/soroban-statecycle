@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "-sS",
+    "http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:04:34.469127+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"\n    },\n    \"transactions\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/transactions{?cursor,limit,order}\",\n      \"templated\": true\n    },\n    \"operations\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/operations{?cursor,limit,order}\",\n      \"templated\": true\n    },\n    \"payments\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/payments{?cursor,limit,order}\",\n      \"templated\": true\n    },\n    \"effects\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/effects{?cursor,limit,order}\",\n      \"templated\": true\n    },\n    \"offers\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/offers{?cursor,limit,order}\",\n      \"templated\": true\n    },\n    \"trades\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/trades{?cursor,limit,order}\",\n      \"templated\": true\n    },\n    \"data\": {\n      \"href\": \"http://localhost:8000/accounts/GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN/data/{key}\",\n      \"templated\": true\n    }\n  },\n  \"id\": \"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\n  \"account_id\": \"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\n  \"sequence\": \"12558484373569\",\n  \"sequence_ledger\": 7388,\n  \"sequence_time\": \"1792087473\",\n  \"subentry_count\": 0,\n  \"last_modified_ledger\": 7388,\n  \"last_modified_time\": \"2026-10-15T18:04:33Z\",\n  \"thresholds\": {\n    \"low_threshold\": 0,\n    \"med_threshold\": 0,\n    \"high_threshold\": 0\n  },\n  \"flags\": {\n    \"auth_required\": false,\n    \"auth_revocable\": false,\n    \"auth_immutable\": false,\n    \"auth_clawback_enabled\": false\n  },\n  \"balances\": [\n    {\n      \"balance\": \"9993.9950813\",\n      \"buying_liabilities\": \"0.0000000\",\n      \"selling_liabilities\": \"0.0000000\",\n      \"asset_type\": \"native\"\n    }\n  ],\n  \"signers\": [\n    {\n      \"weight\": 1,\n      \"key\": \"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\n      \"type\": \"ed25519_public_key\"\n    }\n  ],\n  \"data\": {},\n  \"num_sponsoring\": 0,\n  \"num_sponsored\": 0,\n  \"paging_token\": \"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"\n}",
+  "stderr": ""
+}

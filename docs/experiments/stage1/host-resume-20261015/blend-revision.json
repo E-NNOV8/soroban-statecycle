@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "/home/mxr/Documents/Projects/drips_projects/blend-contracts-v2",
+    "rev-parse",
+    "HEAD"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:27.150226+00:00",
+  "exit_code": 0,
+  "stdout": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117\n",
+  "stderr": ""
+}

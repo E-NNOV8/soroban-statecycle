@@ -1,0 +1,12 @@
+{
+  "id": "python-version",
+  "argv": [
+    "python3",
+    "--version"
+  ],
+  "started_at": "2026-10-15T14:38:23.307201+00:00",
+  "timeout_seconds": 20,
+  "exit_code": 0,
+  "stdout": "Python 3.14.6\n",
+  "stderr": ""
+}

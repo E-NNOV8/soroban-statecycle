@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "protected_files_unchanged": 392,
+  "local_links": 9,
+  "final_preflight_source_hashes_match": true,
+  "manifest_not_claiming_campaign_proof": true,
+  "note": "Document/integrity checks only, not protocol verification."
+}

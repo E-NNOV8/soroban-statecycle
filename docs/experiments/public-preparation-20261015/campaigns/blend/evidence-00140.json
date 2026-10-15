@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerEntryData",
+    "--input",
+    "single-base64",
+    "AAAABgAAAAAAAAABzdpF1VH1MQIeXdNbORKxgKPLkJCc2Hl3q5OtrYkunc0AAAAUAAAAAQAAABMAAAAAJ02Fg2xOmt+JlfkkDGRSywzi5HUeGxC6///b+5Axm6EAAAABAAAABQAAAA8AAAAFQWRtaW4AAAAAAAASAAAAAAAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAAA8AAAAHQkxORFRrbgAAAAASAAAAAAAAAAAIRJPWO6LmEclbLcVeQcysX9n6b3NRVvjRuVnWIBkumgAAAA8AAAAIQmFja3N0b3AAAAASAAAAAAAAAABMTaYCi8d6IIobk+DPEDWxoeDuS3FvNQNQY2Cn8HKVhQAAAA8AAAAGQ29uZmlnAAAAAAARAAAAAQAAAAUAAAAPAAAACmJzdG9wX3JhdGUAAAAAAAMAD0JAAAAADwAAAA1tYXhfcG9zaXRpb25zAAAAAAAAAwAAAAQAAAAPAAAADm1pbl9jb2xsYXRlcmFsAAAAAAAKAAAAAAAAAAAAAAAAAJiWgAAAAA8AAAAGb3JhY2xlAAAAAAASAAAAAAAAAAAIRJPWO6LmEclbLcVeQcysX9n6b3NRVvjRuVnWIBkumgAAAA8AAAAGc3RhdHVzAAAAAAADAAAABgAAAA8AAAAETmFtZQAAAA4AAAASU29yb2JhbiBTdGF0ZUN5Y2xlAAA="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"contract_data\":{\"ext\":\"v0\",\"contract\":\"CDG5UROVKH2TCAQ6LXJVWOISWGAKHS4QSCONQ6LXVOJ23LMJF2O43YSQ\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\",\"val\":{\"contract_instance\":{\"executable\":{\"wasm\":\"274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1\"},\"storage\":[{\"key\":{\"symbol\":\"Admin\"},\"val\":{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"}},{\"key\":{\"symbol\":\"BLNDTkn\"},\"val\":{\"address\":\"GAEEJE6WHOROMEOJLMW4KXSBZSWF7WP2N5ZVCVXY2G4VTVRADEXJURBY\"}},{\"key\":{\"symbol\":\"Backstop\"},\"val\":{\"address\":\"GBGE3JQCRPDXUIEKDOJ6BTYQGWY2DYHOJNYW6NIDKBRWBJ7QOKKYL4QB\"}},{\"key\":{\"symbol\":\"Config\"},\"val\":{\"map\":[{\"key\":{\"symbol\":\"bstop_rate\"},\"val\":{\"u32\":1000000}},{\"key\":{\"symbol\":\"max_positions\"},\"val\":{\"u32\":4}},{\"key\":{\"symbol\":\"min_collateral\"},\"val\":{\"i128\":\"10000000\"}},{\"key\":{\"symbol\":\"oracle\"},\"val\":{\"address\":\"GAEEJE6WHOROMEOJLMW4KXSBZSWF7WP2N5ZVCVXY2G4VTVRADEXJURBY\"}},{\"key\":{\"symbol\":\"status\"},\"val\":{\"u32\":6}}]}},{\"key\":{\"symbol\":\"Name\"},\"val\":{\"string\":\"Soroban StateCycle\"}}]}}}}\n",
+  "stderr": ""
+}

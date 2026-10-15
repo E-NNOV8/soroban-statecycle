@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "restore",
+    "--id",
+    "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "New ttl ledger: 11800\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: b0440e757eb7ce1f0456b49d3ca3573d3b8128e26d74bf5d82c202e11f596709\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

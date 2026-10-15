@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "-sS",
+    "http://localhost:8000/.well-known/stellar-history.json"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:17:05.824468+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"type\": \"https://stellar.org/horizon-errors/not_found\",\n  \"title\": \"Resource Missing\",\n  \"status\": 404,\n  \"detail\": \"The resource at the url requested was not found.  This usually occurs for one of two reasons:  The url requested is not valid, or no data in our database could be found with the parameters provided.\"\n}",
+  "stderr": ""
+}

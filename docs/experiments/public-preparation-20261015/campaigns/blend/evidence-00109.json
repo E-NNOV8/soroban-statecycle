@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+    "contract",
+    "restore",
+    "--id",
+    "CDG5UROVKH2TCAQ6LXJVWOISWGAKHS4QSCONQ6LXVOJ23LMJF2O43YSQ",
+    "--rpc-url",
+    "http://localhost:18001/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "New ttl ledger: 187\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 8ebbc82829ecab4ab77e119a52b441f082d4560f62ef0f2581757b715e4e8323\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

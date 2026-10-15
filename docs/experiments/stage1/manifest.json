@@ -1,0 +1,433 @@
+{
+  "schema": "archival-regression-stage1/0",
+  "recorded_at": "2026-10-15T17:30:17.779400+00:00",
+  "stage": "Stage 1",
+  "phase_reached": "verified-real-core-archive-restore",
+  "result": "PASS",
+  "reason": "One local unchanged Blend V2 configuration/admin campaign passed with direct hot-archive pilot proof and five fresh-state repetitions; see host-resume summary.",
+  "product": {
+    "title": "Core-backed Soroban Archival Regression Tester",
+    "source_revision": null,
+    "branch": "main (unborn)",
+    "remote": null,
+    "source_hashes": {
+      "src/archival_regression/__init__.py": "7202ba06c491ee7eec8ea239550124893732ef7ea4efbb2a2c1e709f3eb8323f",
+      "src/archival_regression/campaign.py": "f62ecc2927d310f37af2d8591ba708d753c117923a5f83d631d6f7aa2c91d718",
+      "src/archival_regression/preflight.py": "7da6ded93ae3b54b983446cb44a02918fc921d66b700df28d3c239db949133ba",
+      "tests/test_campaign.py": "cdf04d39dfae7b480499400b075faf05e0df0e1eeb2ce965cfc058a4084f892a",
+      "tests/test_preflight.py": "01e28c227dc21aef0c47f47559f1275c7f1f27045378187b4f1d3534a958c535"
+    }
+  },
+  "external_target": {
+    "name": "Blend V2 pool",
+    "repository": "https://github.com/blend-capital/blend-contracts-v2",
+    "revision": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117",
+    "artifact_used": true,
+    "source_modified": false,
+    "wasm_hashes": {
+      "pool": "274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1",
+      "pool_factory": "e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9"
+    },
+    "contract_ids": {
+      "factory": "CA3JX42W32345O6AIUO3GJGBXHP2VZCAHQBZOC3RKJ6QAVSNG2VBKMYC",
+      "original_baseline_pool": "CBTTZI3XSOH7UG3YRTRUOI2MMNDUPNNY76KNTMHSDWITU6PKWP7JKI7I",
+      "repetition_pools": [
+        "CDXTNWGN2ZM2LMCH4ZTL74CBTD4DDKMBAIAD7UJPWY7DQLZAY72GRW3X",
+        "CCYKZIH7LTRXHPSLVUR3SQPL4ZFPTJAMWXIBSM6MHZ567W4OAOKFVY6H",
+        "CDCS6IS2ZGBDTZRFUHPBEWYUWXJUMCHLAUBAWMVSJUQ6J55LDTN5NFAJ",
+        "CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI",
+        "CAUZLF2W3MGXHERIHYAMKNBZFJJUBV6YXAYFRK5ECI3MSTYV3IJRBE6S"
+      ]
+    },
+    "actual_integration_classification": "SMALL GENERAL PRODUCT GAP",
+    "integration_result": "PASS",
+    "prior_selection_assumption": "SMALL GENERAL PRODUCT GAP"
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Linux-7.1.4-100.fc43.x86_64-x86_64-with-glibc2.42",
+    "stellar_cli": "28.1.0",
+    "stellar_cli_source": "c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd",
+    "xdr": "28.0.0",
+    "core": "29.0.0",
+    "host": "28.0.0 (active protocol profile; full Core host identities in core-version.json)",
+    "protocol": 28,
+    "network_config": "host-resume-20261015/active-config-decoded-1.json (see actual active-config-decoded-* files)",
+    "ledger_anchors": [
+      {
+        "ledger": 4902,
+        "hash": "8c73911af63ed6a479a1d56d1154d03f562b30cc3b674edc9055bbcfcc5fd863",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CDXTNWGN2ZM2LMCH4ZTL74CBTD4DDKMBAIAD7UJPWY7DQLZAY72GRW3X",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      {
+        "ledger": 5046,
+        "hash": "b8edcb916a1fb52d8627933d078e29f03ff52afa0483521e71c899bcea585fb7",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CCYKZIH7LTRXHPSLVUR3SQPL4ZFPTJAMWXIBSM6MHZ567W4OAOKFVY6H",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      {
+        "ledger": 5125,
+        "hash": "123e4ce9010040c0c46a38b4ba20473bbef2431e858ef41bd1a4a2bfdbfaf7d9",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CDCS6IS2ZGBDTZRFUHPBEWYUWXJUMCHLAUBAWMVSJUQ6J55LDTN5NFAJ",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      {
+        "ledger": 5203,
+        "hash": "8134c619c744e8e93baf002f5347a8a4432d238a6bece87b55944695a48e9042",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      },
+      {
+        "ledger": 5283,
+        "hash": "517c9393fd72bd6914bd84cc2b2daa20ec6a4b75946d80abf52a7f8df2d93023",
+        "rpc_evidence": "evidence-00101.json",
+        "key": {
+          "contract_data": {
+            "contract": "CAUZLF2W3MGXHERIHYAMKNBZFJJUBV6YXAYFRK5ECI3MSTYV3IJRBE6S",
+            "key": "ledger_key_contract_instance",
+            "durability": "persistent"
+          }
+        }
+      }
+    ],
+    "ledger_keys": [
+      {
+        "contract_data": {
+          "contract": "CDXTNWGN2ZM2LMCH4ZTL74CBTD4DDKMBAIAD7UJPWY7DQLZAY72GRW3X",
+          "key": "ledger_key_contract_instance",
+          "durability": "persistent"
+        }
+      },
+      {
+        "contract_data": {
+          "contract": "CCYKZIH7LTRXHPSLVUR3SQPL4ZFPTJAMWXIBSM6MHZ567W4OAOKFVY6H",
+          "key": "ledger_key_contract_instance",
+          "durability": "persistent"
+        }
+      },
+      {
+        "contract_data": {
+          "contract": "CDCS6IS2ZGBDTZRFUHPBEWYUWXJUMCHLAUBAWMVSJUQ6J55LDTN5NFAJ",
+          "key": "ledger_key_contract_instance",
+          "durability": "persistent"
+        }
+      },
+      {
+        "contract_data": {
+          "contract": "CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI",
+          "key": "ledger_key_contract_instance",
+          "durability": "persistent"
+        }
+      },
+      {
+        "contract_data": {
+          "contract": "CAUZLF2W3MGXHERIHYAMKNBZFJJUBV6YXAYFRK5ECI3MSTYV3IJRBE6S",
+          "key": "ledger_key_contract_instance",
+          "durability": "persistent"
+        }
+      }
+    ],
+    "local_endpoint_probed": "http://localhost:8000/rpc",
+    "network_created": false,
+    "non_default_network_settings": {
+      "min_persistent_ttl": 64,
+      "min_temporary_ttl": 16,
+      "starting_eviction_scan_level": 1,
+      "quickstart_artificially_accelerate_time_for_testing": true
+    },
+    "non_default_settings_note": "Consensus settings upgrade verified at ledger 4457. Existing TTLs unchanged; local profile remains applied. Container preexisted this resume.",
+    "installed_rust_targets": [
+      "wasm32-unknown-unknown",
+      "wasm32v1-none",
+      "x86_64-unknown-linux-gnu"
+    ]
+  },
+  "invariant": {
+    "name": "pool_configuration_and_admin_continuity",
+    "definition": "canonical(get_config_after) == canonical(get_config_before) and get_admin_after == get_admin_before; decoded raw contract-instance configuration/admin must agree at both points",
+    "public_calls": [
+      "get_config",
+      "get_admin"
+    ],
+    "why": "Stable persisted pool configuration and owner are meaningful and independent of balances, interest accrual and price changes. No empty default getter is used.",
+    "status": "PASS",
+    "observed_values": {
+      "get_config": {
+        "bstop_rate": 1000000,
+        "max_positions": 4,
+        "min_collateral": "10000000",
+        "oracle": "GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ",
+        "status": 6
+      },
+      "get_admin": "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+    },
+    "limitation": "Configuration/admin continuity and complete instance equality only; valid placeholder account addresses; no reserve, lending, real oracle/backstop/token operation tested."
+  },
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "info",
+        "--format",
+        "{{json .ServerVersion}}"
+      ],
+      "url": null,
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "argv": [
+        "podman",
+        "--root",
+        "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-root",
+        "--runroot",
+        "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-runroot",
+        "--storage-driver",
+        "vfs",
+        "info",
+        "--format",
+        "json"
+      ],
+      "url": null,
+      "exit_code": 125,
+      "error": null
+    },
+    {
+      "argv": [
+        "stellar-core",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": null,
+      "error": "[Errno 2] No such file or directory: 'stellar-core'"
+    },
+    {
+      "argv": [
+        "/tmp/runbook-tools/stellar",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "python3",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "ls-remote",
+        "https://github.com/blend-capital/blend-contracts-v2.git",
+        "refs/heads/main"
+      ],
+      "url": null,
+      "exit_code": 128,
+      "error": null
+    },
+    {
+      "argv": null,
+      "url": "http://127.0.0.1:8000/soroban/rpc",
+      "exit_code": null,
+      "error": "URLError: <urlopen error [Errno 1] Operation not permitted>"
+    },
+    {
+      "argv": null,
+      "url": "https://codeload.github.com/blend-capital/blend-contracts-v2/tar.gz/refs/heads/main",
+      "exit_code": null,
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "argv": null,
+      "url": "https://api.github.com/repos/stellar/stellar-core/releases/latest",
+      "exit_code": null,
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+    }
+  ],
+  "outcomes": {
+    "control": "PASS",
+    "positive_flagship": "PASS",
+    "negative": "PASS: intended required-restore omission produced FAIL exit 1; infrastructure absence separately INCONCLUSIVE exit 2",
+    "retry": "PASS",
+    "archival": "PASS",
+    "archive_observation": "PASS",
+    "restore": "PASS",
+    "application_invariant": "PASS",
+    "raw_verification": "PASS",
+    "repeatability": "PASS"
+  },
+  "fresh_state_campaign_runs": 5,
+  "independent_target_builds": 0,
+  "preflight_attempts_are_not_campaigns": true,
+  "checks": {
+    "python_behavior_tests": {
+      "result": "PASS",
+      "passed": 30,
+      "failed": 0,
+      "command": "PYTHONPATH=src python3 -W error::ResourceWarning -m unittest discover -s tests -v",
+      "log": "host-resume-20261015/tests-final.log"
+    },
+    "python_compile": {
+      "result": "PASS",
+      "command": "python3 -m compileall -q src tests",
+      "log": "host-resume-20261015/compile-final.json"
+    },
+    "lint": {
+      "result": "NOT TESTED",
+      "reason": "ruff is not installed (No module named ruff); no install attempted"
+    },
+    "blend_build": {
+      "result": "OWNER-REPORTED PASS",
+      "agent_rebuild_executed": false
+    },
+    "core_build": {
+      "result": "NOT TESTED"
+    }
+  },
+  "exit_gates": [
+    {
+      "id": "real_target",
+      "requirement": "Real unchanged Blend artifact",
+      "result": "PASS"
+    },
+    {
+      "id": "unchanged_source",
+      "requirement": "Provision without source modification",
+      "result": "PASS"
+    },
+    {
+      "id": "public_invariant",
+      "requirement": "Public invariant established",
+      "result": "PASS"
+    },
+    {
+      "id": "actual_archive",
+      "requirement": "Actual Core archival",
+      "result": "PASS"
+    },
+    {
+      "id": "archive_verification",
+      "requirement": "Independent archival observation",
+      "result": "PASS"
+    },
+    {
+      "id": "restore",
+      "requirement": "Legitimate restoration",
+      "result": "PASS"
+    },
+    {
+      "id": "resume",
+      "requirement": "Application success after restore",
+      "result": "PASS"
+    },
+    {
+      "id": "raw_state",
+      "requirement": "Independent raw-state agreement",
+      "result": "PASS"
+    },
+    {
+      "id": "negative",
+      "requirement": "Meaningful archival negative",
+      "result": "PASS"
+    },
+    {
+      "id": "retry",
+      "requirement": "Real recovery retry boundary",
+      "result": "PASS"
+    },
+    {
+      "id": "repeatability",
+      "requirement": "Five fresh-state campaigns",
+      "result": "PASS"
+    },
+    {
+      "id": "integration",
+      "requirement": "Acceptable implemented integration",
+      "result": "PASS"
+    },
+    {
+      "id": "general_hooks",
+      "requirement": "No target-specific product branch",
+      "result": "PASS"
+    },
+    {
+      "id": "behavior_tests",
+      "requirement": "All introduced behavior tests",
+      "result": "PASS"
+    },
+    {
+      "id": "reproduction",
+      "requirement": "Reproducible flagship evidence",
+      "result": "PASS"
+    }
+  ],
+  "recommendation": "STOP AT STAGE 1",
+  "next_dependency": "Stage 1 complete for the bounded configuration/admin invariant. Stage 2 requires new authorization.",
+  "initial_recorded_at": "2026-10-15T14:44:56.960598+00:00",
+  "last_resume": {
+    "result": "PASS",
+    "evidence": "host-resume-20261015/summary.json",
+    "guide": "host-resume-20261015/README.md",
+    "previous_manifest": "host-resume-20261015/manifest-before-host-resume.json"
+  },
+  "current_commands_note": "Historical commands above remain unchanged; all current argv/stdin/stdout/stderr and raw RPC/XDR evidence are in host-resume-20261015/ and run-N/. See summary for final verifier identities."
+}

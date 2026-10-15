@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X",
+    "--rpc-url",
+    "http://localhost:18002/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--send",
+    "yes",
+    "--",
+    "get_commit",
+    "--project_key",
+    "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\"0524376d293be41ee3bf5ca102cee2a88bea3d03\"\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: a1251e3ebffa60001c6f73fb16f5fc6235a7df5f4e7e31a40b9f4d384bad564c\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

@@ -1,0 +1,287 @@
+#![no_std]
+
+use soroban_sdk::{Address, Bytes, BytesN, Env, String, Vec, contract, panic_with_error};
+use soroban_sdk::{Executable, contractmeta};
+
+mod contract_dao;
+mod contract_membership;
+// mod contract_migration;
+mod contract_tansu;
+mod contract_versioning;
+mod errors;
+mod events;
+#[cfg(test)]
+mod tests;
+mod types;
+
+contractmeta!(key = "Description", val = "Tansu");
+
+#[contract]
+pub struct Tansu;
+
+pub trait TansuTrait {
+    fn __constructor(env: Env, admin: Address);
+
+    fn pause(env: Env, admin: Address, paused: bool);
+
+    fn require_not_paused(env: Env);
+
+    fn get_admins_config(env: Env) -> types::AdminsConfig;
+
+    fn set_collateral_contract(env: Env, admin: Address, collateral_contract: types::ContractRef);
+
+    fn set_nqg_contract(
+        env: Env,
+        admin: Address,
+        nqg_contract: types::ContractRef,
+        project: String,
+    );
+
+    fn propose_upgrade(
+        env: Env,
+        caller: Address,
+        new_wasm_hash: BytesN<32>,
+        new_admins_config: Option<types::AdminsConfig>,
+    );
+
+    fn approve_upgrade(env: Env, signer: Address);
+
+    fn finalize_upgrade(env: Env, executor: Address, accept: bool);
+
+    fn get_upgrade_proposal(env: Env) -> types::UpgradeProposal;
+
+    fn version() -> u32;
+}
+
+pub trait MembershipTrait {
+    #[allow(clippy::too_many_arguments)]
+    fn add_member(
+        env: Env,
+        member_address: Address,
+        meta: String,
+        git_identity: Option<String>,
+        git_pubkey: Option<BytesN<32>>,
+        git_sig: Option<BytesN<64>>,
+    );
+
+    fn update_member(
+        env: Env,
+        member_address: Address,
+        meta: String,
+        git_identity: Option<String>,
+        git_pubkey: Option<BytesN<32>>,
+        git_sig: Option<BytesN<64>>,
+    );
+
+    fn get_member(env: Env, member_address: Address) -> types::Member;
+
+    fn set_badges(
+        env: Env,
+        maintainer: Address,
+        key: Bytes,
+        member: Address,
+        badges: Vec<types::Badge>,
+    );
+
+    fn get_badges(env: Env, key: Bytes) -> types::Badges;
+
+    fn get_max_weight(env: Env, key: Bytes, member_address: Address) -> u32;
+}
+
+pub trait VersioningTrait {
+    #[allow(clippy::too_many_arguments)]
+    fn register(
+        env: Env,
+        maintainer: Address,
+        name: String,
+        maintainers: Vec<Address>,
+        url: String,
+        ipfs: String,
+        min_voting_period: Option<u64>,
+        execute_delay: Option<u64>,
+    ) -> Bytes;
+
+    #[allow(clippy::too_many_arguments)]
+    fn update_config(
+        env: Env,
+        maintainer: Address,
+        key: Bytes,
+        maintainers: Vec<Address>,
+        url: String,
+        hash: String,
+        min_voting_period: Option<u64>,
+        execute_delay: Option<u64>,
+    );
+
+    fn commit(env: Env, maintainer: Address, project_key: Bytes, hash: String);
+
+    fn get_commit(env: Env, project_key: Bytes) -> String;
+
+    fn set_evidence(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        commit_hash: String,
+        kind: types::EvidenceKind,
+        cid: String,
+    );
+
+    fn get_evidence(
+        env: Env,
+        project_key: Bytes,
+        commit_hash: String,
+        kind: types::EvidenceKind,
+    ) -> Vec<types::Evidence>;
+
+    fn get_project(env: Env, project_key: Bytes) -> types::Project;
+
+    fn get_projects(env: Env, page: u32) -> Vec<types::Project>;
+
+    fn get_sub_projects(env: Env, project_key: Bytes) -> Vec<Bytes>;
+
+    fn set_sub_projects(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        sub_projects: Vec<Bytes>,
+    );
+}
+
+pub trait DaoTrait {
+    fn anonymous_voting_setup(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        public_key: String,
+    );
+
+    fn get_anonymous_voting_config(env: Env, project_key: Bytes) -> types::AnonymousVoteConfig;
+
+    fn build_commitments_from_votes(
+        env: Env,
+        project_key: Bytes,
+        votes: Vec<u128>,
+        seeds: Vec<u128>,
+    ) -> Vec<BytesN<96>>;
+
+    #[allow(clippy::too_many_arguments)]
+    fn create_proposal(
+        env: Env,
+        proposer: Address,
+        project_key: Bytes,
+        title: String,
+        ipfs: String,
+        voting_ends_at: u64,
+        public_voting: bool,
+        token_contract: Option<Address>,
+        outcome_contracts: Option<Vec<types::OutcomeContract>>,
+    ) -> u32;
+
+    fn vote(env: Env, voter: Address, project_key: Bytes, proposal_id: u32, vote: types::Vote);
+
+    fn remove_vote(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        proposal_id: u32,
+        voter: Address,
+    );
+
+    fn revoke_proposal(env: Env, maintainer: Address, project_key: Bytes, proposal_id: u32);
+
+    fn execute(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        proposal_id: u32,
+        tallies: Option<Vec<u128>>,
+        seeds: Option<Vec<u128>>,
+    ) -> types::ProposalStatus;
+
+    fn proof(
+        env: Env,
+        project_key: Bytes,
+        proposal: types::Proposal,
+        tallies: Vec<u128>,
+        seeds: Vec<u128>,
+    ) -> bool;
+
+    fn get_dao(env: Env, project_key: Bytes, page: u32) -> types::Dao;
+
+    fn get_proposal(env: Env, project_key: Bytes, proposal_id: u32) -> types::Proposal;
+
+    fn add_conflict_of_interest(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        proposal_id: u32,
+        addresses: Vec<Address>,
+    );
+
+    fn remove_conflict_of_interest(
+        env: Env,
+        maintainer: Address,
+        project_key: Bytes,
+        proposal_id: u32,
+        addresses: Vec<Address>,
+    );
+
+    fn get_conflict_of_interest(env: Env, project_key: Bytes, proposal_id: u32) -> Vec<Address>;
+}
+
+// pub trait MigrationTrait {
+//     fn projects_migration(env: Env, admin: Address, names: Vec<String>);
+// }
+
+fn auth_maintainers(env: &Env, maintainer: &Address, project_key: &Bytes) -> types::Project {
+    maintainer.require_auth();
+    let project_key_ = types::ProjectKey::Key(project_key.clone());
+    if let Some(project) = env
+        .storage()
+        .persistent()
+        .get::<types::ProjectKey, types::Project>(&project_key_)
+    {
+        if !project.maintainers.contains(maintainer) {
+            panic_with_error!(&env, &errors::ContractErrors::UnauthorizedSigner);
+        }
+        project
+    } else {
+        panic_with_error!(&env, &errors::ContractErrors::InvalidKey)
+    }
+}
+
+/// Retrieve a contract address and WASM hash.
+///
+/// # Arguments
+/// * `env` - The environment object
+/// * `key` - The contract key
+///
+/// # Returns
+/// * `types::ContractRef` - The contract object
+///
+/// # Panics
+/// * If the contract cannot be found
+/// * If the WASM hash of the contract does not match on-chain data
+fn retrieve_contract(env: &Env, key: types::ContractKey) -> types::ContractRef {
+    let retrieved_contract: types::ContractRef = env.storage().instance().get(&key).unwrap();
+    validate_contract(env, &retrieved_contract);
+    retrieved_contract
+}
+
+/// Validate the contract WASM hash match on-chain data.
+///
+/// # Arguments
+/// * `env` - The environment object
+/// * `contract` - The contract to validate
+///
+/// # Panics
+/// * If the WASM hash of the contract does not match on-chain data
+fn validate_contract(env: &Env, contract: &types::ContractRef) {
+    let contract_executable = contract.address.executable();
+
+    if let Some(wasm_hash) = contract.clone().wasm_hash
+        && contract_executable != Some(Executable::Wasm(wasm_hash))
+    {
+        panic_with_error!(&env, &errors::ContractErrors::ContractValidation)
+    }
+}

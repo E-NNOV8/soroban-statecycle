@@ -1,0 +1,9 @@
+{
+  "url": "http://localhost:1/rpc",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getNetwork"
+  },
+  "error": "<urlopen error [Errno 111] Connection refused>"
+}

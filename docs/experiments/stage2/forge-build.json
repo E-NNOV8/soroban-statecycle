@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "cargo",
+    "build",
+    "--offline",
+    "--locked",
+    "--release",
+    "--target",
+    "wasm32v1-none",
+    "--manifest-path",
+    ".local/stage2/forge-source/Cargo.toml",
+    "--package",
+    "soroban-forge-marketplace-royalties",
+    "--target-dir",
+    ".local/stage2/forge-build"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:03:27.467744+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "    Finished `release` profile [optimized] target(s) in 0.85s\n"
+}

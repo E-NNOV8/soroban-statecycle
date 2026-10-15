@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "-w",
+    "/opt/stellar/core",
+    "stellar-local",
+    "stellar-core",
+    "dump-ledger",
+    "--conf",
+    "/opt/stellar/core/etc/stellar-core.cfg",
+    "--output-file",
+    "/dev/stdout",
+    "--limit",
+    "30"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:09:42.034486+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "2026-10-15T17:09:42.176 [default INFO] Config from /opt/stellar/core/etc/stellar-core.cfg\n2026-10-15T17:09:42.178 [default INFO] 'ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING' enabled in configuration file - node will not function properly with most networks\n2026-10-15T17:09:42.178 [default INFO] Using QUORUM_SET: {\n   \"t\" : 1,\n   \"v\" : [ \"self\" ]\n}\n\n"
+}

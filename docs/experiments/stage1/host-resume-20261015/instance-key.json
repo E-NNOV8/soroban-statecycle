@@ -1,0 +1,12 @@
+{
+  "input": {
+    "contract_data": {
+      "contract": "CBTTZI3XSOH7UG3YRTRUOI2MMNDUPNNY76KNTMHSDWITU6PKWP7JKI7I",
+      "key": "ledger_key_contract_instance",
+      "durability": "persistent"
+    }
+  },
+  "stdout": "AAAABgAAAAFnPKN3k4/6G3iM40cjTGNHR7W4/5TZsPIdkTp56rP+lQAAABQAAAAB\n",
+  "stderr": "",
+  "exit_code": 0
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "archival-regression/scenario-v2",
+  "rpc_url": "http://localhost:18001/rpc",
+  "passphrase": "Standalone Network ; February 2017",
+  "protocol": 28,
+  "archive_timeout_seconds": 240,
+  "name": "blend-config-admin",
+  "source": {
+    "revision": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117"
+  },
+  "hooks": {
+    "deploy": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "CANT3LIPEZVO2JIK22ZA3TGCMIRLZTLKZNGXFNSGSSCC2CTGW5M2H7HJ",
+      "--rpc-url",
+      "http://localhost:18001/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--",
+      "deploy",
+      "--admin",
+      "GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ",
+      "--name",
+      "Soroban StateCycle",
+      "--salt",
+      "3768e02f87a1d8270d8273140abae62e16f98f63cc5a8b1a9ba33b1ef11a8868",
+      "--oracle",
+      "GAEEJE6WHOROMEOJLMW4KXSBZSWF7WP2N5ZVCVXY2G4VTVRADEXJURBY",
+      "--backstop_take_rate",
+      "1000000",
+      "--max_positions",
+      "4",
+      "--min_collateral",
+      "10000000"
+    ],
+    "get_config": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:18001/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--send",
+      "yes",
+      "--",
+      "get_config"
+    ],
+    "get_admin": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:18001/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--send",
+      "yes",
+      "--",
+      "get_admin"
+    ],
+    "restore": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+      "contract",
+      "restore",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:18001/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin"
+    ]
+  },
+  "entries": {
+    "instance": {
+      "contract_data": {
+        "contract": "{id}",
+        "key": "ledger_key_contract_instance",
+        "durability": "persistent"
+      }
+    }
+  },
+  "bindings": {
+    "get_config": {
+      "entry": "instance",
+      "path": [
+        "contract_data",
+        "val"
+      ],
+      "value_path": [
+        "storage",
+        "Config"
+      ]
+    },
+    "get_admin": {
+      "entry": "instance",
+      "path": [
+        "contract_data",
+        "val"
+      ],
+      "value_path": [
+        "storage",
+        "Admin"
+      ]
+    }
+  }
+}

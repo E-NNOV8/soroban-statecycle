@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sh",
+    "-c",
+    "grep -Ei \"configUpgrade|invalid.*config|invalid.*setting|config.*invalid|upgrade.*invalid|Setting.*upgrade|upgrade.*set|state archival\" /var/log/stellar-core/stellar-core-2026-10-15_15-02-36.log | tail -30"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:14:26.494951+00:00",
+  "exit_code": 0,
+  "stdout": "    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n2026-10-15T15:02:43.066 GCTI6 [Herder INFO] Resetting Soroban transaction queue due to upgrade\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n2026-10-15T15:02:47.060 GCTI6 [Herder INFO] Resetting Soroban transaction queue due to upgrade\n",
+  "stderr": ""
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "encode",
+    "--type",
+    "LedgerKey"
+  ],
+  "stdin": "{\"ttl\": {\"key_hash\": \"f049502545bd8d951b0045963e5974f3683c701e7993c9c4275234ceb088dc85\"}}",
+  "started_at": "2026-10-15T17:14:00.947736+00:00",
+  "exit_code": 0,
+  "stdout": "AAAACfBJUCVFvY2VGwBFlj5ZdPNoPHAeeZPJxCdSNM6wiNyF\n",
+  "stderr": ""
+}

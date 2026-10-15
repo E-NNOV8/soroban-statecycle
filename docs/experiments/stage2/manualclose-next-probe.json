@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "stellar-core",
+    "http-command",
+    "manualclose"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:08:18.264639+00:00",
+  "exit_code": 0,
+  "stdout": "Content-Length: 250\nContent-Type: application/json\n\n{\"exception\": \"Set MANUAL_CLOSE=true in the stellar-core.cfg if you want to close every ledger manually. Otherwise, run stellar-core with --wait-for-consensus flag to close ledger once and trigger consensus. Ensure NODE_IS_VALIDATOR is set to true.\"}\n",
+  "stderr": "2026-10-15T18:08:18.782 [default INFO] Config from stellar-core.cfg\n2026-10-15T18:08:18.787 [default INFO] 'ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING' enabled in configuration file - node will not function properly with most networks\n2026-10-15T18:08:18.788 [default INFO] Using QUORUM_SET: {\n   \"t\" : 1,\n   \"v\" : [ \"self\" ]\n}\n\n"
+}

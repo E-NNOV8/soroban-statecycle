@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X",
+    "--rpc-url",
+    "http://localhost:18002/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--send",
+    "yes",
+    "--",
+    "pause",
+    "--admin",
+    "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+    "--paused",
+    "false"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 34542f1773e83df7cfb95c156e88806953cc78844d46a35d48ebd78ea76f7d64\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\ud83d\udcc5 CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X - Success - Event: ContractPaused (contract_paused), paused: false, admin: \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n"
+}

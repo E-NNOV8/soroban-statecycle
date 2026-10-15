@@ -1,0 +1,20 @@
+{
+  "id": "podman-local",
+  "argv": [
+    "podman",
+    "--root",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-root",
+    "--runroot",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-runroot",
+    "--storage-driver",
+    "vfs",
+    "info",
+    "--format",
+    "json"
+  ],
+  "started_at": "2026-10-15T14:38:23.136099+00:00",
+  "timeout_seconds": 20,
+  "exit_code": 125,
+  "stdout": "",
+  "stderr": "time=\"2026-10-15T15:38:23+01:00\" level=warning msg=\"\\\"/\\\" is not a shared mount, this could cause issues or missing mounts with rootless containers\"\ntime=\"2026-10-15T15:38:23+01:00\" level=error msg=\"running `/usr/bin/newuidmap 48 0 1000 1 1 524288 65536`: newuidmap: write to uid_map failed: Operation not permitted\\n\"\nError: cannot set up namespace using \"/usr/bin/newuidmap\": exit status 1\n"
+}

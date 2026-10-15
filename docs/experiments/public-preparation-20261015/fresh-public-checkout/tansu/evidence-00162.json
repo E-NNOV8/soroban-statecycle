@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAALg4AAAARAAAAEwAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtqgAAAAGNjFv1AAAAQCtR0GTiAiraMG4uyn4aA6ICzSH8gPbzmKx14Y1yYXMqOvg4ggE5b72YTXW2fJUNudHXTlR1W143E4CxTHT1CwU="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\"fee\":11790,\"seq_num\":\"73014444051\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"restore_footprint\":{\"ext\":\"v0\"}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[],\"read_write\":[]},\"instructions\":0,\"disk_read_bytes\":0,\"write_bytes\":0},\"resource_fee\":\"11690\"}}},\"signatures\":[{\"hint\":\"8d8c5bf5\",\"signature\":\"2b51d064e2022ada306e2eca7e1a03a202cd21fc80f6f398ac75e18d7261732a3af8388201396fbd984d75b67c950db9d1d74e54755b5e371380b14c74f50b05\"}]}}\n",
+  "stderr": ""
+}

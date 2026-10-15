@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "stellar-core",
+    "http-command",
+    "sorobaninfo"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:28.627714+00:00",
+  "exit_code": 0,
+  "stdout": "Content-Length: 1743\nContent-Type: application/json\n\n{\n   \"fee_contract_events_size_1kb\" : 5000,\n   \"fee_historical_1kb\" : 4059,\n   \"fee_rate_per_instructions_increment\" : 7,\n   \"fee_read_1kb\" : 447,\n   \"fee_read_ledger_entry\" : 1563,\n   \"fee_transaction_size_1kb\" : 406,\n   \"fee_write_1kb\" : 1000,\n   \"fee_write_ledger_entry\" : 2500,\n   \"ledger\" : {\n      \"max_instructions\" : 580000000,\n      \"max_read_bytes\" : 400000,\n      \"max_read_ledger_entries\" : 1000,\n      \"max_tx_count\" : 2000,\n      \"max_tx_size_bytes\" : 266240,\n      \"max_write_bytes\" : 286720,\n      \"max_write_ledger_entries\" : 1000\n   },\n   \"max_contract_data_entry_size\" : 65536,\n   \"max_contract_data_key_size\" : 250,\n   \"max_contract_size\" : 131072,\n   \"max_dependent_tx_clusters\" : 2,\n   \"scp\" : {\n      \"ballot_timeout_inc_ms\" : 1000,\n      \"ballot_timeout_ms\" : 1000,\n      \"ledger_close_time_ms\" : 5000,\n      \"nomination_timeout_inc_ms\" : 1000,\n      \"nomination_timeout_ms\" : 1000\n   },\n   \"state_archival\" : {\n      \"average_bucket_list_size\" : 792248,\n      \"bucket_list_size_snapshot_period\" : 30,\n      \"bucketlist_size_window_sample_size\" : 30,\n      \"eviction_scan_size\" : 500000,\n      \"max_entries_to_archive\" : 1000,\n      \"max_entry_ttl\" : 3110400,\n      \"min_persistent_ttl\" : 120960,\n      \"min_temporary_ttl\" : 720,\n      \"persistent_rent_rate_denominator\" : 1215,\n      \"starting_eviction_scan_level\" : 7,\n      \"temp_rent_rate_denominator\" : 2430\n   },\n   \"tx\" : {\n      \"max_contract_events_size_bytes\" : 16384,\n      \"max_footprint_size\" : 400,\n      \"max_instructions\" : 400000000,\n      \"max_read_bytes\" : 200000,\n      \"max_read_ledger_entries\" : 200,\n      \"max_size_bytes\" : 132096,\n      \"max_write_bytes\" : 132096,\n      \"max_write_ledger_entries\" : 200,\n      \"memory_limit\" : 41943040\n   }\n}\n\n",
+  "stderr": "2026-10-15T17:08:28.819 [default INFO] Config from stellar-core.cfg\n2026-10-15T17:08:28.821 [default INFO] 'ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING' enabled in configuration file - node will not function properly with most networks\n2026-10-15T17:08:28.822 [default INFO] Using QUORUM_SET: {\n   \"t\" : 1,\n   \"v\" : [ \"self\" ]\n}\n\n"
+}

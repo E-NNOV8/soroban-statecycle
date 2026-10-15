@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "encode",
+    "--type",
+    "LedgerKey"
+  ],
+  "stdin": "{\"config_setting\": {\"config_setting_id\": \"state_archival\"}}",
+  "started_at": "2026-10-15T18:04:34.264547+00:00",
+  "exit_code": 0,
+  "stdout": "AAAACAAAAAo=\n",
+  "stderr": ""
+}

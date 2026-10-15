@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "stellar",
+    "--version"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T19:27:28.332225+00:00",
+  "exit_code": 0,
+  "stdout": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)\nstellar-xdr 28.0.0 (d0f1330e43c3a2c0c616da30698b24140d4eea72)\nxdr (9c9c145953e80990d6ff1ae3a6a973a0ce6d0694)\n",
+  "stderr": ""
+}

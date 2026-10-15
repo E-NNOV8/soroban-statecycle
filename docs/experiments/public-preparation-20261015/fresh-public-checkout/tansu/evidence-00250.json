@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerEntryData",
+    "--input",
+    "single-base64",
+    "AAAABgAAAAAAAAABhxG8n8jpwVJZeNxc9qxmG3JgIitYwu4f4/CgRQGsZaQAAAAUAAAAAQAAABMAAAAAeWL0LfUYtqJCidk4s/fi8qRdXQWKd4HQTJodHob8PLYAAAABAAAAAwAAABAAAAABAAAAAQAAAA8AAAAMQWRtaW5zQ29uZmlnAAAAEQAAAAEAAAACAAAADwAAAAZhZG1pbnMAAAAAABAAAAABAAAAAQAAABIAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1AAAADwAAAAl0aHJlc2hvbGQAAAAAAAADAAAAAQAAABAAAAABAAAAAQAAAA8AAAAKQ29sbGF0ZXJhbAAAAAAAEQAAAAEAAAACAAAADwAAAAdhZGRyZXNzAAAAABIAAAABk35hltOMbCb0WxMkBtbK1DtcuyZwWE8rrwAilWQ+nAYAAAAPAAAACXdhc21faGFzaAAAAAAAAAEAAAAQAAAAAQAAAAEAAAAPAAAABlBhdXNlZAAAAAAAAAAAAAA="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"contract_data\":{\"ext\":\"v0\",\"contract\":\"CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\",\"val\":{\"contract_instance\":{\"executable\":{\"wasm\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"},\"storage\":[{\"key\":{\"vec\":[{\"symbol\":\"AdminsConfig\"}]},\"val\":{\"map\":[{\"key\":{\"symbol\":\"admins\"},\"val\":{\"vec\":[{\"address\":\"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"}]}},{\"key\":{\"symbol\":\"threshold\"},\"val\":{\"u32\":1}}]}},{\"key\":{\"vec\":[{\"symbol\":\"Collateral\"}]},\"val\":{\"map\":[{\"key\":{\"symbol\":\"address\"},\"val\":{\"address\":\"CCJX4YMW2OGGYJXULMJSIBWWZLKDWXF3EZYFQTZLV4ACFFLEH2OANJJL\"}},{\"key\":{\"symbol\":\"wasm_hash\"},\"val\":\"void\"}]}},{\"key\":{\"vec\":[{\"symbol\":\"Paused\"}]},\"val\":{\"bool\":false}}]}}}}\n",
+  "stderr": ""
+}

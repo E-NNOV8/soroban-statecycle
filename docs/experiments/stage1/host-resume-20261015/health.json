@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "curl",
+    "--noproxy",
+    "*",
+    "--max-time",
+    "20",
+    "-sS",
+    "http://localhost:8000/rpc",
+    "-H",
+    "Content-Type: application/json",
+    "-d",
+    "{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"getHealth\"}"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:28.396353+00:00",
+  "exit_code": 0,
+  "stdout": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"status\":\"healthy\",\"latestLedger\":4023,\"latestLedgerCloseTime\":\"1792084108\",\"oldestLedger\":7,\"oldestLedgerCloseTime\":\"1792076562\",\"ledgerRetentionWindow\":120960}}",
+  "stderr": ""
+}

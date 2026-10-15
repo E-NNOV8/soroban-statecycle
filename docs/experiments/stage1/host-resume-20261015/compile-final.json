@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "python3",
+    "-m",
+    "compileall",
+    "-q",
+    "src",
+    "tests"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:30:17.199878+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

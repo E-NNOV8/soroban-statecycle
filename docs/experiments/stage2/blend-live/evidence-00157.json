@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAARu0AAAtsAAAATQAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAGAAAAAS/cJla2mZCorNlnDTlz+zUSc2o1WN3nmm4xe1P9TTiDAAAAFAAAAAEAAAAAAAACIAAAAiAAAAAAAABGiQAAAAFrQeGWAAAAQPleLl9wVFGk77QpP4aJPRKsl+KW52YAk73WKp50JbneG946T70sqLkKoUA1Q+OfO1ehIo/T8BwNQciYdNTyfQE="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"fee\":18157,\"seq_num\":\"12558484373581\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"restore_footprint\":{\"ext\":\"v0\"}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[],\"read_write\":[{\"contract_data\":{\"contract\":\"CAX5YJSWW2MZBKFM3FTQ2OLT7M2RE43KGVMN3Z42NYYXWU75JU4IGCKT\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}}]},\"instructions\":0,\"disk_read_bytes\":544,\"write_bytes\":544},\"resource_fee\":\"18057\"}}},\"signatures\":[{\"hint\":\"6b41e196\",\"signature\":\"f95e2e5f705451a4efb4293f86893d12ac97e296e7660093bdd62a9e7425b9de1bde3a4fbd2ca8b90aa1403543e39f3b57a1228fd3f01c0d41c89874d4f27d01\"}]}}\n",
+  "stderr": ""
+}

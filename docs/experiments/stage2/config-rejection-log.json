@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sh",
+    "-c",
+    "grep -Ei \"invalid|config.*upgrade|entry.*ttl\" /var/log/stellar-core/stellar-core-2026-10-15_15-02-36.log | tail -35"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:06:48.920093+00:00",
+  "exit_code": 0,
+  "stdout": "    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n2026-10-15T15:02:47.024 GCTI6 [Ledger INFO] Applying config upgrade: {\n                \"maxEntryTTL\": 3110400,\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n    \"configupgradesetkey\": {\n2026-10-15T17:15:42.029 GCTI6 [Ledger INFO] Applying config upgrade: {\n                \"maxEntryTTL\": 3110400,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n            \"maxEntryTTL\": 128,\n",
+  "stderr": ""
+}

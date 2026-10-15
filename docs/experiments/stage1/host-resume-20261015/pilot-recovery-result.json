@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "scope": "single pilot archive/restore public and raw equality only; control/negative/retry/repetitions still pending",
+  "after": {
+    "get_config": {
+      "bstop_rate": 1000000,
+      "max_positions": 4,
+      "min_collateral": "10000000",
+      "oracle": "GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ",
+      "status": 6
+    },
+    "get_admin": "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+  },
+  "raw_equal": true,
+  "restored_ledger": 4729
+}

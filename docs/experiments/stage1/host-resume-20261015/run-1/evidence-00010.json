@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CDXTNWGN2ZM2LMCH4ZTL74CBTD4DDKMBAIAD7UJPWY7DQLZAY72GRW3X",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin",
+    "--send",
+    "yes",
+    "--",
+    "get_admin"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: ebf71e178d8029303a9eb61ce6811de962d914b569d96dde955d3ca4b53976cf\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

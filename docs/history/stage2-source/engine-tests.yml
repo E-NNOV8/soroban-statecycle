@@ -1,0 +1,23 @@
+name: Engine behavior tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Dependency-free engine configuration and failure tests
+        env:
+          PYTHONPATH: src
+        run: |
+          python3 -m unittest discover -s tests -p 'test_scenario.py' -v
+          python3 -m unittest discover -s tests -p 'test_preflight.py' -v
+          python3 -m compileall -q src tests
+# Real Core campaigns and CLI-XDR replay tests run locally via scripts/check.sh.
+# This workflow is configured only; hosted execution requires publication.

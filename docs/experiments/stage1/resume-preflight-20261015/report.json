@@ -1,0 +1,94 @@
+{
+  "phase": "infrastructure-preflight",
+  "stage1_result": "INCONCLUSIVE",
+  "backend_advertised_available": false,
+  "blockers": [
+    "network/Core configuration failure: no available real Core backend"
+  ],
+  "campaign": {
+    "provisioning": "NOT TESTED",
+    "control": "NOT TESTED",
+    "archival": "NOT TESTED",
+    "archive_observation": "NOT TESTED",
+    "restore": "NOT TESTED",
+    "application_invariant": "NOT TESTED",
+    "raw_verification": "NOT TESTED",
+    "negative": "NOT TESTED",
+    "retry": "NOT TESTED",
+    "repeatability": "NOT TESTED"
+  },
+  "fresh_state_campaign_runs": 0,
+  "independent_builds": 0,
+  "note": "Availability/health probes do not execute the archival campaign.",
+  "recorded_at": "2026-10-15T15:11:16.544818+00:00",
+  "probes": [
+    {
+      "id": "docker",
+      "argv": [
+        "docker",
+        "info",
+        "--format",
+        "{{json .ServerVersion}}"
+      ],
+      "timeout_seconds": 15,
+      "exit_code": 1,
+      "stdout": "\"\"\n",
+      "stderr": "permission denied while trying to connect to the docker API at unix:///var/run/docker.sock\n",
+      "result": "INCONCLUSIVE"
+    },
+    {
+      "id": "podman",
+      "argv": [
+        "podman",
+        "--root",
+        "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-root",
+        "--runroot",
+        "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-runroot",
+        "--storage-driver",
+        "vfs",
+        "info",
+        "--format",
+        "json"
+      ],
+      "timeout_seconds": 15,
+      "exit_code": 125,
+      "stdout": "",
+      "stderr": "time=\"2026-10-15T16:11:16+01:00\" level=warning msg=\"\\\"/\\\" is not a shared mount, this could cause issues or missing mounts with rootless containers\"\ntime=\"2026-10-15T16:11:16+01:00\" level=error msg=\"running `/usr/bin/newuidmap 205 0 1000 1 1 524288 65536`: newuidmap: write to uid_map failed: Operation not permitted\\n\"\nError: cannot set up namespace using \"/usr/bin/newuidmap\": exit status 1\n",
+      "result": "INCONCLUSIVE"
+    },
+    {
+      "id": "native-core",
+      "argv": [
+        "stellar-core",
+        "--version"
+      ],
+      "timeout_seconds": 15,
+      "exit_code": null,
+      "result": "INCONCLUSIVE",
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: 'stellar-core'"
+    },
+    {
+      "id": "stellar",
+      "argv": [
+        "/tmp/runbook-tools/stellar",
+        "--version"
+      ],
+      "timeout_seconds": 15,
+      "exit_code": 0,
+      "stdout": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)\nstellar-xdr 28.0.0 (d0f1330e43c3a2c0c616da30698b24140d4eea72)\nxdr (9c9c145953e80990d6ff1ae3a6a973a0ce6d0694)\n",
+      "stderr": "",
+      "result": "PASS"
+    },
+    {
+      "id": "local-rpc",
+      "url": "http://localhost:8000/rpc",
+      "timeout_seconds": 5,
+      "result": "INCONCLUSIVE",
+      "error": "URLError: <urlopen error [Errno 1] Operation not permitted>"
+    }
+  ],
+  "source_hashes": {
+    "src/archival_regression/__init__.py": "7202ba06c491ee7eec8ea239550124893732ef7ea4efbb2a2c1e709f3eb8323f",
+    "src/archival_regression/preflight.py": "7da6ded93ae3b54b983446cb44a02918fc921d66b700df28d3c239db949133ba"
+  }
+}

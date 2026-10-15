@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerEntryData",
+    "--input",
+    "single-base64",
+    "AAAACAAAAAoAL3YAAAAC0AAB2IAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAc="
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:12:34.506727+00:00",
+  "exit_code": 0,
+  "stdout": "{\"config_setting\":{\"state_archival\":{\"max_entry_ttl\":3110400,\"min_temporary_ttl\":720,\"min_persistent_ttl\":120960,\"persistent_rent_rate_denominator\":\"1215\",\"temp_rent_rate_denominator\":\"2430\",\"max_entries_to_archive\":1000,\"live_soroban_state_size_window_sample_size\":30,\"live_soroban_state_size_window_sample_period\":64,\"eviction_scan_size\":500000,\"starting_eviction_scan_level\":7}}}\n",
+  "stderr": ""
+}

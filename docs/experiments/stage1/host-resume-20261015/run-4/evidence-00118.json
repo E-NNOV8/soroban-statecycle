@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAANwkAAAtsAAAANQAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAAAAAAFA52S5wLGoMu5bJ9JA9w8f09hFm01XzxRqTREGJ910hgAAAApnZXRfY29uZmlnAAAAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAYAAAABQOdkucCxqDLuWyfSQPcPH9PYRZtNV88Uak0RBifddIYAAAAUAAAAAQAAAAcnTYWDbE6a34mV+SQMZFLLDOLkdR4bELr//9v7kDGboQAAAAAAC/SwAAAAAAAAAAAAAAAAAAA2pQAAAAFrQeGWAAAAQFjOz17ilWwKW18/I60RHnh2cH30Z+LsOwzFqOprsAHMh+tw5Wqu/FPooiTqGToO9IK/pBRHZI7BKZoa3+SgVAE="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"fee\":14089,\"seq_num\":\"12558484373557\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"invoke_host_function\":{\"host_function\":{\"invoke_contract\":{\"contract_address\":\"CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI\",\"function_name\":\"get_config\",\"args\":[]}},\"auth\":[]}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[{\"contract_data\":{\"contract\":\"CBAOOZFZYCY2QMXOLMT5EQHXB4P5HWCFTNGVPTYUNJGRCBRH3V2IM3DI\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}},{\"contract_code\":{\"hash\":\"274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1\"}}],\"read_write\":[]},\"instructions\":783536,\"disk_read_bytes\":0,\"write_bytes\":0},\"resource_fee\":\"13989\"}}},\"signatures\":[{\"hint\":\"6b41e196\",\"signature\":\"58cecf5ee2956c0a5b5f3f23ad111e7876707df467e2ec3b0cc5a8ea6bb001cc87eb70e56aaefc53e8a224ea193a0ef482bfa41447648ec1299a1adfe4a05401\"}]}}\n",
+  "stderr": ""
+}

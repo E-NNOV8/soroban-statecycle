@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+    "contract",
+    "restore",
+    "--id",
+    "CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X",
+    "--key-xdr",
+    "AAAAEAAAAAEAAAACAAAADwAAAANLZXkAAAAADQAAACC4f42ZPWVAr1egZOy6Ur57uixkHDQrPEcNejFAOTVJtQ==",
+    "--rpc-url",
+    "http://localhost:18002/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "New ttl ledger: 259\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 009788cd9f72df0ffef0737e0c1406af697e84d107a15e42444f8b8db1f76948\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

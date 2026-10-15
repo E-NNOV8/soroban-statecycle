@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "encode",
+    "--type",
+    "LedgerKey"
+  ],
+  "stdin": "{\"contract_data\": {\"contract\": \"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\", \"key\": {\"vec\": [{\"symbol\": \"LastHash\"}, {\"bytes\": \"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\"}]}, \"durability\": \"persistent\"}}",
+  "exit_code": 0,
+  "stdout": "AAAABgAAAAHe8AfMbnRNeER+k3bbCzpKG7MEoO1GVHOT6KK3JZHqhgAAABAAAAABAAAAAgAAAA8AAAAITGFzdEhhc2gAAAANAAAAILh/jZk9ZUCvV6Bk7LpSvnu6LGQcNCs8Rw16MUA5NUm1AAAAAQ==\n",
+  "stderr": ""
+}

@@ -1,0 +1,6 @@
+{
+  "result": "INCONCLUSIVE",
+  "reason": "RPC unavailable",
+  "phase": "archive",
+  "exit_code": 2
+}

@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "deploy",
+    "--wasm-hash",
+    "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+    "--salt",
+    "5038d85b9801d2ee4bcaa7a4e36ea437c50494292830efb3fbb30d18024a0390",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin",
+    "--",
+    "--admin",
+    "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\n",
+  "stderr": "\u2139\ufe0f  Deploying contract using wasm hash 7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\n\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 6f0315c436dc40f37706e73dac5ee21e366b6e536cb5decdb54eac045a3f7dd4\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+}

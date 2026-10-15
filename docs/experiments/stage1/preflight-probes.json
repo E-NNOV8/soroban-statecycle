@@ -1,0 +1,144 @@
+[
+  {
+    "id": "docker-info",
+    "argv": [
+      "docker",
+      "info",
+      "--format",
+      "{{json .ServerVersion}}"
+    ],
+    "started_at": "2026-10-15T14:38:23.080935+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 1,
+    "stdout": "\"\"\n",
+    "stderr": "permission denied while trying to connect to the docker API at unix:///var/run/docker.sock\n"
+  },
+  {
+    "id": "podman-local",
+    "argv": [
+      "podman",
+      "--root",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-root",
+      "--runroot",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-runroot",
+      "--storage-driver",
+      "vfs",
+      "info",
+      "--format",
+      "json"
+    ],
+    "started_at": "2026-10-15T14:38:23.136099+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 125,
+    "stdout": "",
+    "stderr": "time=\"2026-10-15T15:38:23+01:00\" level=warning msg=\"\\\"/\\\" is not a shared mount, this could cause issues or missing mounts with rootless containers\"\ntime=\"2026-10-15T15:38:23+01:00\" level=error msg=\"running `/usr/bin/newuidmap 48 0 1000 1 1 524288 65536`: newuidmap: write to uid_map failed: Operation not permitted\\n\"\nError: cannot set up namespace using \"/usr/bin/newuidmap\": exit status 1\n"
+  },
+  {
+    "id": "native-core",
+    "argv": [
+      "stellar-core",
+      "--version"
+    ],
+    "started_at": "2026-10-15T14:38:23.257448+00:00",
+    "timeout_seconds": 20,
+    "exit_code": null,
+    "error": "[Errno 2] No such file or directory: 'stellar-core'"
+  },
+  {
+    "id": "stellar-version",
+    "argv": [
+      "/tmp/runbook-tools/stellar",
+      "--version"
+    ],
+    "started_at": "2026-10-15T14:38:23.259427+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 0,
+    "stdout": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)\nstellar-xdr 28.0.0 (d0f1330e43c3a2c0c616da30698b24140d4eea72)\nxdr (9c9c145953e80990d6ff1ae3a6a973a0ce6d0694)\n",
+    "stderr": ""
+  },
+  {
+    "id": "python-version",
+    "argv": [
+      "python3",
+      "--version"
+    ],
+    "started_at": "2026-10-15T14:38:23.307201+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 0,
+    "stdout": "Python 3.14.6\n",
+    "stderr": ""
+  },
+  {
+    "id": "cargo-version",
+    "argv": [
+      "cargo",
+      "--version"
+    ],
+    "started_at": "2026-10-15T14:38:23.309828+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 0,
+    "stdout": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\n",
+    "stderr": ""
+  },
+  {
+    "id": "rust-version",
+    "argv": [
+      "rustc",
+      "--version"
+    ],
+    "started_at": "2026-10-15T14:38:23.416865+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 0,
+    "stdout": "rustc 1.95.0 (59807616e 2026-04-14)\n",
+    "stderr": ""
+  },
+  {
+    "id": "git-version",
+    "argv": [
+      "git",
+      "--version"
+    ],
+    "started_at": "2026-10-15T14:38:23.609994+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 0,
+    "stdout": "git version 2.55.0\n",
+    "stderr": ""
+  },
+  {
+    "id": "blend-revision",
+    "argv": [
+      "git",
+      "-c",
+      "credential.helper=",
+      "ls-remote",
+      "https://github.com/blend-capital/blend-contracts-v2.git",
+      "refs/heads/main"
+    ],
+    "started_at": "2026-10-15T14:38:23.624810+00:00",
+    "timeout_seconds": 20,
+    "exit_code": 128,
+    "stdout": "",
+    "stderr": "fatal: unable to access 'https://github.com/blend-capital/blend-contracts-v2.git/': Could not resolve host: github.com\n"
+  },
+  {
+    "id": "local-rpc",
+    "url": "http://127.0.0.1:8000/soroban/rpc",
+    "started_at": "2026-10-15T14:38:23.647516+00:00",
+    "timeout_seconds": 15,
+    "error": "URLError: <urlopen error [Errno 1] Operation not permitted>"
+  },
+  {
+    "id": "blend-source",
+    "url": "https://codeload.github.com/blend-capital/blend-contracts-v2/tar.gz/refs/heads/main",
+    "started_at": "2026-10-15T14:38:23.673237+00:00",
+    "timeout_seconds": 15,
+    "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  },
+  {
+    "id": "core-release",
+    "url": "https://api.github.com/repos/stellar/stellar-core/releases/latest",
+    "started_at": "2026-10-15T14:38:23.674447+00:00",
+    "timeout_seconds": 15,
+    "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "result": "INCONCLUSIVE",
+  "reason": "checkpoint preserved; recovery is not complete",
+  "phase": "restore",
+  "exit_code": 2
+}

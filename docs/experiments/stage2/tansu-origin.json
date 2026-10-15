@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "/home/mxr/timi/tansu",
+    "remote",
+    "-v"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T19:18:03.684577+00:00",
+  "exit_code": 0,
+  "stdout": "origin\tgit@github-timi:starboytiimz/tansu.git (fetch)\norigin\tgit@github-timi:starboytiimz/tansu.git (push)\n",
+  "stderr": ""
+}

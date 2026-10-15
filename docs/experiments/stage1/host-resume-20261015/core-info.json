@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "stellar-core",
+    "http-command",
+    "info"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:28.413824+00:00",
+  "exit_code": 0,
+  "stdout": "Content-Length: 1388\nContent-Type: application/json\n\n{\n   \"info\" : {\n      \"build\" : \"v29.0.0\",\n      \"ledger\" : {\n         \"age\" : 0,\n         \"baseFee\" : 100,\n         \"baseReserve\" : 5000000,\n         \"closeTime\" : 1792084108,\n         \"hash\" : \"ece5773731693ea0681fa3c49b847704503fd00df1b377b9bebf08fcc6cd80e5\",\n         \"maxSorobanTxSetSize\" : 2000,\n         \"maxTxSetSize\" : 100,\n         \"num\" : 4023,\n         \"version\" : 28\n      },\n      \"network\" : \"Standalone Network ; February 2017\",\n      \"peers\" : {\n         \"authenticated_count\" : 2,\n         \"pending_count\" : 0\n      },\n      \"protocol_version\" : 29,\n      \"quorum\" : {\n         \"maybe_dead_nodes\" : [],\n         \"node\" : \"self\",\n         \"qset\" : {\n            \"agree\" : 1,\n            \"cost\" : 0,\n            \"delayed\" : 0,\n            \"disagree\" : 0,\n            \"fail_at\" : 0,\n            \"hash\" : \"d05a3b\",\n            \"lag_ms\" : null,\n            \"ledger\" : 4022,\n            \"missing\" : 0,\n            \"phase\" : \"EXTERNALIZE\",\n            \"validated\" : true\n         },\n         \"transitive\" : {\n            \"critical\" : null,\n            \"intersection\" : true,\n            \"last_check_ledger\" : 2,\n            \"node_count\" : 0\n         }\n      },\n      \"startedOn\" : \"2026-10-15T15:02:36Z\",\n      \"state\" : \"Synced!\",\n      \"status\" : [\n         \"Publishing 1 queued checkpoints [4023-4023]: Waiting before starting Ready to run: resolve-snapshot\"\n      ]\n   }\n}\n\n",
+  "stderr": "2026-10-15T17:08:28.614 [default INFO] Config from stellar-core.cfg\n2026-10-15T17:08:28.615 [default INFO] 'ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING' enabled in configuration file - node will not function properly with most networks\n2026-10-15T17:08:28.616 [default INFO] Using QUORUM_SET: {\n   \"t\" : 1,\n   \"v\" : [ \"self\" ]\n}\n\n"
+}

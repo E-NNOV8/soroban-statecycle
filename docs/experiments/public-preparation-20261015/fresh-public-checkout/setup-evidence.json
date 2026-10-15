@@ -1,0 +1,957 @@
+[
+  {
+    "argv": [
+      "stellar",
+      "--version"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)\nstellar-xdr 28.0.0 (d0f1330e43c3a2c0c616da30698b24140d4eea72)\nxdr (9c9c145953e80990d6ff1ae3a6a973a0ce6d0694)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "docker",
+      "ps",
+      "-a",
+      "--format",
+      "{{.Names}}"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "statecycle-repro-2\nstatecycle-repro\nstellar-local\nweighin-stage4-proof\nweighin-stage3-proof\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "docker",
+      "run",
+      "--detach",
+      "--name",
+      "statecycle-fresh-checkout",
+      "--publish",
+      "127.0.0.1:18002:8000",
+      "stellar/quickstart@sha256:4f8dfd693deba57fddef7f0bc722e4782c2e606c8675e3adc5438cebae249295",
+      "--local",
+      "--enable",
+      "rpc,horizon"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "b74385a9df84a759c54aeae0b2c45b79641cebc11267adcf3ce196fee96cf4d1\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getHealth",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "error": {
+        "code": -32603,
+        "message": "[-32603] data stores are not initialized: DB is empty"
+      }
+    }
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getHealth",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "error": {
+        "code": -32603,
+        "message": "[-32603] data stores are not initialized: DB is empty"
+      }
+    }
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getHealth",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "status": "healthy",
+        "latestLedger": 12,
+        "latestLedgerCloseTime": "1792095411",
+        "oldestLedger": 7,
+        "oldestLedgerCloseTime": "1792095406",
+        "ledgerRetentionWindow": 120960
+      }
+    }
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getNetwork",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "friendbotUrl": "http://localhost:8000/friendbot",
+        "passphrase": "Standalone Network ; February 2017",
+        "protocolVersion": 28
+      }
+    }
+  },
+  {
+    "argv": [
+      "docker",
+      "exec",
+      "statecycle-fresh-checkout",
+      "stellar-core",
+      "version"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "v29.0.0\nledger protocol version: 29\nrust version: rustc 1.95.0 (59807616e 2026-04-14)\nsoroban-env-host versions: \n    host[0]:\n        package version: 21.2.2\n        git version: 7eeddd897cfb0f700f938b0c8d6f0541150d1fcb\n        ledger protocol version: 21\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 21.2.0\n            git version: 9bea881f2057e412fdbb98875841626bf77b4b88\n            base XDR git version: 70180d5e8d9caee9e8645ed8a38c36a8cf403cd9\n    host[1]:\n        package version: 22.0.0\n        git version: 1cd8b8dca9aeeca9ce45b129cd923992b32dc258\n        ledger protocol version: 22\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 22.0.0\n            git version: 715003372ea6380044b5a4a02907ff73e56ae9e7\n            base XDR git version: 529d5176f24c73eeccfa5eba481d4e89c19b1181\n    host[2]:\n        package version: 23.0.0\n        git version: 688bc34e6cd15c71742139e625268c7f30f55a92\n        ledger protocol version: 23\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 23.0.0\n            git version: e83a6337204ecfdb0ac0d44ffb857130c1249b1b\n            base XDR git version: 4b7a2ef7931ab2ca2499be68d849f38190b443ca\n    host[3]:\n        package version: 24.0.0\n        git version: a37eeda815e626f416eff13f2eacb32a8b0c3729\n        ledger protocol version: 24\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 24.0.0\n            git version: 07b765d3ab146f7f7ea951af1f9e41e0ece8fb48\n            base XDR git version: 4b7a2ef7931ab2ca2499be68d849f38190b443ca\n    host[4]:\n        package version: 25.0.0\n        git version: 6323c1fc03ecb9f53b7c1e42fd62c1bbd3aebc2c\n        ledger protocol version: 25\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 25.0.0\n            git version: dc9f40fcb83c3054341f70b65a2222073369b37b\n            base XDR git version: 0a621ec7811db000a60efae5b35f78dee3aa2533\n    host[5]:\n        package version: 26.0.0\n        git version: b351f88a468d3b9e1d6de53d5b0ca585f6b7dadb\n        ledger protocol version: 26\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 26.0.0\n            git version: dd7a165a193126fd37a751d867bee1cb8f3b55a6\n            base XDR git version: cff714a5ebaaaf2dac343b3546c2df73f0b7a36e\n    host[6]:\n        package version: 27.0.0\n        git version: b03d2563f3a08d51095a19bdbb6d90364b8ce04a\n        ledger protocol version: 27\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 27.0.0\n            git version: 5262803470be965e42f80023d12fba12808c774a\n            base XDR git version: 68fa1ac55692f68ad2a2ca549d0a283273554439\n    host[7]:\n        package version: 28.0.0\n        git version: ba37ea5f76a10710835992fb90f9ec7a14eca499\n        ledger protocol version: 28\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 28.0.0\n            git version: d0f1330e43c3a2c0c616da30698b24140d4eea72\n            base XDR git version: 9c9c145953e80990d6ff1ae3a6a973a0ce6d0694\n    host[8]:\n        package version: 29.0.0\n        git version: a721944b5a4ea830a4bf5c2dbb8dbe8c1e1354c5\n        ledger protocol version: 29\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 28.0.0\n            git version: d0f1330e43c3a2c0c616da30698b24140d4eea72\n            base XDR git version: 9c9c145953e80990d6ff1ae3a6a973a0ce6d0694\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "keys",
+      "generate",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "[private identity output omitted]",
+    "stderr": "[private identity output omitted]"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "keys",
+      "address",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "keys",
+      "generate",
+      "statecycle-oracle"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "[private identity output omitted]",
+    "stderr": "[private identity output omitted]"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "keys",
+      "address",
+      "statecycle-oracle"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "GBKT5OPZOXLNPL26KCYFUYENTK7KOVNL7PI566E7EEEPFBK7ECIFOYWF\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "keys",
+      "generate",
+      "statecycle-backstop"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "[private identity output omitted]",
+    "stderr": "[private identity output omitted]"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "keys",
+      "address",
+      "statecycle-backstop"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "GDADDOLRTEB2VBCURA7WX52HFD2XV5W3HOWRJ26FMFWHZUUDWVRN3HHY\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/friendbot?addr=GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+    "request": null,
+    "response": {
+      "successful": true,
+      "hash": "c7649a1ab18a97e1271b4c191a19aa832ac83f60c3157551e05b699f7f823cf2",
+      "envelope_xdr": "AAAAAgAAAAAVaKqQCYgKGqcgHgUpTAai2eWfkX7SfH2hLlWYc5P8DAABhqAAAAAPAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAHN2/eiOTNYcwPspSheGs/HQYfXy8cpXRl+qkyIRuUbWAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAABdIdugAAAAAAAAAAAJzk/wMAAAAQOIZCM020a7yHM+H/C+h00V/f2V/fDbKSVZqNIWuQ/HyCW5+zGA8EfTqUPfYBozUXmeLGqkYA+csbzmTQH8zyA4RuUbWAAAAQIVYANhGH+BIQF6RjiRtS3TlaSTTEK/cAEMDA1FuXPODP7TBBINcWqsc7qxmzOGrlC4tomxx4Wj+guLODkOAXQE="
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "upload",
+      "--wasm",
+      "/tmp/statecycle-public-checkout/docs/experiments/stage2/artifacts/pool.wasm",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1\n",
+    "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 94f79b5ac1789ebda08be6a9befd3eccee74d00a610e8c6002c1493d2cd08a4e\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "upload",
+      "--wasm",
+      "/tmp/statecycle-public-checkout/docs/experiments/stage2/artifacts/pool_factory.wasm",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9\n",
+    "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 2a04c07bd7a3976494b4f01f71439324020b2213a4a72a01a33fc6f6205c9f68\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "upload",
+      "--wasm",
+      "/tmp/statecycle-public-checkout/docs/experiments/stage2/artifacts/tansu.wasm",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\n",
+    "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: b4d9d07810908d7d639c02c6ee318fa3ec85ca2a9bed5556c0fb85e4f35b5945\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "deploy",
+      "--wasm-hash",
+      "e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--",
+      "--pool_init_meta",
+      "{\"pool_hash\": \"274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1\", \"backstop\": \"GDADDOLRTEB2VBCURA7WX52HFD2XV5W3HOWRJ26FMFWHZUUDWVRN3HHY\", \"blnd_id\": \"GBKT5OPZOXLNPL26KCYFUYENTK7KOVNL7PI566E7EEEPFBK7ECIFOYWF\"}"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "CACKUC73SVHWUHNSBNAEM6YM3CPBHICIGVEG5RUYFOLDWQINKQ322DLK\n",
+    "stderr": "\u2139\ufe0f  Deploying contract using wasm hash e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9\n\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 7509f79a8aff7d61c41a4035ee12e2ffc788fa8e382de22b435ecbfef4e24ee2\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "asset",
+      "deploy",
+      "--asset",
+      "ARST2:GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "CCJX4YMW2OGGYJXULMJSIBWWZLKDWXF3EZYFQTZLV4ACFFLEH2OANJJL\n",
+    "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 65a1800aa3dd3e53b4dff18f77a88ce0e93bfc49f44e53b4ac39199ac6792913\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "encode",
+      "--type",
+      "LedgerKey"
+    ],
+    "stdin": "{\"config_setting\": {\"config_setting_id\": \"state_archival\"}}",
+    "exit_code": 0,
+    "stdout": "AAAACAAAAAo=\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getLedgerEntries",
+      "params": {
+        "keys": [
+          "AAAACAAAAAo="
+        ]
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "entries": [
+          {
+            "key": "AAAACAAAAAo=",
+            "xdr": "AAAACAAAAAoAL3YAAAAC0AAB2IAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAc=",
+            "lastModifiedLedgerSeq": 14,
+            "extXdr": "AAAAAA=="
+          }
+        ],
+        "latestLedger": 26
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "decode",
+      "--type",
+      "LedgerEntryData",
+      "--input",
+      "single-base64",
+      "AAAACAAAAAoAL3YAAAAC0AAB2IAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAc="
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "{\"config_setting\":{\"state_archival\":{\"max_entry_ttl\":3110400,\"min_temporary_ttl\":720,\"min_persistent_ttl\":120960,\"persistent_rent_rate_denominator\":\"1215\",\"temp_rent_rate_denominator\":\"2430\",\"max_entries_to_archive\":1000,\"live_soroban_state_size_window_sample_size\":30,\"live_soroban_state_size_window_sample_period\":64,\"eviction_scan_size\":500000,\"starting_eviction_scan_level\":7}}}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "encode",
+      "--type",
+      "ConfigUpgradeSet"
+    ],
+    "stdin": "{\"updated_entry\": [{\"state_archival\": {\"max_entry_ttl\": 3110400, \"min_temporary_ttl\": 16, \"min_persistent_ttl\": 64, \"persistent_rent_rate_denominator\": \"1215\", \"temp_rent_rate_denominator\": \"2430\", \"max_entries_to_archive\": 1000, \"live_soroban_state_size_window_sample_size\": 30, \"live_soroban_state_size_window_sample_period\": 64, \"eviction_scan_size\": 500000, \"starting_eviction_scan_level\": 1}}]}",
+    "exit_code": 0,
+    "stdout": "AAAAAQAAAAoAL3YAAAAAEAAAAEAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAE=\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+    "request": null,
+    "response": {
+      "_links": {
+        "self": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6"
+        },
+        "transactions": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/transactions{?cursor,limit,order}",
+          "templated": true
+        },
+        "operations": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/operations{?cursor,limit,order}",
+          "templated": true
+        },
+        "payments": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/payments{?cursor,limit,order}",
+          "templated": true
+        },
+        "effects": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/effects{?cursor,limit,order}",
+          "templated": true
+        },
+        "offers": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/offers{?cursor,limit,order}",
+          "templated": true
+        },
+        "trades": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/trades{?cursor,limit,order}",
+          "templated": true
+        },
+        "data": {
+          "href": "http://localhost:18002/accounts/GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6/data/{key}",
+          "templated": true
+        }
+      },
+      "id": "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+      "account_id": "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+      "sequence": "73014444037",
+      "sequence_ledger": 26,
+      "sequence_time": "1792095425",
+      "subentry_count": 0,
+      "last_modified_ledger": 26,
+      "last_modified_time": "2026-10-15T20:17:05Z",
+      "thresholds": {
+        "low_threshold": 0,
+        "med_threshold": 0,
+        "high_threshold": 0
+      },
+      "flags": {
+        "auth_required": false,
+        "auth_revocable": false,
+        "auth_immutable": false,
+        "auth_clawback_enabled": false
+      },
+      "balances": [
+        {
+          "balance": "9991.7642119",
+          "buying_liabilities": "0.0000000",
+          "selling_liabilities": "0.0000000",
+          "asset_type": "native"
+        }
+      ],
+      "signers": [
+        {
+          "weight": 1,
+          "key": "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+          "type": "ed25519_public_key"
+        }
+      ],
+      "data": {},
+      "num_sponsoring": 0,
+      "num_sponsored": 0,
+      "paging_token": "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6"
+    }
+  },
+  {
+    "argv": [
+      "docker",
+      "exec",
+      "statecycle-fresh-checkout",
+      "stellar-core",
+      "get-settings-upgrade-txs",
+      "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+      "73014444037",
+      "Standalone Network ; February 2017",
+      "--xdr",
+      "AAAAAQAAAAoAL3YAAAAAEAAAAEAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAE="
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAA=\n665b3a8648c2a949d87b60de8a39eaab9ed60874c94d5ac9faf0a59d250f96ca\nAAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAgAAAcwAYXNtAQAAAAEeBWABfgF+YAN+fn4BfmAEfn5+fgF+YAJ+fgF+YAAAAhkEAWMBXwAAAWwBXwABAWwBNwACAWwBOAADAwMCAAQFAwEAEAYRAn8AQYCAwAALfwBBgIDAAAsHMQUGbWVtb3J5AgAFd3JpdGUABAFfAAUKX19kYXRhX2VuZAMAC19faGVhcF9iYXNlAwEKVQJPAQF+IABC/wGDQsgAUgRAAAsgABAAIgEgAEIAEAEaIAFCAEKEgICAgMD0B0KEgICAgMD0BxACGkKEgICAgMD0B0KEgICAgMD0BxADGiABCwMAAQsASw5jb250cmFjdHNwZWN2MAAAAAAAAAAAAAAABXdyaXRlAAAAAAAAAQAAAAAAAAAJeGRyX2J5dGVzAAAAAAAADgAAAAEAAAPuAAAAIAAeEWNvbnRyYWN0ZW52bWV0YXYwAAAAAAAAABQAAAAAAHMOY29udHJhY3RtZXRhdjAAAAAAAAAABXJzdmVyAAAAAAAABjEuNzQuMAAAAAAAAAAAAAhyc3Nka3ZlcgAAADMyMC4wLjAtcmMyIzdjMTU0YjRmZTZhMzdkN2NhNzE3NzM0MmRlZGI2OWYzMTA4MDk1ZWYAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAHoSAAAAH0AAAB9AAAAAAA0c7wAAAAAA=\ne96985b6286f5563f89f68a9403f8555954df24de0e9c58ce848f5838b65add3\nAAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QJiWgAAAAARAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1Q0H3iF1ijx7Xkv/OLa3BciuwZZ6d48HAjRFsj/ZtVVwAAAAAS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAABAAAAAAAAAAEAAAAAAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9UNB94hdYo8e15L/zi2twXIrsGWenePBwI0RbI/2bVVcAAAAAEuTFnIUhygdggHhxgRFREAPEgJTSHlx4znrI6RlUWk1AAAAAAAAAAEAAAAAAAAAAQAAAAdLkxZyFIcoHYIB4cYERURADxICU0h5ceM56yOkZVFpNQAAAAEAAAAGAAAAAd6FeR0MzZNriBTCMlhCTeWQfPSSN550j9DUSdnpriOoAAAAFAAAAAEAHoSAAAAH0AAAAHgAAAAAAOThwAAAAAA=\n6f1eefbdd1a6817ca4266d740692a393a6f333af6bfbfc2bb6785cc633a23ab5\n3oV5HQzNk2uIFMIyWEJN5ZB89JI3nnSP0NRJ2emuI6hTPNRVIRsBjz4OfkTZNf+bmmaqaWdFoTf1BEMzkZzdag==\n",
+    "stderr": "Unsigned TransactionEnvelope to upload upgrade WASM \nUnsigned TransactionEnvelope to create upgrade contract \nUnsigned TransactionEnvelope to invoke contract with upgrade bytes \n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "tx",
+      "sign",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--sign-with-key",
+      "statecycle-admin"
+    ],
+    "stdin": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAA=",
+    "exit_code": 0,
+    "stdout": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAGNjFv1AAAAQMa+h0MVlwoe2O0yDHaOHlX64wb2yEoIqmjhkeY2ZMLUzkNDazk3MHCjawH34nyNByyOZGPhN2qxhkEPgvFnqQM=\n",
+    "stderr": "\u2139\ufe0f  Signing transaction: 665b3a8648c2a949d87b60de8a39eaab9ed60874c94d5ac9faf0a59d250f96ca\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "tx",
+      "send",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017"
+    ],
+    "stdin": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAGNjFv1AAAAQMa+h0MVlwoe2O0yDHaOHlX64wb2yEoIqmjhkeY2ZMLUzkNDazk3MHCjawH34nyNByyOZGPhN2qxhkEPgvFnqQM=",
+    "exit_code": 0,
+    "stdout": "{\n  \"status\": \"SUCCESS\",\n  \"ledger\": 28,\n  \"application_order\": 1,\n  \"fee_bump\": false,\n  \"tx_hash\": \"665b3a8648c2a949d87b60de8a39eaab9ed60874c94d5ac9faf0a59d250f96ca\",\n  \"created_at\": 1792095427,\n  \"envelope\": {\n    \"tx\": {\n      \"tx\": {\n        \"source_account\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n        \"fee\": 155000000,\n        \"seq_num\": \"73014444038\",\n        \"cond\": \"none\",\n        \"memo\": \"none\",\n        \"operations\": [\n          {\n            \"source_account\": null,\n            \"body\": {\n              \"restore_footprint\": {\n                \"ext\": \"v0\"\n              }\n            }\n          }\n        ],\n        \"ext\": {\n          \"v1\": {\n            \"ext\": \"v0\",\n            \"resources\": {\n              \"footprint\": {\n                \"read_only\": [],\n                \"read_write\": [\n                  {\n                    \"contract_code\": {\n                      \"hash\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n                    }\n                  }\n                ]\n              },\n              \"instructions\": 0,\n              \"disk_read_bytes\": 2000,\n              \"write_bytes\": 2000\n            },\n            \"resource_fee\": \"55000000\"\n          }\n        }\n      },\n      \"signatures\": [\n        {\n          \"hint\": \"8d8c5bf5\",\n          \"signature\": \"c6be874315970a1ed8ed320c768e1e55fae306f6c84a08aa68e191e63664c2d4ce43436b39373070a36b01f7e27c8d072c8e6463e1376ab186410f82f167a903\"\n        }\n      ]\n    }\n  },\n  \"result\": {\n    \"fee_charged\": \"8913\",\n    \"result\": {\n      \"tx_success\": [\n        {\n          \"op_inner\": {\n            \"restore_footprint\": \"success\"\n          }\n        }\n      ]\n    },\n    \"ext\": \"v0\"\n  },\n  \"result_meta\": {\n    \"v4\": {\n      \"ext\": \"v0\",\n      \"tx_changes_before\": [\n        {\n          \"state\": {\n            \"last_modified_ledger_seq\": 28,\n            \"data\": {\n              \"account\": {\n                \"account_id\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                \"balance\": \"99862642019\",\n                \"seq_num\": \"73014444037\",\n                \"num_sub_entries\": 0,\n                \"inflation_dest\": null,\n                \"flags\": 0,\n                \"home_domain\": \"\",\n                \"thresholds\": \"01000000\",\n                \"signers\": [],\n                \"ext\": {\n                  \"v1\": {\n                    \"liabilities\": {\n                      \"buying\": \"0\",\n                      \"selling\": \"0\"\n                    },\n                    \"ext\": {\n                      \"v2\": {\n                        \"num_sponsored\": 0,\n                        \"num_sponsoring\": 0,\n                        \"signer_sponsoring_i_ds\": [],\n                        \"ext\": {\n                          \"v3\": {\n                            \"ext\": \"v0\",\n                            \"seq_ledger\": 26,\n                            \"seq_time\": \"1792095425\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"ext\": \"v0\"\n          }\n        },\n        {\n          \"updated\": {\n            \"last_modified_ledger_seq\": 28,\n            \"data\": {\n              \"account\": {\n                \"account_id\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                \"balance\": \"99862642019\",\n                \"seq_num\": \"73014444038\",\n                \"num_sub_entries\": 0,\n                \"inflation_dest\": null,\n                \"flags\": 0,\n                \"home_domain\": \"\",\n                \"thresholds\": \"01000000\",\n                \"signers\": [],\n                \"ext\": {\n                  \"v1\": {\n                    \"liabilities\": {\n                      \"buying\": \"0\",\n                      \"selling\": \"0\"\n                    },\n                    \"ext\": {\n                      \"v2\": {\n                        \"num_sponsored\": 0,\n                        \"num_sponsoring\": 0,\n                        \"signer_sponsoring_i_ds\": [],\n                        \"ext\": {\n                          \"v3\": {\n                            \"ext\": \"v0\",\n                            \"seq_ledger\": 28,\n                            \"seq_time\": \"1792095427\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"ext\": \"v0\"\n          }\n        }\n      ],\n      \"operations\": [\n        {\n          \"ext\": \"v0\",\n          \"changes\": [],\n          \"events\": []\n        }\n      ],\n      \"tx_changes_after\": [],\n      \"soroban_meta\": {\n        \"ext\": {\n          \"v1\": {\n            \"ext\": \"v0\",\n            \"total_non_refundable_resource_fee_charged\": \"8813\",\n            \"total_refundable_resource_fee_charged\": \"0\",\n            \"rent_fee_charged\": \"0\"\n          }\n        },\n        \"return_value\": null\n      },\n      \"events\": [\n        {\n          \"stage\": \"before_all_txs\",\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n            \"type\": \"contract\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"fee\"\n                  },\n                  {\n                    \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                  }\n                ],\n                \"data\": {\n                  \"i128\": \"55000100\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"stage\": \"after_all_txs\",\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n            \"type\": \"contract\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"fee\"\n                  },\n                  {\n                    \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                  }\n                ],\n                \"data\": {\n                  \"i128\": \"-54991187\"\n                }\n              }\n            }\n          }\n        }\n      ],\n      \"diagnostic_events\": []\n    }\n  },\n  \"events\": {\n    \"contract_events\": [\n      []\n    ],\n    \"diagnostic_events\": [],\n    \"transaction_events\": [\n      {\n        \"stage\": \"before_all_txs\",\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n          \"type\": \"contract\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"fee\"\n                },\n                {\n                  \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                }\n              ],\n              \"data\": {\n                \"i128\": \"55000100\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"stage\": \"after_all_txs\",\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n          \"type\": \"contract\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"fee\"\n                },\n                {\n                  \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                }\n              ],\n              \"data\": {\n                \"i128\": \"-54991187\"\n              }\n            }\n          }\n        }\n      }\n    ]\n  }\n}\n",
+    "stderr": "\u2139\ufe0f  Transaction hash is 665b3a8648c2a949d87b60de8a39eaab9ed60874c94d5ac9faf0a59d250f96ca\n"
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getTransaction",
+      "params": {
+        "hash": "665b3a8648c2a949d87b60de8a39eaab9ed60874c94d5ac9faf0a59d250f96ca"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "latestLedger": 29,
+        "latestLedgerCloseTime": "1792095428",
+        "oldestLedger": 7,
+        "oldestLedgerCloseTime": "1792095406",
+        "status": "SUCCESS",
+        "txHash": "665b3a8648c2a949d87b60de8a39eaab9ed60874c94d5ac9faf0a59d250f96ca",
+        "applicationOrder": 1,
+        "feeBump": false,
+        "envelopeXdr": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAGNjFv1AAAAQMa+h0MVlwoe2O0yDHaOHlX64wb2yEoIqmjhkeY2ZMLUzkNDazk3MHCjawH34nyNByyOZGPhN2qxhkEPgvFnqQM=",
+        "resultXdr": "AAAAAAAAItEAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAA=",
+        "resultMetaXdr": "AAAABAAAAAAAAAACAAAAAwAAABwAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1AAAAF0BG/WMAAAARAAAABQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAGgAAAABq0TTBAAAAAAAAAAEAAAAcAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAABdARv1jAAAAEQAAAAYAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAADAAAAAAAAABwAAAAAatE0wwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAACJtAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAoAAAAAAAAAAAAAAAADRzwkAAAAAgAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAr////////////////8uOatAAAAAA==",
+        "events": {
+          "transactionEventsXdr": [
+            "AAAAAAAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAoAAAAAAAAAAAAAAAADRzwk",
+            "AAAAAgAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAr////////////////8uOat"
+          ],
+          "contractEventsXdr": [
+            []
+          ]
+        },
+        "ledger": 28,
+        "createdAt": "1792095427"
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "tx",
+      "sign",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--sign-with-key",
+      "statecycle-admin"
+    ],
+    "stdin": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAgAAAcwAYXNtAQAAAAEeBWABfgF+YAN+fn4BfmAEfn5+fgF+YAJ+fgF+YAAAAhkEAWMBXwAAAWwBXwABAWwBNwACAWwBOAADAwMCAAQFAwEAEAYRAn8AQYCAwAALfwBBgIDAAAsHMQUGbWVtb3J5AgAFd3JpdGUABAFfAAUKX19kYXRhX2VuZAMAC19faGVhcF9iYXNlAwEKVQJPAQF+IABC/wGDQsgAUgRAAAsgABAAIgEgAEIAEAEaIAFCAEKEgICAgMD0B0KEgICAgMD0BxACGkKEgICAgMD0B0KEgICAgMD0BxADGiABCwMAAQsASw5jb250cmFjdHNwZWN2MAAAAAAAAAAAAAAABXdyaXRlAAAAAAAAAQAAAAAAAAAJeGRyX2J5dGVzAAAAAAAADgAAAAEAAAPuAAAAIAAeEWNvbnRyYWN0ZW52bWV0YXYwAAAAAAAAABQAAAAAAHMOY29udHJhY3RtZXRhdjAAAAAAAAAABXJzdmVyAAAAAAAABjEuNzQuMAAAAAAAAAAAAAhyc3Nka3ZlcgAAADMyMC4wLjAtcmMyIzdjMTU0YjRmZTZhMzdkN2NhNzE3NzM0MmRlZGI2OWYzMTA4MDk1ZWYAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAHoSAAAAH0AAAB9AAAAAAA0c7wAAAAAA=",
+    "exit_code": 0,
+    "stdout": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAgAAAcwAYXNtAQAAAAEeBWABfgF+YAN+fn4BfmAEfn5+fgF+YAJ+fgF+YAAAAhkEAWMBXwAAAWwBXwABAWwBNwACAWwBOAADAwMCAAQFAwEAEAYRAn8AQYCAwAALfwBBgIDAAAsHMQUGbWVtb3J5AgAFd3JpdGUABAFfAAUKX19kYXRhX2VuZAMAC19faGVhcF9iYXNlAwEKVQJPAQF+IABC/wGDQsgAUgRAAAsgABAAIgEgAEIAEAEaIAFCAEKEgICAgMD0B0KEgICAgMD0BxACGkKEgICAgMD0B0KEgICAgMD0BxADGiABCwMAAQsASw5jb250cmFjdHNwZWN2MAAAAAAAAAAAAAAABXdyaXRlAAAAAAAAAQAAAAAAAAAJeGRyX2J5dGVzAAAAAAAADgAAAAEAAAPuAAAAIAAeEWNvbnRyYWN0ZW52bWV0YXYwAAAAAAAAABQAAAAAAHMOY29udHJhY3RtZXRhdjAAAAAAAAAABXJzdmVyAAAAAAAABjEuNzQuMAAAAAAAAAAAAAhyc3Nka3ZlcgAAADMyMC4wLjAtcmMyIzdjMTU0YjRmZTZhMzdkN2NhNzE3NzM0MmRlZGI2OWYzMTA4MDk1ZWYAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAHoSAAAAH0AAAB9AAAAAAA0c7wAAAAAGNjFv1AAAAQMm+dxu5zFbsp/zGxfS199F8ls6zWAcPWMpokkkvbExzgJj5uEb0XVCUYeoxodnuDvK/qi9TiG/zekiUwJ3IUww=\n",
+    "stderr": "\u2139\ufe0f  Signing transaction: e96985b6286f5563f89f68a9403f8555954df24de0e9c58ce848f5838b65add3\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "tx",
+      "send",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017"
+    ],
+    "stdin": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAgAAAcwAYXNtAQAAAAEeBWABfgF+YAN+fn4BfmAEfn5+fgF+YAJ+fgF+YAAAAhkEAWMBXwAAAWwBXwABAWwBNwACAWwBOAADAwMCAAQFAwEAEAYRAn8AQYCAwAALfwBBgIDAAAsHMQUGbWVtb3J5AgAFd3JpdGUABAFfAAUKX19kYXRhX2VuZAMAC19faGVhcF9iYXNlAwEKVQJPAQF+IABC/wGDQsgAUgRAAAsgABAAIgEgAEIAEAEaIAFCAEKEgICAgMD0B0KEgICAgMD0BxACGkKEgICAgMD0B0KEgICAgMD0BxADGiABCwMAAQsASw5jb250cmFjdHNwZWN2MAAAAAAAAAAAAAAABXdyaXRlAAAAAAAAAQAAAAAAAAAJeGRyX2J5dGVzAAAAAAAADgAAAAEAAAPuAAAAIAAeEWNvbnRyYWN0ZW52bWV0YXYwAAAAAAAAABQAAAAAAHMOY29udHJhY3RtZXRhdjAAAAAAAAAABXJzdmVyAAAAAAAABjEuNzQuMAAAAAAAAAAAAAhyc3Nka3ZlcgAAADMyMC4wLjAtcmMyIzdjMTU0YjRmZTZhMzdkN2NhNzE3NzM0MmRlZGI2OWYzMTA4MDk1ZWYAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAHoSAAAAH0AAAB9AAAAAAA0c7wAAAAAGNjFv1AAAAQMm+dxu5zFbsp/zGxfS199F8ls6zWAcPWMpokkkvbExzgJj5uEb0XVCUYeoxodnuDvK/qi9TiG/zekiUwJ3IUww=",
+    "exit_code": 0,
+    "stdout": "{\n  \"status\": \"SUCCESS\",\n  \"ledger\": 30,\n  \"application_order\": 1,\n  \"fee_bump\": false,\n  \"tx_hash\": \"e96985b6286f5563f89f68a9403f8555954df24de0e9c58ce848f5838b65add3\",\n  \"created_at\": 1792095429,\n  \"envelope\": {\n    \"tx\": {\n      \"tx\": {\n        \"source_account\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n        \"fee\": 155000000,\n        \"seq_num\": \"73014444039\",\n        \"cond\": \"none\",\n        \"memo\": \"none\",\n        \"operations\": [\n          {\n            \"source_account\": null,\n            \"body\": {\n              \"invoke_host_function\": {\n                \"host_function\": {\n                  \"upload_contract_wasm\": \"0061736d01000000011e0560017e017e60037e7e7e017e60047e7e7e7e017e60027e7e017e6000000219040163015f0000016c015f0001016c01370002016c01380003030302000405030100100611027f00418080c0000b7f00418080c0000b073105066d656d6f727902000577726974650004015f00050a5f5f646174615f656e6403000b5f5f686561705f6261736503010a55024f01017e200042ff018342c800520440000b2000100022012000420010011a20014200428480808080c0f407428480808080c0f40710021a428480808080c0f407428480808080c0f40710031a20010b0300010b004b0e636f6e747261637473706563763000000000000000000000000577726974650000000000000100000000000000097864725f62797465730000000000000e00000001000003ee00000020001e11636f6e7472616374656e766d657461763000000000000000140000000000730e636f6e74726163746d65746176300000000000000005727376657200000000000006312e37342e3000000000000000000008727373646b7665720000003332302e302e302d726332233763313534623466653661333764376361373137373334326465646236396633313038303935656600\"\n                },\n                \"auth\": []\n              }\n            }\n          }\n        ],\n        \"ext\": {\n          \"v1\": {\n            \"ext\": \"v0\",\n            \"resources\": {\n              \"footprint\": {\n                \"read_only\": [],\n                \"read_write\": [\n                  {\n                    \"contract_code\": {\n                      \"hash\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n                    }\n                  }\n                ]\n              },\n              \"instructions\": 2000000,\n              \"disk_read_bytes\": 2000,\n              \"write_bytes\": 2000\n            },\n            \"resource_fee\": \"55000000\"\n          }\n        }\n      },\n      \"signatures\": [\n        {\n          \"hint\": \"8d8c5bf5\",\n          \"signature\": \"c9be771bb9cc56eca7fcc6c5f4b5f7d17c96ceb358070f58ca6892492f6c4c738098f9b846f45d509461ea31a1d9ee0ef2bfaa2f53886ff37a4894c09dc8530c\"\n        }\n      ]\n    }\n  },\n  \"result\": {\n    \"fee_charged\": \"10987\",\n    \"result\": {\n      \"tx_success\": [\n        {\n          \"op_inner\": {\n            \"invoke_host_function\": {\n              \"success\": \"dc744a9efb210323593d3708bc69acb5c1bcd114eac1e408c9aeee5b90c71c98\"\n            }\n          }\n        }\n      ]\n    },\n    \"ext\": \"v0\"\n  },\n  \"result_meta\": {\n    \"v4\": {\n      \"ext\": \"v0\",\n      \"tx_changes_before\": [\n        {\n          \"state\": {\n            \"last_modified_ledger_seq\": 30,\n            \"data\": {\n              \"account\": {\n                \"account_id\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                \"balance\": \"99862633106\",\n                \"seq_num\": \"73014444038\",\n                \"num_sub_entries\": 0,\n                \"inflation_dest\": null,\n                \"flags\": 0,\n                \"home_domain\": \"\",\n                \"thresholds\": \"01000000\",\n                \"signers\": [],\n                \"ext\": {\n                  \"v1\": {\n                    \"liabilities\": {\n                      \"buying\": \"0\",\n                      \"selling\": \"0\"\n                    },\n                    \"ext\": {\n                      \"v2\": {\n                        \"num_sponsored\": 0,\n                        \"num_sponsoring\": 0,\n                        \"signer_sponsoring_i_ds\": [],\n                        \"ext\": {\n                          \"v3\": {\n                            \"ext\": \"v0\",\n                            \"seq_ledger\": 28,\n                            \"seq_time\": \"1792095427\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"ext\": \"v0\"\n          }\n        },\n        {\n          \"updated\": {\n            \"last_modified_ledger_seq\": 30,\n            \"data\": {\n              \"account\": {\n                \"account_id\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                \"balance\": \"99862633106\",\n                \"seq_num\": \"73014444039\",\n                \"num_sub_entries\": 0,\n                \"inflation_dest\": null,\n                \"flags\": 0,\n                \"home_domain\": \"\",\n                \"thresholds\": \"01000000\",\n                \"signers\": [],\n                \"ext\": {\n                  \"v1\": {\n                    \"liabilities\": {\n                      \"buying\": \"0\",\n                      \"selling\": \"0\"\n                    },\n                    \"ext\": {\n                      \"v2\": {\n                        \"num_sponsored\": 0,\n                        \"num_sponsoring\": 0,\n                        \"signer_sponsoring_i_ds\": [],\n                        \"ext\": {\n                          \"v3\": {\n                            \"ext\": \"v0\",\n                            \"seq_ledger\": 30,\n                            \"seq_time\": \"1792095429\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"ext\": \"v0\"\n          }\n        }\n      ],\n      \"operations\": [\n        {\n          \"ext\": \"v0\",\n          \"changes\": [\n            {\n              \"state\": {\n                \"last_modified_ledger_seq\": 10,\n                \"data\": {\n                  \"contract_code\": {\n                    \"ext\": {\n                      \"v1\": {\n                        \"ext\": \"v0\",\n                        \"cost_inputs\": {\n                          \"ext\": \"v0\",\n                          \"n_instructions\": 29,\n                          \"n_functions\": 2,\n                          \"n_globals\": 2,\n                          \"n_table_entries\": 0,\n                          \"n_types\": 5,\n                          \"n_data_segments\": 0,\n                          \"n_elem_segments\": 0,\n                          \"n_imports\": 4,\n                          \"n_exports\": 5,\n                          \"n_data_segment_bytes\": 0\n                        }\n                      }\n                    },\n                    \"hash\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\",\n                    \"code\": \"0061736d01000000011e0560017e017e60037e7e7e017e60047e7e7e7e017e60027e7e017e6000000219040163015f0000016c015f0001016c01370002016c01380003030302000405030100100611027f00418080c0000b7f00418080c0000b073105066d656d6f727902000577726974650004015f00050a5f5f646174615f656e6403000b5f5f686561705f6261736503010a55024f01017e200042ff018342c800520440000b2000100022012000420010011a20014200428480808080c0f407428480808080c0f40710021a428480808080c0f407428480808080c0f40710031a20010b0300010b004b0e636f6e747261637473706563763000000000000000000000000577726974650000000000000100000000000000097864725f62797465730000000000000e00000001000003ee00000020001e11636f6e7472616374656e766d657461763000000000000000140000000000730e636f6e74726163746d65746176300000000000000005727376657200000000000006312e37342e3000000000000000000008727373646b7665720000003332302e302e302d726332233763313534623466653661333764376361373137373334326465646236396633313038303935656600\"\n                  }\n                },\n                \"ext\": \"v0\"\n              }\n            },\n            {\n              \"updated\": {\n                \"last_modified_ledger_seq\": 30,\n                \"data\": {\n                  \"contract_code\": {\n                    \"ext\": {\n                      \"v1\": {\n                        \"ext\": \"v0\",\n                        \"cost_inputs\": {\n                          \"ext\": \"v0\",\n                          \"n_instructions\": 29,\n                          \"n_functions\": 2,\n                          \"n_globals\": 2,\n                          \"n_table_entries\": 0,\n                          \"n_types\": 5,\n                          \"n_data_segments\": 0,\n                          \"n_elem_segments\": 0,\n                          \"n_imports\": 4,\n                          \"n_exports\": 5,\n                          \"n_data_segment_bytes\": 0\n                        }\n                      }\n                    },\n                    \"hash\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\",\n                    \"code\": \"0061736d01000000011e0560017e017e60037e7e7e017e60047e7e7e7e017e60027e7e017e6000000219040163015f0000016c015f0001016c01370002016c01380003030302000405030100100611027f00418080c0000b7f00418080c0000b073105066d656d6f727902000577726974650004015f00050a5f5f646174615f656e6403000b5f5f686561705f6261736503010a55024f01017e200042ff018342c800520440000b2000100022012000420010011a20014200428480808080c0f407428480808080c0f40710021a428480808080c0f407428480808080c0f40710031a20010b0300010b004b0e636f6e747261637473706563763000000000000000000000000577726974650000000000000100000000000000097864725f62797465730000000000000e00000001000003ee00000020001e11636f6e7472616374656e766d657461763000000000000000140000000000730e636f6e74726163746d65746176300000000000000005727376657200000000000006312e37342e3000000000000000000008727373646b7665720000003332302e302e302d726332233763313534623466653661333764376361373137373334326465646236396633313038303935656600\"\n                  }\n                },\n                \"ext\": \"v0\"\n              }\n            }\n          ],\n          \"events\": []\n        }\n      ],\n      \"tx_changes_after\": [],\n      \"soroban_meta\": {\n        \"ext\": {\n          \"v1\": {\n            \"ext\": \"v0\",\n            \"total_non_refundable_resource_fee_charged\": \"10691\",\n            \"total_refundable_resource_fee_charged\": \"196\",\n            \"rent_fee_charged\": \"0\"\n          }\n        },\n        \"return_value\": {\n          \"bytes\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n        }\n      },\n      \"events\": [\n        {\n          \"stage\": \"before_all_txs\",\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n            \"type\": \"contract\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"fee\"\n                  },\n                  {\n                    \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                  }\n                ],\n                \"data\": {\n                  \"i128\": \"55000100\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"stage\": \"after_all_txs\",\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n            \"type\": \"contract\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"fee\"\n                  },\n                  {\n                    \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                  }\n                ],\n                \"data\": {\n                  \"i128\": \"-54989113\"\n                }\n              }\n            }\n          }\n        }\n      ],\n      \"diagnostic_events\": [\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_entry\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"1\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_entry\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"1\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"ledger_read_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"ledger_write_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"560\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_key_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_key_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_data_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_data_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_code_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_code_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"560\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"emit_event\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"emit_event_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"40\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"cpu_insn\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"1445673\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"mem_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"1429468\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"invoke_time_nsecs\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"843607\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_rw_key_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"36\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_rw_data_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_rw_code_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"560\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_emit_event_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        }\n      ]\n    }\n  },\n  \"events\": {\n    \"contract_events\": [\n      []\n    ],\n    \"diagnostic_events\": [\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_entry\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"1\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_entry\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"1\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"ledger_read_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"ledger_write_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"560\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_key_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_key_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_data_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_data_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_code_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_code_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"560\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"emit_event\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"emit_event_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"40\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"cpu_insn\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"1445673\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"mem_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"1429468\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"invoke_time_nsecs\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"843607\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_rw_key_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"36\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_rw_data_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_rw_code_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"560\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_emit_event_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      }\n    ],\n    \"transaction_events\": [\n      {\n        \"stage\": \"before_all_txs\",\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n          \"type\": \"contract\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"fee\"\n                },\n                {\n                  \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                }\n              ],\n              \"data\": {\n                \"i128\": \"55000100\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"stage\": \"after_all_txs\",\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n          \"type\": \"contract\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"fee\"\n                },\n                {\n                  \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                }\n              ],\n              \"data\": {\n                \"i128\": \"-54989113\"\n              }\n            }\n          }\n        }\n      }\n    ]\n  }\n}\n",
+    "stderr": "\u2139\ufe0f  Transaction hash is e96985b6286f5563f89f68a9403f8555954df24de0e9c58ce848f5838b65add3\n"
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getTransaction",
+      "params": {
+        "hash": "e96985b6286f5563f89f68a9403f8555954df24de0e9c58ce848f5838b65add3"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "latestLedger": 30,
+        "latestLedgerCloseTime": "1792095429",
+        "oldestLedger": 7,
+        "oldestLedgerCloseTime": "1792095406",
+        "status": "SUCCESS",
+        "txHash": "e96985b6286f5563f89f68a9403f8555954df24de0e9c58ce848f5838b65add3",
+        "applicationOrder": 1,
+        "feeBump": false,
+        "envelopeXdr": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9Qk9HMAAAAARAAAABwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAgAAAcwAYXNtAQAAAAEeBWABfgF+YAN+fn4BfmAEfn5+fgF+YAJ+fgF+YAAAAhkEAWMBXwAAAWwBXwABAWwBNwACAWwBOAADAwMCAAQFAwEAEAYRAn8AQYCAwAALfwBBgIDAAAsHMQUGbWVtb3J5AgAFd3JpdGUABAFfAAUKX19kYXRhX2VuZAMAC19faGVhcF9iYXNlAwEKVQJPAQF+IABC/wGDQsgAUgRAAAsgABAAIgEgAEIAEAEaIAFCAEKEgICAgMD0B0KEgICAgMD0BxACGkKEgICAgMD0B0KEgICAgMD0BxADGiABCwMAAQsASw5jb250cmFjdHNwZWN2MAAAAAAAAAAAAAAABXdyaXRlAAAAAAAAAQAAAAAAAAAJeGRyX2J5dGVzAAAAAAAADgAAAAEAAAPuAAAAIAAeEWNvbnRyYWN0ZW52bWV0YXYwAAAAAAAAABQAAAAAAHMOY29udHJhY3RtZXRhdjAAAAAAAAAABXJzdmVyAAAAAAAABjEuNzQuMAAAAAAAAAAAAAhyc3Nka3ZlcgAAADMyMC4wLjAtcmMyIzdjMTU0YjRmZTZhMzdkN2NhNzE3NzM0MmRlZGI2OWYzMTA4MDk1ZWYAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAHoSAAAAH0AAAB9AAAAAAA0c7wAAAAAGNjFv1AAAAQMm+dxu5zFbsp/zGxfS199F8ls6zWAcPWMpokkkvbExzgJj5uEb0XVCUYeoxodnuDvK/qi9TiG/zekiUwJ3IUww=",
+        "resultXdr": "AAAAAAAAKusAAAAAAAAAAQAAAAAAAAAYAAAAANx0Sp77IQMjWT03CLxprLXBvNEU6sHkCMmu7luQxxyYAAAAAA==",
+        "resultMetaXdr": "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",
+        "diagnosticEventsXdr": [
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACnJlYWRfZW50cnkAAAAAAAUAAAAAAAAAAQ==",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAC3dyaXRlX2VudHJ5AAAAAAUAAAAAAAAAAQ==",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEGxlZGdlcl9yZWFkX2J5dGUAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEWxlZGdlcl93cml0ZV9ieXRlAAAAAAAABQAAAAAAAAIw",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADXJlYWRfa2V5X2J5dGUAAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADndyaXRlX2tleV9ieXRlAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADnJlYWRfZGF0YV9ieXRlAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD3dyaXRlX2RhdGFfYnl0ZQAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADnJlYWRfY29kZV9ieXRlAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD3dyaXRlX2NvZGVfYnl0ZQAAAAAFAAAAAAAAAjA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACmVtaXRfZXZlbnQAAAAAAAUAAAAAAAAAAA==",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD2VtaXRfZXZlbnRfYnl0ZQAAAAAFAAAAAAAAACg=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACGNwdV9pbnNuAAAABQAAAAAAFg8p",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACG1lbV9ieXRlAAAABQAAAAAAFc/c",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEWludm9rZV90aW1lX25zZWNzAAAAAAAABQAAAAAADN9X",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD21heF9yd19rZXlfYnl0ZQAAAAAFAAAAAAAAACQ=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEG1heF9yd19kYXRhX2J5dGUAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEG1heF9yd19jb2RlX2J5dGUAAAAFAAAAAAAAAjA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAE21heF9lbWl0X2V2ZW50X2J5dGUAAAAABQAAAAAAAAAA"
+        ],
+        "events": {
+          "transactionEventsXdr": [
+            "AAAAAAAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAoAAAAAAAAAAAAAAAADRzwk",
+            "AAAAAgAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAr////////////////8uO7H"
+          ],
+          "contractEventsXdr": [
+            []
+          ]
+        },
+        "ledger": 30,
+        "createdAt": "1792095429"
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "tx",
+      "sign",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--sign-with-key",
+      "statecycle-admin"
+    ],
+    "stdin": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QJiWgAAAAARAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1Q0H3iF1ijx7Xkv/OLa3BciuwZZ6d48HAjRFsj/ZtVVwAAAAAS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAABAAAAAAAAAAEAAAAAAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9UNB94hdYo8e15L/zi2twXIrsGWenePBwI0RbI/2bVVcAAAAAEuTFnIUhygdggHhxgRFREAPEgJTSHlx4znrI6RlUWk1AAAAAAAAAAEAAAAAAAAAAQAAAAdLkxZyFIcoHYIB4cYERURADxICU0h5ceM56yOkZVFpNQAAAAEAAAAGAAAAAd6FeR0MzZNriBTCMlhCTeWQfPSSN550j9DUSdnpriOoAAAAFAAAAAEAHoSAAAAH0AAAAHgAAAAAAOThwAAAAAA=",
+    "exit_code": 0,
+    "stdout": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QJiWgAAAAARAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1Q0H3iF1ijx7Xkv/OLa3BciuwZZ6d48HAjRFsj/ZtVVwAAAAAS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAABAAAAAAAAAAEAAAAAAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9UNB94hdYo8e15L/zi2twXIrsGWenePBwI0RbI/2bVVcAAAAAEuTFnIUhygdggHhxgRFREAPEgJTSHlx4znrI6RlUWk1AAAAAAAAAAEAAAAAAAAAAQAAAAdLkxZyFIcoHYIB4cYERURADxICU0h5ceM56yOkZVFpNQAAAAEAAAAGAAAAAd6FeR0MzZNriBTCMlhCTeWQfPSSN550j9DUSdnpriOoAAAAFAAAAAEAHoSAAAAH0AAAAHgAAAAAAOThwAAAAAGNjFv1AAAAQL5Qg8AQyJNln+Af04ODqy+ZBnb57fZHot72q9NdpzsVoOq8TDdOSuY1CMIET0MrriPJF2GjKClqywM8/zxJbwM=\n",
+    "stderr": "\u2139\ufe0f  Signing transaction: 6f1eefbdd1a6817ca4266d740692a393a6f333af6bfbfc2bb6785cc633a23ab5\n"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "tx",
+      "send",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017"
+    ],
+    "stdin": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QJiWgAAAAARAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1Q0H3iF1ijx7Xkv/OLa3BciuwZZ6d48HAjRFsj/ZtVVwAAAAAS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAABAAAAAAAAAAEAAAAAAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9UNB94hdYo8e15L/zi2twXIrsGWenePBwI0RbI/2bVVcAAAAAEuTFnIUhygdggHhxgRFREAPEgJTSHlx4znrI6RlUWk1AAAAAAAAAAEAAAAAAAAAAQAAAAdLkxZyFIcoHYIB4cYERURADxICU0h5ceM56yOkZVFpNQAAAAEAAAAGAAAAAd6FeR0MzZNriBTCMlhCTeWQfPSSN550j9DUSdnpriOoAAAAFAAAAAEAHoSAAAAH0AAAAHgAAAAAAOThwAAAAAGNjFv1AAAAQL5Qg8AQyJNln+Af04ODqy+ZBnb57fZHot72q9NdpzsVoOq8TDdOSuY1CMIET0MrriPJF2GjKClqywM8/zxJbwM=",
+    "exit_code": 0,
+    "stdout": "{\n  \"status\": \"SUCCESS\",\n  \"ledger\": 32,\n  \"application_order\": 1,\n  \"fee_bump\": false,\n  \"tx_hash\": \"6f1eefbdd1a6817ca4266d740692a393a6f333af6bfbfc2bb6785cc633a23ab5\",\n  \"created_at\": 1792095431,\n  \"envelope\": {\n    \"tx\": {\n      \"tx\": {\n        \"source_account\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n        \"fee\": 40000000,\n        \"seq_num\": \"73014444040\",\n        \"cond\": \"none\",\n        \"memo\": \"none\",\n        \"operations\": [\n          {\n            \"source_account\": null,\n            \"body\": {\n              \"invoke_host_function\": {\n                \"host_function\": {\n                  \"create_contract\": {\n                    \"contract_id_preimage\": {\n                      \"address\": {\n                        \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                        \"salt\": \"4341f7885d628f1ed792ffce2dadc1722bb0659e9de3c1c08d116c8ff66d555c\"\n                      }\n                    },\n                    \"executable\": {\n                      \"wasm\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n                    }\n                  }\n                },\n                \"auth\": [\n                  {\n                    \"credentials\": \"source_account\",\n                    \"root_invocation\": {\n                      \"function\": {\n                        \"create_contract_host_fn\": {\n                          \"contract_id_preimage\": {\n                            \"address\": {\n                              \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                              \"salt\": \"4341f7885d628f1ed792ffce2dadc1722bb0659e9de3c1c08d116c8ff66d555c\"\n                            }\n                          },\n                          \"executable\": {\n                            \"wasm\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n                          }\n                        }\n                      },\n                      \"sub_invocations\": []\n                    }\n                  }\n                ]\n              }\n            }\n          }\n        ],\n        \"ext\": {\n          \"v1\": {\n            \"ext\": \"v0\",\n            \"resources\": {\n              \"footprint\": {\n                \"read_only\": [\n                  {\n                    \"contract_code\": {\n                      \"hash\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n                    }\n                  }\n                ],\n                \"read_write\": [\n                  {\n                    \"contract_data\": {\n                      \"contract\": \"CDPIK6I5BTGZG24ICTBDEWCCJXSZA7HUSI3Z45EP2DKETWPJVYR2RRST\",\n                      \"key\": \"ledger_key_contract_instance\",\n                      \"durability\": \"persistent\"\n                    }\n                  }\n                ]\n              },\n              \"instructions\": 2000000,\n              \"disk_read_bytes\": 2000,\n              \"write_bytes\": 120\n            },\n            \"resource_fee\": \"15000000\"\n          }\n        }\n      },\n      \"signatures\": [\n        {\n          \"hint\": \"8d8c5bf5\",\n          \"signature\": \"be5083c010c893659fe01fd38383ab2f990676f9edf647a2def6abd35da73b15a0eabc4c374e4ae63508c2044f432bae23c91761a328296acb033cff3c496f03\"\n        }\n      ]\n    }\n  },\n  \"result\": {\n    \"fee_charged\": \"21249\",\n    \"result\": {\n      \"tx_success\": [\n        {\n          \"op_inner\": {\n            \"invoke_host_function\": {\n              \"success\": \"dfd1ef057ab39bd0897f1d38131cd39abcceef1f8d14432149d904d9b355ef08\"\n            }\n          }\n        }\n      ]\n    },\n    \"ext\": \"v0\"\n  },\n  \"result_meta\": {\n    \"v4\": {\n      \"ext\": \"v0\",\n      \"tx_changes_before\": [\n        {\n          \"state\": {\n            \"last_modified_ledger_seq\": 32,\n            \"data\": {\n              \"account\": {\n                \"account_id\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                \"balance\": \"99902622119\",\n                \"seq_num\": \"73014444039\",\n                \"num_sub_entries\": 0,\n                \"inflation_dest\": null,\n                \"flags\": 0,\n                \"home_domain\": \"\",\n                \"thresholds\": \"01000000\",\n                \"signers\": [],\n                \"ext\": {\n                  \"v1\": {\n                    \"liabilities\": {\n                      \"buying\": \"0\",\n                      \"selling\": \"0\"\n                    },\n                    \"ext\": {\n                      \"v2\": {\n                        \"num_sponsored\": 0,\n                        \"num_sponsoring\": 0,\n                        \"signer_sponsoring_i_ds\": [],\n                        \"ext\": {\n                          \"v3\": {\n                            \"ext\": \"v0\",\n                            \"seq_ledger\": 30,\n                            \"seq_time\": \"1792095429\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"ext\": \"v0\"\n          }\n        },\n        {\n          \"updated\": {\n            \"last_modified_ledger_seq\": 32,\n            \"data\": {\n              \"account\": {\n                \"account_id\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\",\n                \"balance\": \"99902622119\",\n                \"seq_num\": \"73014444040\",\n                \"num_sub_entries\": 0,\n                \"inflation_dest\": null,\n                \"flags\": 0,\n                \"home_domain\": \"\",\n                \"thresholds\": \"01000000\",\n                \"signers\": [],\n                \"ext\": {\n                  \"v1\": {\n                    \"liabilities\": {\n                      \"buying\": \"0\",\n                      \"selling\": \"0\"\n                    },\n                    \"ext\": {\n                      \"v2\": {\n                        \"num_sponsored\": 0,\n                        \"num_sponsoring\": 0,\n                        \"signer_sponsoring_i_ds\": [],\n                        \"ext\": {\n                          \"v3\": {\n                            \"ext\": \"v0\",\n                            \"seq_ledger\": 32,\n                            \"seq_time\": \"1792095431\"\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"ext\": \"v0\"\n          }\n        }\n      ],\n      \"operations\": [\n        {\n          \"ext\": \"v0\",\n          \"changes\": [\n            {\n              \"created\": {\n                \"last_modified_ledger_seq\": 32,\n                \"data\": {\n                  \"ttl\": {\n                    \"key_hash\": \"d579375e46a5f9bb43692a84b5b8c0d97acfaef94940ce9e6aa3d625e96ffd02\",\n                    \"live_until_ledger_seq\": 120991\n                  }\n                },\n                \"ext\": \"v0\"\n              }\n            },\n            {\n              \"created\": {\n                \"last_modified_ledger_seq\": 32,\n                \"data\": {\n                  \"contract_data\": {\n                    \"ext\": \"v0\",\n                    \"contract\": \"CDPIK6I5BTGZG24ICTBDEWCCJXSZA7HUSI3Z45EP2DKETWPJVYR2RRST\",\n                    \"key\": \"ledger_key_contract_instance\",\n                    \"durability\": \"persistent\",\n                    \"val\": {\n                      \"contract_instance\": {\n                        \"executable\": {\n                          \"wasm\": \"4b9316721487281d8201e1c6044544400f120253487971e339eb23a465516935\"\n                        },\n                        \"storage\": null\n                      }\n                    }\n                  }\n                },\n                \"ext\": \"v0\"\n              }\n            }\n          ],\n          \"events\": []\n        }\n      ],\n      \"tx_changes_after\": [],\n      \"soroban_meta\": {\n        \"ext\": {\n          \"v1\": {\n            \"ext\": \"v0\",\n            \"total_non_refundable_resource_fee_charged\": \"8299\",\n            \"total_refundable_resource_fee_charged\": \"12850\",\n            \"rent_fee_charged\": \"12654\"\n          }\n        },\n        \"return_value\": {\n          \"address\": \"CDPIK6I5BTGZG24ICTBDEWCCJXSZA7HUSI3Z45EP2DKETWPJVYR2RRST\"\n        }\n      },\n      \"events\": [\n        {\n          \"stage\": \"before_all_txs\",\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n            \"type\": \"contract\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"fee\"\n                  },\n                  {\n                    \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                  }\n                ],\n                \"data\": {\n                  \"i128\": \"15000100\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"stage\": \"after_all_txs\",\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n            \"type\": \"contract\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"fee\"\n                  },\n                  {\n                    \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                  }\n                ],\n                \"data\": {\n                  \"i128\": \"-14978851\"\n                }\n              }\n            }\n          }\n        }\n      ],\n      \"diagnostic_events\": [\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_entry\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"2\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_entry\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"1\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"ledger_read_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"ledger_write_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"104\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_key_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_key_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_data_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_data_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"104\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"read_code_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"write_code_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"emit_event\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"emit_event_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"40\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"cpu_insn\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"294424\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"mem_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"1131616\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"invoke_time_nsecs\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"445924\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_rw_key_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"48\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_rw_data_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"104\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_rw_code_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        },\n        {\n          \"in_successful_contract_call\": true,\n          \"event\": {\n            \"ext\": \"v0\",\n            \"contract_id\": null,\n            \"type\": \"diagnostic\",\n            \"body\": {\n              \"v0\": {\n                \"topics\": [\n                  {\n                    \"symbol\": \"core_metrics\"\n                  },\n                  {\n                    \"symbol\": \"max_emit_event_byte\"\n                  }\n                ],\n                \"data\": {\n                  \"u64\": \"0\"\n                }\n              }\n            }\n          }\n        }\n      ]\n    }\n  },\n  \"events\": {\n    \"contract_events\": [\n      []\n    ],\n    \"diagnostic_events\": [\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_entry\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"2\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_entry\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"1\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"ledger_read_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"ledger_write_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"104\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_key_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_key_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_data_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_data_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"104\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"read_code_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"write_code_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"emit_event\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"emit_event_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"40\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"cpu_insn\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"294424\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"mem_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"1131616\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"invoke_time_nsecs\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"445924\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_rw_key_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"48\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_rw_data_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"104\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_rw_code_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"in_successful_contract_call\": true,\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": null,\n          \"type\": \"diagnostic\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"core_metrics\"\n                },\n                {\n                  \"symbol\": \"max_emit_event_byte\"\n                }\n              ],\n              \"data\": {\n                \"u64\": \"0\"\n              }\n            }\n          }\n        }\n      }\n    ],\n    \"transaction_events\": [\n      {\n        \"stage\": \"before_all_txs\",\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n          \"type\": \"contract\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"fee\"\n                },\n                {\n                  \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                }\n              ],\n              \"data\": {\n                \"i128\": \"15000100\"\n              }\n            }\n          }\n        }\n      },\n      {\n        \"stage\": \"after_all_txs\",\n        \"event\": {\n          \"ext\": \"v0\",\n          \"contract_id\": \"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\n          \"type\": \"contract\",\n          \"body\": {\n            \"v0\": {\n              \"topics\": [\n                {\n                  \"symbol\": \"fee\"\n                },\n                {\n                  \"address\": \"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"\n                }\n              ],\n              \"data\": {\n                \"i128\": \"-14978851\"\n              }\n            }\n          }\n        }\n      }\n    ]\n  }\n}\n",
+    "stderr": "\u2139\ufe0f  Transaction hash is 6f1eefbdd1a6817ca4266d740692a393a6f333af6bfbfc2bb6785cc633a23ab5\n"
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getTransaction",
+      "params": {
+        "hash": "6f1eefbdd1a6817ca4266d740692a393a6f333af6bfbfc2bb6785cc633a23ab5"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "latestLedger": 33,
+        "latestLedgerCloseTime": "1792095432",
+        "oldestLedger": 7,
+        "oldestLedgerCloseTime": "1792095406",
+        "status": "SUCCESS",
+        "txHash": "6f1eefbdd1a6817ca4266d740692a393a6f333af6bfbfc2bb6785cc633a23ab5",
+        "applicationOrder": 1,
+        "feeBump": false,
+        "envelopeXdr": "AAAAAgAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QJiWgAAAAARAAAACAAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAAAAAAAEZIZjC4RcfylN75ifjIxg1WX0xyXzt7c3n8q6ONjFv1Q0H3iF1ijx7Xkv/OLa3BciuwZZ6d48HAjRFsj/ZtVVwAAAAAS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAABAAAAAAAAAAEAAAAAAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9UNB94hdYo8e15L/zi2twXIrsGWenePBwI0RbI/2bVVcAAAAAEuTFnIUhygdggHhxgRFREAPEgJTSHlx4znrI6RlUWk1AAAAAAAAAAEAAAAAAAAAAQAAAAdLkxZyFIcoHYIB4cYERURADxICU0h5ceM56yOkZVFpNQAAAAEAAAAGAAAAAd6FeR0MzZNriBTCMlhCTeWQfPSSN550j9DUSdnpriOoAAAAFAAAAAEAHoSAAAAH0AAAAHgAAAAAAOThwAAAAAGNjFv1AAAAQL5Qg8AQyJNln+Af04ODqy+ZBnb57fZHot72q9NdpzsVoOq8TDdOSuY1CMIET0MrriPJF2GjKClqywM8/zxJbwM=",
+        "resultXdr": "AAAAAAAAUwEAAAAAAAAAAQAAAAAAAAAYAAAAAN/R7wV6s5vQiX8dOBMc05q8zu8fjRRDIUnZBNmzVe8IAAAAAA==",
+        "resultMetaXdr": "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",
+        "diagnosticEventsXdr": [
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACnJlYWRfZW50cnkAAAAAAAUAAAAAAAAAAg==",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAC3dyaXRlX2VudHJ5AAAAAAUAAAAAAAAAAQ==",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEGxlZGdlcl9yZWFkX2J5dGUAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEWxlZGdlcl93cml0ZV9ieXRlAAAAAAAABQAAAAAAAABo",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADXJlYWRfa2V5X2J5dGUAAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADndyaXRlX2tleV9ieXRlAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADnJlYWRfZGF0YV9ieXRlAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD3dyaXRlX2RhdGFfYnl0ZQAAAAAFAAAAAAAAAGg=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAADnJlYWRfY29kZV9ieXRlAAAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD3dyaXRlX2NvZGVfYnl0ZQAAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACmVtaXRfZXZlbnQAAAAAAAUAAAAAAAAAAA==",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD2VtaXRfZXZlbnRfYnl0ZQAAAAAFAAAAAAAAACg=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACGNwdV9pbnNuAAAABQAAAAAABH4Y",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAACG1lbV9ieXRlAAAABQAAAAAAEURg",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEWludm9rZV90aW1lX25zZWNzAAAAAAAABQAAAAAABs3k",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAD21heF9yd19rZXlfYnl0ZQAAAAAFAAAAAAAAADA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEG1heF9yd19kYXRhX2J5dGUAAAAFAAAAAAAAAGg=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAEG1heF9yd19jb2RlX2J5dGUAAAAFAAAAAAAAAAA=",
+          "AAAAAQAAAAAAAAAAAAAAAgAAAAAAAAACAAAADwAAAAxjb3JlX21ldHJpY3MAAAAPAAAAE21heF9lbWl0X2V2ZW50X2J5dGUAAAAABQAAAAAAAAAA"
+        ],
+        "events": {
+          "transactionEventsXdr": [
+            "AAAAAAAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAoAAAAAAAAAAAAAAAAA5OIk",
+            "AAAAAgAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAABGSGYwuEXH8pTe+Yn4yMYNVl9Mcl87e3N5/KujjYxb9QAAAAr/////////////////G3Dd"
+          ],
+          "contractEventsXdr": [
+            []
+          ]
+        },
+        "ledger": 32,
+        "createdAt": "1792095431"
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "decode",
+      "--type",
+      "ConfigUpgradeSetKey",
+      "--input",
+      "single-base64",
+      "3oV5HQzNk2uIFMIyWEJN5ZB89JI3nnSP0NRJ2emuI6hTPNRVIRsBjz4OfkTZNf+bmmaqaWdFoTf1BEMzkZzdag=="
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "{\"contract_id\":\"CDPIK6I5BTGZG24ICTBDEWCCJXSZA7HUSI3Z45EP2DKETWPJVYR2RRST\",\"content_hash\":\"533cd455211b018f3e0e7e44d935ff9b9a66aa696745a137f5044333919cdd6a\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "encode",
+      "--type",
+      "LedgerKey"
+    ],
+    "stdin": "{\"contract_data\": {\"contract\": \"CDPIK6I5BTGZG24ICTBDEWCCJXSZA7HUSI3Z45EP2DKETWPJVYR2RRST\", \"key\": {\"bytes\": \"533cd455211b018f3e0e7e44d935ff9b9a66aa696745a137f5044333919cdd6a\"}, \"durability\": \"temporary\"}}",
+    "exit_code": 0,
+    "stdout": "AAAABgAAAAHehXkdDM2Ta4gUwjJYQk3lkHz0kjeedI/Q1EnZ6a4jqAAAAA0AAAAgUzzUVSEbAY8+Dn5E2TX/m5pmqmlnRaE39QRDM5Gc3WoAAAAA\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getLedgerEntries",
+      "params": {
+        "keys": [
+          "AAAABgAAAAHehXkdDM2Ta4gUwjJYQk3lkHz0kjeedI/Q1EnZ6a4jqAAAAA0AAAAgUzzUVSEbAY8+Dn5E2TX/m5pmqmlnRaE39QRDM5Gc3WoAAAAA"
+        ]
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "entries": [],
+        "latestLedger": 33
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "CDPIK6I5BTGZG24ICTBDEWCCJXSZA7HUSI3Z45EP2DKETWPJVYR2RRST",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--",
+      "write",
+      "--xdr_bytes",
+      "000000010000000a002f7600000000100000004000000000000004bf000000000000097e000003e80000001e000000400007a12000000001"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "\"533cd455211b018f3e0e7e44d935ff9b9a66aa696745a137f5044333919cdd6a\"\n",
+    "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: 5ef7562218ac23161131abd180102191b69e79125df8ee298ab65197cd777083\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+  },
+  {
+    "argv": [
+      "docker",
+      "exec",
+      "statecycle-fresh-checkout",
+      "curl",
+      "-sSG",
+      "http://localhost:11626/upgrades?mode=set&upgradetime=1970-01-01T00:00:00Z",
+      "--data-urlencode",
+      "configupgradesetkey=3oV5HQzNk2uIFMIyWEJN5ZB89JI3nnSP0NRJ2emuI6hTPNRVIRsBjz4OfkTZNf+bmmaqaWdFoTf1BEMzkZzdag=="
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getLedgerEntries",
+      "params": {
+        "keys": [
+          "AAAACAAAAAo="
+        ]
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "entries": [
+          {
+            "key": "AAAACAAAAAo=",
+            "xdr": "AAAACAAAAAoAL3YAAAAC0AAB2IAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAc=",
+            "lastModifiedLedgerSeq": 14,
+            "extXdr": "AAAAAA=="
+          }
+        ],
+        "latestLedger": 36
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "decode",
+      "--type",
+      "LedgerEntryData",
+      "--input",
+      "single-base64",
+      "AAAACAAAAAoAL3YAAAAC0AAB2IAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAc="
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "{\"config_setting\":{\"state_archival\":{\"max_entry_ttl\":3110400,\"min_temporary_ttl\":720,\"min_persistent_ttl\":120960,\"persistent_rent_rate_denominator\":\"1215\",\"temp_rent_rate_denominator\":\"2430\",\"max_entries_to_archive\":1000,\"live_soroban_state_size_window_sample_size\":30,\"live_soroban_state_size_window_sample_period\":64,\"eviction_scan_size\":500000,\"starting_eviction_scan_level\":7}}}\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18002/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getLedgerEntries",
+      "params": {
+        "keys": [
+          "AAAACAAAAAo="
+        ]
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "entries": [
+          {
+            "key": "AAAACAAAAAo=",
+            "xdr": "AAAACAAAAAoAL3YAAAAAEAAAAEAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAE=",
+            "lastModifiedLedgerSeq": 37,
+            "extXdr": "AAAAAA=="
+          }
+        ],
+        "latestLedger": 37
+      }
+    }
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "xdr",
+      "decode",
+      "--type",
+      "LedgerEntryData",
+      "--input",
+      "single-base64",
+      "AAAACAAAAAoAL3YAAAAAEAAAAEAAAAAAAAAEvwAAAAAAAAl+AAAD6AAAAB4AAABAAAehIAAAAAE="
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "{\"config_setting\":{\"state_archival\":{\"max_entry_ttl\":3110400,\"min_temporary_ttl\":16,\"min_persistent_ttl\":64,\"persistent_rent_rate_denominator\":\"1215\",\"temp_rent_rate_denominator\":\"2430\",\"max_entries_to_archive\":1000,\"live_soroban_state_size_window_sample_size\":30,\"live_soroban_state_size_window_sample_period\":64,\"eviction_scan_size\":500000,\"starting_eviction_scan_level\":1}}}\n",
+    "stderr": ""
+  }
+]

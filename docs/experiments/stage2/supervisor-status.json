@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "supervisorctl",
+    "status"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:10:10.226534+00:00",
+  "exit_code": 3,
+  "stdout": "friendbot                        RUNNING   pid 1033, uptime 3:07:23\ngalexie                          STOPPED   Not started\nhistory-archive                  RUNNING   pid 344, uptime 3:07:34\nhorizon                          RUNNING   pid 455, uptime 3:07:31\nledger-meta-store                STOPPED   Not started\nnginx                            RUNNING   pid 345, uptime 3:07:34\npostgresql                       RUNNING   pid 400, uptime 3:07:32\nstellar-core                     RUNNING   pid 349, uptime 3:07:34\nstellar-lab                      RUNNING   pid 615, uptime 3:07:29\nstellar-rpc                      RUNNING   pid 550, uptime 3:07:30\n",
+  "stderr": ""
+}

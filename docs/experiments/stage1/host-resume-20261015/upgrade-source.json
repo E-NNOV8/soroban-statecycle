@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sh",
+    "-c",
+    "rg -n \"get-settings-upgrade|configupgradesetkey|config-settings|upgrades\\?\" /start /opt/stellar/core/bin /opt/stellar/core/etc/env"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:43.547489+00:00",
+  "exit_code": 127,
+  "stdout": "",
+  "stderr": "sh: 1: rg: not found\n"
+}

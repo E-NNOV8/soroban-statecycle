@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "Uint32",
+    "--input",
+    "single-base64",
+    "AAAPvA=="
+  ],
+  "exit_code": 0,
+  "stdout": "4028\n",
+  "stderr": ""
+}

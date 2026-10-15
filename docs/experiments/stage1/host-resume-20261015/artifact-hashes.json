@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "sha256sum",
+    "/home/mxr/Documents/Projects/drips_projects/blend-contracts-v2/target/wasm32-unknown-unknown/optimized/pool.wasm",
+    "/home/mxr/Documents/Projects/drips_projects/blend-contracts-v2/target/wasm32-unknown-unknown/optimized/pool_factory.wasm"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:08:27.216058+00:00",
+  "exit_code": 0,
+  "stdout": "274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1  /home/mxr/Documents/Projects/drips_projects/blend-contracts-v2/target/wasm32-unknown-unknown/optimized/pool.wasm\ne304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9  /home/mxr/Documents/Projects/drips_projects/blend-contracts-v2/target/wasm32-unknown-unknown/optimized/pool_factory.wasm\n",
+  "stderr": ""
+}

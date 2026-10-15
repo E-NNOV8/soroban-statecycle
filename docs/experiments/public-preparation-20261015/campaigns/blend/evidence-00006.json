@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/stellar",
+    "contract",
+    "invoke",
+    "--id",
+    "CDG5UROVKH2TCAQ6LXJVWOISWGAKHS4QSCONQ6LXVOJ23LMJF2O43YSQ",
+    "--rpc-url",
+    "http://localhost:18001/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--send",
+    "yes",
+    "--",
+    "get_config"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"bstop_rate\":1000000,\"max_positions\":4,\"min_collateral\":\"10000000\",\"oracle\":\"GAEEJE6WHOROMEOJLMW4KXSBZSWF7WP2N5ZVCVXY2G4VTVRADEXJURBY\",\"status\":6}\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: d9bd84ae7e64964284d66d36747c06652bcc9602480534adfd64f45faaf262e1\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n"
+}

@@ -1,0 +1,197 @@
+[
+  {
+    "argv": [
+      "stellar",
+      "--version"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "stellar 28.1.0 (c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd)\nstellar-xdr 28.0.0 (d0f1330e43c3a2c0c616da30698b24140d4eea72)\nxdr (9c9c145953e80990d6ff1ae3a6a973a0ce6d0694)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "docker",
+      "ps",
+      "-a",
+      "--format",
+      "{{.Names}}"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "stellar-local\nweighin-stage4-proof\nweighin-stage3-proof\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "docker",
+      "run",
+      "--detach",
+      "--name",
+      "statecycle-repro",
+      "--publish",
+      "127.0.0.1:18000:8000",
+      "stellar/quickstart@sha256:4f8dfd693deba57fddef7f0bc722e4782c2e606c8675e3adc5438cebae249295",
+      "--local",
+      "--enable",
+      "rpc,horizon"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "c6f1813c8b1e212607989698326e1f5a0229cabe1637522f1687a55b257a5948\n",
+    "stderr": ""
+  },
+  {
+    "url": "http://localhost:18000/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getHealth",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "error": {
+        "code": -32603,
+        "message": "[-32603] data stores are not initialized: DB is empty"
+      }
+    }
+  },
+  {
+    "url": "http://localhost:18000/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getHealth",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "status": "healthy",
+        "latestLedger": 7,
+        "latestLedgerCloseTime": "1792094776",
+        "oldestLedger": 7,
+        "oldestLedgerCloseTime": "1792094776",
+        "ledgerRetentionWindow": 120960
+      }
+    }
+  },
+  {
+    "url": "http://localhost:18000/rpc",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getNetwork",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "friendbotUrl": "http://localhost:8000/friendbot",
+        "passphrase": "Standalone Network ; February 2017",
+        "protocolVersion": 28
+      }
+    }
+  },
+  {
+    "argv": [
+      "docker",
+      "exec",
+      "statecycle-repro",
+      "stellar-core",
+      "version"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "v29.0.0\nledger protocol version: 29\nrust version: rustc 1.95.0 (59807616e 2026-04-14)\nsoroban-env-host versions: \n    host[0]:\n        package version: 21.2.2\n        git version: 7eeddd897cfb0f700f938b0c8d6f0541150d1fcb\n        ledger protocol version: 21\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 21.2.0\n            git version: 9bea881f2057e412fdbb98875841626bf77b4b88\n            base XDR git version: 70180d5e8d9caee9e8645ed8a38c36a8cf403cd9\n    host[1]:\n        package version: 22.0.0\n        git version: 1cd8b8dca9aeeca9ce45b129cd923992b32dc258\n        ledger protocol version: 22\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 22.0.0\n            git version: 715003372ea6380044b5a4a02907ff73e56ae9e7\n            base XDR git version: 529d5176f24c73eeccfa5eba481d4e89c19b1181\n    host[2]:\n        package version: 23.0.0\n        git version: 688bc34e6cd15c71742139e625268c7f30f55a92\n        ledger protocol version: 23\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 23.0.0\n            git version: e83a6337204ecfdb0ac0d44ffb857130c1249b1b\n            base XDR git version: 4b7a2ef7931ab2ca2499be68d849f38190b443ca\n    host[3]:\n        package version: 24.0.0\n        git version: a37eeda815e626f416eff13f2eacb32a8b0c3729\n        ledger protocol version: 24\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 24.0.0\n            git version: 07b765d3ab146f7f7ea951af1f9e41e0ece8fb48\n            base XDR git version: 4b7a2ef7931ab2ca2499be68d849f38190b443ca\n    host[4]:\n        package version: 25.0.0\n        git version: 6323c1fc03ecb9f53b7c1e42fd62c1bbd3aebc2c\n        ledger protocol version: 25\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 25.0.0\n            git version: dc9f40fcb83c3054341f70b65a2222073369b37b\n            base XDR git version: 0a621ec7811db000a60efae5b35f78dee3aa2533\n    host[5]:\n        package version: 26.0.0\n        git version: b351f88a468d3b9e1d6de53d5b0ca585f6b7dadb\n        ledger protocol version: 26\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 26.0.0\n            git version: dd7a165a193126fd37a751d867bee1cb8f3b55a6\n            base XDR git version: cff714a5ebaaaf2dac343b3546c2df73f0b7a36e\n    host[6]:\n        package version: 27.0.0\n        git version: b03d2563f3a08d51095a19bdbb6d90364b8ce04a\n        ledger protocol version: 27\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 27.0.0\n            git version: 5262803470be965e42f80023d12fba12808c774a\n            base XDR git version: 68fa1ac55692f68ad2a2ca549d0a283273554439\n    host[7]:\n        package version: 28.0.0\n        git version: ba37ea5f76a10710835992fb90f9ec7a14eca499\n        ledger protocol version: 28\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 28.0.0\n            git version: d0f1330e43c3a2c0c616da30698b24140d4eea72\n            base XDR git version: 9c9c145953e80990d6ff1ae3a6a973a0ce6d0694\n    host[8]:\n        package version: 29.0.0\n        git version: a721944b5a4ea830a4bf5c2dbb8dbe8c1e1354c5\n        ledger protocol version: 29\n        pre-release version: 0\n        rs-stellar-xdr:\n            package version: 28.0.0\n            git version: d0f1330e43c3a2c0c616da30698b24140d4eea72\n            base XDR git version: 9c9c145953e80990d6ff1ae3a6a973a0ce6d0694\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check/stellar",
+      "keys",
+      "generate",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "[private identity output omitted]",
+    "stderr": "[private identity output omitted]"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check/stellar",
+      "keys",
+      "address",
+      "statecycle-admin"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "GDZYSQK6BN6YJQDVWT7F3QYU4BOHG6IDR66WUY6V4M4DZJTRLKNLOJDB\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check/stellar",
+      "keys",
+      "generate",
+      "statecycle-oracle"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "[private identity output omitted]",
+    "stderr": "[private identity output omitted]"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check/stellar",
+      "keys",
+      "address",
+      "statecycle-oracle"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "GAOHQTND7MKUDEJ4VOSCALENFOYH3DUXIE6RQIAXSD7HM224T6JNRATY\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check/stellar",
+      "keys",
+      "generate",
+      "statecycle-backstop"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "[private identity output omitted]",
+    "stderr": "[private identity output omitted]"
+  },
+  {
+    "argv": [
+      "stellar",
+      "--config-dir",
+      "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check/stellar",
+      "keys",
+      "address",
+      "statecycle-backstop"
+    ],
+    "stdin": null,
+    "exit_code": 0,
+    "stdout": "GAVC2G3LVCUEAZFQWUCXWZ7QPZPVAD6C7VYUHCRYW2SEHINUKD522VKC\n",
+    "stderr": ""
+  }
+]

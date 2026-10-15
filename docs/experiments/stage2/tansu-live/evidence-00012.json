@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAARPUAAAtsAAAAUwAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAAAAAAEQa55wndbtZrCGMztZVyECY9dWWbGx0cxaya6xSxGsnwAAAAVwYXVzZQAAAAAAAAIAAAASAAAAAAAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0HhlgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAARBrnnCd1u1msIYzO1lXIQJj11ZZsbHRzFrJrrFLEayfAAAABXBhdXNlAAAAAAAAAgAAABIAAAAAAAAAAF8JQhGW+EfT0C7isx0HB9sDtxDlKUkjEfT4XpVrQeGWAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAB3li9C31GLaiQonZOLP34vKkXV0FineB0EyaHR6G/Dy2AAAAAQAAAAYAAAABEGuecJ3W7WawhjM7WVchAmPXVlmxsdHMWsmusUsRrJ8AAAAUAAAAAQAOyZwAAAAAAAABnAAAAAAAAESRAAAAAWtB4ZYAAABAkW+xlDJfo0LV6zH8KoVagt9fQkPBoJiaIlDA9YjN5X5HmRgaThLT15HMDvCPN6pUpt4a6UhGarofqdo0Pu39Cg=="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\",\"fee\":17653,\"seq_num\":\"12558484373587\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"invoke_host_function\":{\"host_function\":{\"invoke_contract\":{\"contract_address\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"function_name\":\"pause\",\"args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"},{\"bool\":false}]}},\"auth\":[{\"credentials\":\"source_account\",\"root_invocation\":{\"function\":{\"contract_fn\":{\"contract_address\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"function_name\":\"pause\",\"args\":[{\"address\":\"GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN\"},{\"bool\":false}]}},\"sub_invocations\":[]}}]}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[{\"contract_code\":{\"hash\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"}}],\"read_write\":[{\"contract_data\":{\"contract\":\"CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}}]},\"instructions\":969116,\"disk_read_bytes\":0,\"write_bytes\":412},\"resource_fee\":\"17553\"}}},\"signatures\":[{\"hint\":\"6b41e196\",\"signature\":\"916fb194325fa342d5eb31fc2a855a82df5f4243c1a0989a2250c0f588cde57e4799181a4e12d3d791cc0ef08f37aa54a6de1ae948466aba1fa9da343eedfd0a\"}]}}\n",
+  "stderr": ""
+}

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "cargo",
+    "build",
+    "--offline",
+    "--locked",
+    "--release",
+    "--target",
+    "wasm32v1-none",
+    "--manifest-path",
+    ".local/stage2/tansu-source/Cargo.toml",
+    "--package",
+    "tansu",
+    "--target-dir",
+    ".local/stage2/tansu-build"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:11:31.277062+00:00",
+  "exit_code": 101,
+  "stdout": "",
+  "stderr": "error: failed to download `enum-ordinalize v4.4.1`\n\nCaused by:\n  attempting to make an HTTP request, but --offline was specified\n"
+}

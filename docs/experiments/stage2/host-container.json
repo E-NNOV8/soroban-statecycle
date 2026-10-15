@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "docker",
+    "ps",
+    "--no-trunc"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:04:27.439491+00:00",
+  "exit_code": 0,
+  "stdout": "CONTAINER ID                                                       IMAGE                                 COMMAND                                       CREATED       STATUS       PORTS                                                                                                       NAMES\nd6e74e01930b63d94c296af7be44a5eceddb04c65ab2cc496671a8807060b89d   docker.io/stellar/quickstart:latest   \"/start --local '--enable rpc,horizon,lab'\"   3 hours ago   Up 3 hours   5432/tcp, 6060-6061/tcp, 8002/tcp, 8100/tcp, 11625-11626/tcp, 0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp   stellar-local\n",
+  "stderr": ""
+}

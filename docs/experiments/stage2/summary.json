@@ -1,0 +1,371 @@
+{
+  "stage": "Stage 2",
+  "result": "PASS",
+  "recorded_at": "2026-10-15T19:42:59.269509+00:00",
+  "engine_source_revision": null,
+  "revision_note": "Git main remains unborn; final source file SHA256 values identify the verifier. Live records were reverified after general evidence-index/exception-guard changes.",
+  "engine_source_hashes": {
+    "src/archival_regression/__init__.py": "7202ba06c491ee7eec8ea239550124893732ef7ea4efbb2a2c1e709f3eb8323f",
+    "src/archival_regression/__main__.py": "a55e153e03b69eebde9e807234cb63a0c6fbe7b51f39ca02a41f210ac0eaf9bf",
+    "src/archival_regression/campaign.py": "2225b71bec081032abfdb60ca300085057d78bcd387ac645d493ed54ccccf375",
+    "src/archival_regression/errors.py": "7dfdfe44ef7f9d4b9a077fe16c6ea65207f527f8eb15b14a221a9393db858511",
+    "src/archival_regression/preflight.py": "7da6ded93ae3b54b983446cb44a02918fc921d66b700df28d3c239db949133ba",
+    "src/archival_regression/scenario.py": "4348f54f6f8829534a3bbde599a237feefc7351b4589fc74158eec4816bfd6d0"
+  },
+  "test_source_hashes": {
+    "tests/test_campaign.py": "cdf04d39dfae7b480499400b075faf05e0df0e1eeb2ce965cfc058a4084f892a",
+    "tests/test_preflight.py": "01e28c227dc21aef0c47f47559f1275c7f1f27045378187b4f1d3534a958c535",
+    "tests/test_scenario.py": "bd7498179eb9a5c446c327bb10e7978ee7e5abbe3570dcce99c4b007e68127fe",
+    "tests/test_stage2_evidence.py": "eab473d78c3af9f85a2b1b13a9709543085439fa99c6a7a2825df21f3b631202"
+  },
+  "interface": "PYTHONPATH=src python3 -m archival_regression run <scenario.json> --output <fresh-directory>",
+  "model": {
+    "hooks": [
+      "deploy",
+      "setup (optional list)",
+      "mutate (optional list)",
+      "public observation hooks",
+      "restore (argv/list)"
+    ],
+    "observations": "explicit named persistent ContractData LedgerKeys",
+    "bindings": "entry + JSON path to SCVal + optional decoded-value path",
+    "mutation": "expected_initial X, expected_before Y, mutation_required",
+    "checkpoints": "archived -> restore committed -> new process restore retry -> getter/raw verification",
+    "compatibility": "legacy Stage 1 instance-binding configs remain supported"
+  },
+  "target_specific": "Only JSON keys/addresses/CLI arguments, artifact/source identities, setup/mutation sequence and supplied invariant values. No target-specific executable hook was needed in either campaign. Fixture-generation script computes Tansu project key and SCVal argument encodings; it does not run archival or restoration logic.",
+  "validations": [
+    {
+      "scenario": "blend-config-admin",
+      "contract_id": "CAX5YJSWW2MZBKFM3FTQ2OLT7M2RE43KGVMN3Z42NYYXWU75JU4IGCKT",
+      "deploy": {
+        "hash": "092e132c0e9a4dba2e8a9d90f5e0872d6b136864e1a951424eaa5fee7a023e9a",
+        "ledger": 11572,
+        "evidence": "evidence-00002.json"
+      },
+      "source": {
+        "revision": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117"
+      },
+      "initial": null,
+      "mutated_before": {
+        "get_config": {
+          "bstop_rate": 1000000,
+          "max_positions": 4,
+          "min_collateral": "10000000",
+          "oracle": "GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ",
+          "status": 6
+        },
+        "get_admin": "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+      },
+      "after": {
+        "get_config": {
+          "bstop_rate": 1000000,
+          "max_positions": 4,
+          "min_collateral": "10000000",
+          "oracle": "GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ",
+          "status": 6
+        },
+        "get_admin": "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+      },
+      "mutable_state_proven": false,
+      "mutation_transactions": [],
+      "archive_witnesses": {
+        "instance": {
+          "ledger": 11636,
+          "hash": "e043873b70d58ca28ec79cf03f6c791bfbb0e32821f937ef6ce23920cfe95d83",
+          "rpc_evidence": "evidence-00100.json",
+          "key": {
+            "contract_data": {
+              "contract": "CAX5YJSWW2MZBKFM3FTQ2OLT7M2RE43KGVMN3Z42NYYXWU75JU4IGCKT",
+              "key": "ledger_key_contract_instance",
+              "durability": "persistent"
+            }
+          }
+        }
+      },
+      "restore_batches": [
+        [
+          {
+            "hash": "9a9bd12dfb8cb77e4c4f76797bbcaa06a0996ee4645d42bcb4e20f787f17f797",
+            "ledger": 11641,
+            "evidence": "evidence-00109.json"
+          }
+        ],
+        [
+          {
+            "hash": "adbbb344ab0fc51a9ca4ee24649e1257fbe33334c08557a9dacb39a2a840f917",
+            "ledger": 11644,
+            "evidence": "evidence-00116.json"
+          }
+        ]
+      ],
+      "control": "PASS",
+      "positive": "PASS",
+      "negative": {
+        "expected_campaign_exit": 1,
+        "reason": "required explicit restoration omitted",
+        "observation": {
+          "rpc_evidence": "evidence-00106.json",
+          "ledger": 11638,
+          "required_keys_unavailable_live": [
+            "AAAABgAAAAEv3CZWtpmQqKzZZw05c/s1EnNqNVjd55puMXtT/U04gwAAABQAAAAB"
+          ]
+        },
+        "scope": "actual unavailable-live-state observation after independently proven Core eviction; no getter/implicit restore attempted"
+      },
+      "retry": {
+        "result": "PASS",
+        "boundary": "separate processes after committed RestoreFootprint checkpoint before application getters",
+        "second_batch_footprints": [
+          {
+            "read_only": [],
+            "read_write": []
+          }
+        ]
+      },
+      "raw_verification": {
+        "result": "PASS",
+        "before_rpc": "evidence-00015.json",
+        "after_rpc": "evidence-00133.json",
+        "complete_named_entries_equal": true
+      }
+    },
+    {
+      "scenario": "tansu-project-commit",
+      "contract_id": "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG",
+      "deploy": {
+        "hash": "6f0315c436dc40f37706e73dac5ee21e366b6e536cb5decdb54eac045a3f7dd4",
+        "ledger": 11656,
+        "evidence": "evidence-00002.json"
+      },
+      "source": {
+        "revision": "0524376d293be41ee3bf5ca102cee2a88bea3d03",
+        "wasm_hash": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6"
+      },
+      "initial": {
+        "commit": "7bd159a9660d5764fb288977ba97356b3f19c72d"
+      },
+      "mutated_before": {
+        "commit": "0524376d293be41ee3bf5ca102cee2a88bea3d03"
+      },
+      "after": {
+        "commit": "0524376d293be41ee3bf5ca102cee2a88bea3d03"
+      },
+      "mutable_state_proven": true,
+      "mutation_transactions": [
+        {
+          "hash": "c192d84bb329552e0183075ea00c5dda7884c626359c8c41b40122a98ecaf249",
+          "ledger": 11673,
+          "evidence": "evidence-00034.json"
+        }
+      ],
+      "archive_witnesses": {
+        "instance": {
+          "ledger": 11720,
+          "hash": "859cf92652f006fb762b9a6e9390ac096bc3dea5ca4b624df1878889672e3be7",
+          "rpc_evidence": "evidence-00114.json",
+          "key": {
+            "contract_data": {
+              "contract": "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG",
+              "key": "ledger_key_contract_instance",
+              "durability": "persistent"
+            }
+          }
+        },
+        "project": {
+          "ledger": 11727,
+          "hash": "55626acf202ba8dfc125aaf9d7cc385ec3899b042f6742b4a59ce6cf576737fc",
+          "rpc_evidence": "evidence-00123.json",
+          "key": {
+            "contract_data": {
+              "contract": "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG",
+              "key": {
+                "vec": [
+                  {
+                    "symbol": "Key"
+                  },
+                  {
+                    "bytes": "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5"
+                  }
+                ]
+              },
+              "durability": "persistent"
+            }
+          }
+        },
+        "commit": {
+          "ledger": 11729,
+          "hash": "fba323309aff3d5d78c2a741f82f1f62aed919a74743feb7e3eed63affb59cda",
+          "rpc_evidence": "evidence-00127.json",
+          "key": {
+            "contract_data": {
+              "contract": "CAIGXHTQTXLO2ZVQQYZTWWKXEEBGHV2WLGY3DUOMLLE25MKLCGWJ7RSG",
+              "key": {
+                "vec": [
+                  {
+                    "symbol": "LastHash"
+                  },
+                  {
+                    "bytes": "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5"
+                  }
+                ]
+              },
+              "durability": "persistent"
+            }
+          }
+        }
+      },
+      "restore_batches": [
+        [
+          {
+            "hash": "01509d73e16424d76a84ece912b1802b63fde34db8264884b7c450b8f217c40e",
+            "ledger": 11734,
+            "evidence": "evidence-00141.json"
+          },
+          {
+            "hash": "b0440e757eb7ce1f0456b49d3ca3573d3b8128e26d74bf5d82c202e11f596709",
+            "ledger": 11737,
+            "evidence": "evidence-00145.json"
+          },
+          {
+            "hash": "c3c2f7e1d1a0b6214c7ec8f0562b4878f02e8acb4218cb3c76aa5e51ad31a054",
+            "ledger": 11739,
+            "evidence": "evidence-00149.json"
+          },
+          {
+            "hash": "92758e42a2d8ee1262be0f17a52cbda6a21b6a3dded4c4e9c1c59302079340cf",
+            "ledger": 11741,
+            "evidence": "evidence-00153.json"
+          }
+        ],
+        [
+          {
+            "hash": "aba9fc4d47e2ceb0b29d1cf92548e893a3ea838151ee56314ea63d6526f4f93f",
+            "ledger": 11745,
+            "evidence": "evidence-00168.json"
+          },
+          {
+            "hash": "dc4a5902da26252cfd093c951131b8ec2ad9f943cbd10cc83f0ab793789dae55",
+            "ledger": 11748,
+            "evidence": "evidence-00172.json"
+          },
+          {
+            "hash": "16591f2bfedbcb004f620d96d461239bb90ffc56acd2d2fd91d87f8d7f4d7122",
+            "ledger": 11751,
+            "evidence": "evidence-00176.json"
+          },
+          {
+            "hash": "1429a72bbecc14dd83890ca77c2f47ac5e89616db9c41f135804eb0ef47aafa0",
+            "ledger": 11753,
+            "evidence": "evidence-00180.json"
+          }
+        ]
+      ],
+      "control": "PASS",
+      "positive": "PASS",
+      "negative": {
+        "expected_campaign_exit": 1,
+        "reason": "required explicit restoration omitted",
+        "observation": {
+          "rpc_evidence": "evidence-00136.json",
+          "ledger": 11731,
+          "required_keys_unavailable_live": [
+            "AAAABgAAAAEQa55wndbtZrCGMztZVyECY9dWWbGx0cxaya6xSxGsnwAAABQAAAAB",
+            "AAAABgAAAAEQa55wndbtZrCGMztZVyECY9dWWbGx0cxaya6xSxGsnwAAABAAAAABAAAAAgAAAA8AAAADS2V5AAAAAA0AAAAguH+NmT1lQK9XoGTsulK+e7osZBw0KzxHDXoxQDk1SbUAAAAB",
+            "AAAABgAAAAEQa55wndbtZrCGMztZVyECY9dWWbGx0cxaya6xSxGsnwAAABAAAAABAAAAAgAAAA8AAAAITGFzdEhhc2gAAAANAAAAILh/jZk9ZUCvV6Bk7LpSvnu6LGQcNCs8Rw16MUA5NUm1AAAAAQ=="
+          ]
+        },
+        "scope": "actual unavailable-live-state observation after independently proven Core eviction; no getter/implicit restore attempted"
+      },
+      "retry": {
+        "result": "PASS",
+        "boundary": "separate processes after committed RestoreFootprint checkpoint before application getters",
+        "second_batch_footprints": [
+          {
+            "read_only": [],
+            "read_write": []
+          },
+          {
+            "read_only": [],
+            "read_write": []
+          },
+          {
+            "read_only": [],
+            "read_write": []
+          },
+          {
+            "read_only": [],
+            "read_write": []
+          }
+        ]
+      },
+      "raw_verification": {
+        "result": "PASS",
+        "before_rpc": "evidence-00044.json",
+        "after_rpc": "evidence-00205.json",
+        "complete_named_entries_equal": true
+      },
+      "wasm_sha256": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6"
+    }
+  ],
+  "stage1_regression": "PASS: fresh v2 Blend run and offline revalidation of all 5 original records; original bytes unchanged",
+  "stage1_preserved_files": 1048,
+  "second_target": {
+    "name": "Tansu project/commit registry",
+    "revision": "0524376d293be41ee3bf5ca102cee2a88bea3d03",
+    "classification": "CONFIGURATION ONLY with the implemented v2 model",
+    "general_gap_from_stage1": "SMALL GENERAL PRODUCT GAP implemented: named persistent keys, projections, setup/mutation phases and lists of restoration commands",
+    "source_rebuild": "PASS: offline locked rebuild from retained source with cached dependencies matches deployed artifact byte-for-byte"
+  },
+  "tests": {
+    "local_full_suite": {
+      "result": "PASS",
+      "passed": 53,
+      "failed": 0,
+      "command": "scripts/check.sh",
+      "log": "tests-final.log"
+    },
+    "configured_hosted_suite_run_locally": {
+      "result": "PASS",
+      "count": 30,
+      "log": "hosted-suite-local.log"
+    },
+    "python_compilation": "PASS",
+    "hosted_ci": "CONFIGURED ONLY \u2014 not published or executed",
+    "infrastructure_host_probe": "PASS: unavailable loopback endpoint classified INCONCLUSIVE exit 2 before deployment",
+    "missing_raw_after_receipt": "PASS: real verifier process exits 2 INCONCLUSIVE"
+  },
+  "profile": {
+    "core": "29.0.0",
+    "active_protocol": 28,
+    "cli": "28.1.0",
+    "rpc": "http://localhost:8000/rpc",
+    "min_persistent_ttl": 64,
+    "min_temporary_ttl": 16,
+    "starting_eviction_scan_level": 1,
+    "max_entry_ttl": 3110400,
+    "timing": "preexisting Quickstart artificial acceleration; real sequential ledgers",
+    "stage2_profile_changes_applied": false,
+    "rejected_max_ttl_probes": [
+      128,
+      4096
+    ],
+    "manual_close_enabled": false
+  },
+  "reusable_tool_verdict": "YES within supported local protocol-28 persistent-entry continuity campaigns; two applications use the same engine and CLI with configuration only. This is not a universal invariant solver or turnkey network provisioner.",
+  "recommendation": "CONTINUE TO MVP HARDENING",
+  "stop_boundary": "Stage 2 complete. Do not start Stage 3, reopen discovery, publish, push, create PRs/releases or contact maintainers without new authorization.",
+  "limitations": [
+    "local Core/RPC/protocol-28 profile only; historical metadata formats v2/v4",
+    "trusted local argv hooks and local funded signing identity required",
+    "declared keys; no automatic key/dependency discovery",
+    "raw/public projections and equality/X-to-Y continuity assertions; no universal financial/property solver",
+    "Tansu project ownership/last-commit state only; no remote Git authenticity, DAO/NQG, full membership/governance, or collateral recovery claim",
+    "SAC collateral is real setup context; its balances and project list/index entries are outside the declared invariant",
+    "negative tests explicit recovery policy and unavailable live state; automatic invocation restoration may otherwise succeed",
+    "retry is after committed restore acknowledgment; no in-flight crash or partially atomic transaction claim",
+    "fresh scenario configs on this node need preuploaded artifacts and existing factory; another node needs documented prerequisite setup and address substitution",
+    "hosted CI configured only; no maintainer endorsement, adoption, hosted campaign, public release, or Stage 3",
+    "two candidate maximum-TTL configurations were rejected; Forge long-TTL campaign remains unexecuted"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "native-core",
+  "argv": [
+    "stellar-core",
+    "--version"
+  ],
+  "started_at": "2026-10-15T14:38:23.257448+00:00",
+  "timeout_seconds": 20,
+  "exit_code": null,
+  "error": "[Errno 2] No such file or directory: 'stellar-core'"
+}

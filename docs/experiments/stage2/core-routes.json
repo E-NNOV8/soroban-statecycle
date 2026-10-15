@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "stellar-core",
+    "http-command",
+    "help"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:07:49.912418+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "2026-10-15T18:07:50.178 [default INFO] Config from stellar-core.cfg\n2026-10-15T18:07:50.185 [default INFO] 'ARTIFICIALLY_ACCELERATE_TIME_FOR_TESTING' enabled in configuration file - node will not function properly with most networks\n2026-10-15T18:07:50.185 [default INFO] Using QUORUM_SET: {\n   \"t\" : 1,\n   \"v\" : [ \"self\" ]\n}\n\n2026-10-15T18:07:50.187 GCTI6 [default INFO] http failed(404) port: 11626 command: help\n"
+}

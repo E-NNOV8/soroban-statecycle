@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "meaning": "setup only; no archival claim",
+  "image": "stellar/quickstart@sha256:4f8dfd693deba57fddef7f0bc722e4782c2e606c8675e3adc5438cebae249295",
+  "network": {
+    "friendbotUrl": "http://localhost:8000/friendbot",
+    "passphrase": "Standalone Network ; February 2017",
+    "protocolVersion": 28
+  },
+  "profile": {
+    "max_entry_ttl": 3110400,
+    "min_temporary_ttl": 16,
+    "min_persistent_ttl": 64,
+    "persistent_rent_rate_denominator": "1215",
+    "temp_rent_rate_denominator": "2430",
+    "max_entries_to_archive": 1000,
+    "live_soroban_state_size_window_sample_size": 30,
+    "live_soroban_state_size_window_sample_period": 64,
+    "eviction_scan_size": 500000,
+    "starting_eviction_scan_level": 1
+  },
+  "addresses": {
+    "admin": "GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ",
+    "oracle": "GAEEJE6WHOROMEOJLMW4KXSBZSWF7WP2N5ZVCVXY2G4VTVRADEXJURBY",
+    "backstop": "GBGE3JQCRPDXUIEKDOJ6BTYQGWY2DYHOJNYW6NIDKBRWBJ7QOKKYL4QB"
+  },
+  "factory": "CANT3LIPEZVO2JIK22ZA3TGCMIRLZTLKZNGXFNSGSSCC2CTGW5M2H7HJ",
+  "sac": "CDBIDYTPVLSPJSCI5MWXAUOWY75NKSBNEKB4UJEYOODL65X3G4WPSYWI",
+  "scenarios": "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/repro-check-2/scenarios",
+  "python": "3.14.6 (main, Jun 11 2026, 00:00:00) [GCC 15.2.1 20260123 (Red Hat 15.2.1-7)]"
+}

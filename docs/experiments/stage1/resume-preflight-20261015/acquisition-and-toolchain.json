@@ -1,0 +1,52 @@
+[
+  {
+    "id": "rust",
+    "argv": [
+      "rustc",
+      "--version"
+    ],
+    "at": "2026-10-15T15:11:50.935773+00:00",
+    "exit_code": 0,
+    "stdout": "rustc 1.95.0 (59807616e 2026-04-14)\n",
+    "stderr": ""
+  },
+  {
+    "id": "cargo",
+    "argv": [
+      "cargo",
+      "--version"
+    ],
+    "at": "2026-10-15T15:11:51.270274+00:00",
+    "exit_code": 0,
+    "stdout": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\n",
+    "stderr": ""
+  },
+  {
+    "id": "targets",
+    "argv": [
+      "rustup",
+      "target",
+      "list",
+      "--installed"
+    ],
+    "at": "2026-10-15T15:11:51.346792+00:00",
+    "exit_code": 0,
+    "stdout": "wasm32-unknown-unknown\nwasm32v1-none\nx86_64-unknown-linux-gnu\n",
+    "stderr": ""
+  },
+  {
+    "id": "blend-revision",
+    "argv": [
+      "git",
+      "-c",
+      "credential.helper=",
+      "ls-remote",
+      "https://github.com/blend-capital/blend-contracts-v2.git",
+      "refs/heads/main"
+    ],
+    "at": "2026-10-15T15:11:51.380713+00:00",
+    "exit_code": 128,
+    "stdout": "",
+    "stderr": "fatal: unable to access 'https://github.com/blend-capital/blend-contracts-v2.git/': Could not resolve host: github.com\n"
+  }
+]

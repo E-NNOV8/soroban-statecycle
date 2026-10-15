@@ -1,0 +1,122 @@
+{
+  "schema": "archival-regression/scenario-v2",
+  "rpc_url": "http://localhost:8000/rpc",
+  "passphrase": "Standalone Network ; February 2017",
+  "protocol": 28,
+  "archive_timeout_seconds": 240,
+  "name": "blend-config-admin",
+  "source": {
+    "revision": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117"
+  },
+  "hooks": {
+    "deploy": [
+      "stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "CA3JX42W32345O6AIUO3GJGBXHP2VZCAHQBZOC3RKJ6QAVSNG2VBKMYC",
+      "--rpc-url",
+      "http://localhost:8000/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "archival-admin",
+      "--",
+      "deploy",
+      "--admin",
+      "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN",
+      "--name",
+      "Stage 1 repetition 1",
+      "--salt",
+      "b70246b2e1892a624581889ef4c601b9c17771547a3b6e8ea1296648407828bd",
+      "--oracle",
+      "GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ",
+      "--backstop_take_rate",
+      "1000000",
+      "--max_positions",
+      "4",
+      "--min_collateral",
+      "10000000"
+    ],
+    "get_config": [
+      "stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:8000/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "archival-admin",
+      "--send",
+      "yes",
+      "--",
+      "get_config"
+    ],
+    "get_admin": [
+      "stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:8000/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "archival-admin",
+      "--send",
+      "yes",
+      "--",
+      "get_admin"
+    ],
+    "restore": [
+      "stellar",
+      "contract",
+      "restore",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:8000/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "archival-admin"
+    ]
+  },
+  "entries": {
+    "instance": {
+      "contract_data": {
+        "contract": "{id}",
+        "key": "ledger_key_contract_instance",
+        "durability": "persistent"
+      }
+    }
+  },
+  "bindings": {
+    "get_config": {
+      "entry": "instance",
+      "path": [
+        "contract_data",
+        "val"
+      ],
+      "value_path": [
+        "storage",
+        "Config"
+      ]
+    },
+    "get_admin": {
+      "entry": "instance",
+      "path": [
+        "contract_data",
+        "val"
+      ],
+      "value_path": [
+        "storage",
+        "Admin"
+      ]
+    }
+  }
+}

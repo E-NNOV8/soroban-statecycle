@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "bucket_sha256": "d179d2a922cb49a316ae96ac132ae95e46d73616b9e9a7a2f03dbec19cce8c58",
+  "anchor_ledger": 4687,
+  "eviction_ledger": 4582,
+  "complete_archived_instance_matches_live_baseline": true,
+  "anchor": "core-history-archived.json",
+  "raw_bucket": "hot-archive-d179d2a922cb49a316ae96ac132ae95e46d73616b9e9a7a2f03dbec19cce8c58.xdr",
+  "decoder_output": "archive-bucket-decode.json",
+  "scope": "independent direct Core hot archive proof for pilot only"
+}

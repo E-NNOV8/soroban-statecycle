@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionEnvelope",
+    "--input",
+    "single-base64",
+    "AAAAAgAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAARPUAAAASAAAAFQAAAAAAAAAAAAAAAQAAAAAAAAAYAAAAAAAAAAHe8AfMbnRNeER+k3bbCzpKG7MEoO1GVHOT6KK3JZHqhgAAAAVwYXVzZQAAAAAAAAIAAAASAAAAAAAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAd7wB8xudE14RH6TdtsLOkobswSg7UZUc5PoorclkeqGAAAABXBhdXNlAAAAAAAAAgAAABIAAAAAAAAAAK0hgo5p4tYA3xPACLjkq0ygSZ8Hl4Bo0zeh1AugqEQ0AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAB3li9C31GLaiQonZOLP34vKkXV0FineB0EyaHR6G/Dy2AAAAAQAAAAYAAAAB3vAHzG50TXhEfpN22ws6ShuzBKDtRlRzk+iityWR6oYAAAAUAAAAAQAOyZwAAAAAAAABnAAAAAAAAESRAAAAAaCoRDQAAABAZAuIqXxABRGjnA25C7P5xebAcmwY4eCATotOr69pIjp0YKUzWaaDWhprHV/3m+1rYqTiRj5mS4UG158Nq1NTBw=="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"tx\":{\"tx\":{\"source_account\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\",\"fee\":17653,\"seq_num\":\"77309411349\",\"cond\":\"none\",\"memo\":\"none\",\"operations\":[{\"source_account\":null,\"body\":{\"invoke_host_function\":{\"host_function\":{\"invoke_contract\":{\"contract_address\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"function_name\":\"pause\",\"args\":[{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"},{\"bool\":false}]}},\"auth\":[{\"credentials\":\"source_account\",\"root_invocation\":{\"function\":{\"contract_fn\":{\"contract_address\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"function_name\":\"pause\",\"args\":[{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"},{\"bool\":false}]}},\"sub_invocations\":[]}}]}}}],\"ext\":{\"v1\":{\"ext\":\"v0\",\"resources\":{\"footprint\":{\"read_only\":[{\"contract_code\":{\"hash\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"}}],\"read_write\":[{\"contract_data\":{\"contract\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\"}}]},\"instructions\":969116,\"disk_read_bytes\":0,\"write_bytes\":412},\"resource_fee\":\"17553\"}}},\"signatures\":[{\"hint\":\"a0a84434\",\"signature\":\"640b88a97c400511a39c0db90bb3f9c5e6c0726c18e1e0804e8b4eafaf69223a7460a53359a6835a1a6b1d5ff79bed6b62a4e2463e664b8506d79f0dab535307\"}]}}\n",
+  "stderr": ""
+}

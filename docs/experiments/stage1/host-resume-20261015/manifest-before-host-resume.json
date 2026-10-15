@@ -1,0 +1,305 @@
+{
+  "schema": "archival-regression-stage1/0",
+  "recorded_at": "2026-10-15T15:13:05.548404+00:00",
+  "stage": "Stage 1",
+  "phase_reached": "infrastructure-preflight",
+  "result": "INCONCLUSIVE",
+  "reason": "Resume preflight still denied in this agent executor: Docker socket permission denied, loopback RPC Operation not permitted, Blend git DNS failure. Host prerequisites are owner-reported working but not reachable here.",
+  "product": {
+    "title": "Core-backed Soroban Archival Regression Tester",
+    "source_revision": null,
+    "branch": "main (unborn)",
+    "remote": null,
+    "source_hashes": {
+      "src/archival_regression/__init__.py": "7202ba06c491ee7eec8ea239550124893732ef7ea4efbb2a2c1e709f3eb8323f",
+      "src/archival_regression/preflight.py": "7da6ded93ae3b54b983446cb44a02918fc921d66b700df28d3c239db949133ba",
+      "tests/test_preflight.py": "01e28c227dc21aef0c47f47559f1275c7f1f27045378187b4f1d3534a958c535"
+    }
+  },
+  "external_target": {
+    "name": "Blend V2 pool",
+    "repository": "https://github.com/blend-capital/blend-contracts-v2",
+    "revision": null,
+    "artifact_used": false,
+    "source_modified": false,
+    "wasm_hashes": {},
+    "contract_ids": {},
+    "actual_integration_classification": null,
+    "integration_result": "NOT TESTED",
+    "prior_selection_assumption": "SMALL GENERAL PRODUCT GAP"
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Linux-7.1.4-100.fc43.x86_64-x86_64-with-glibc2.42",
+    "stellar_cli": "28.1.0",
+    "stellar_cli_source": "c0f4d0da891bbf214c08b8c5035ae6db80e9a3bd",
+    "xdr": "28.0.0",
+    "core": null,
+    "host": null,
+    "protocol": null,
+    "network_config": null,
+    "ledger_anchors": [],
+    "ledger_keys": [],
+    "local_endpoint_probed": "http://localhost:8000/rpc",
+    "network_created": false,
+    "non_default_network_settings": [],
+    "non_default_settings_note": "No network was created; empty array does not imply a successful default-config campaign. Project-local Podman runtime/storage overrides are retained in probe argv.",
+    "installed_rust_targets": [
+      "wasm32-unknown-unknown",
+      "wasm32v1-none",
+      "x86_64-unknown-linux-gnu"
+    ]
+  },
+  "invariant": {
+    "name": "pool_configuration_and_admin_continuity",
+    "definition": "canonical(get_config_after) == canonical(get_config_before) and get_admin_after == get_admin_before; decoded raw contract-instance configuration/admin must agree at both points",
+    "public_calls": [
+      "get_config",
+      "get_admin"
+    ],
+    "why": "Stable persisted pool configuration and owner are meaningful and independent of balances, interest accrual and price changes. No empty default getter is used.",
+    "status": "NOT TESTED",
+    "observed_values": null,
+    "limitation": "Chosen from inspected public source, not yet checked against a pinned built artifact or initialized pool."
+  },
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "info",
+        "--format",
+        "{{json .ServerVersion}}"
+      ],
+      "url": null,
+      "exit_code": 1,
+      "error": null
+    },
+    {
+      "argv": [
+        "podman",
+        "--root",
+        "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-root",
+        "--runroot",
+        "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/.local/container-runroot",
+        "--storage-driver",
+        "vfs",
+        "info",
+        "--format",
+        "json"
+      ],
+      "url": null,
+      "exit_code": 125,
+      "error": null
+    },
+    {
+      "argv": [
+        "stellar-core",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": null,
+      "error": "[Errno 2] No such file or directory: 'stellar-core'"
+    },
+    {
+      "argv": [
+        "/tmp/runbook-tools/stellar",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "python3",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "url": null,
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "credential.helper=",
+        "ls-remote",
+        "https://github.com/blend-capital/blend-contracts-v2.git",
+        "refs/heads/main"
+      ],
+      "url": null,
+      "exit_code": 128,
+      "error": null
+    },
+    {
+      "argv": null,
+      "url": "http://127.0.0.1:8000/soroban/rpc",
+      "exit_code": null,
+      "error": "URLError: <urlopen error [Errno 1] Operation not permitted>"
+    },
+    {
+      "argv": null,
+      "url": "https://codeload.github.com/blend-capital/blend-contracts-v2/tar.gz/refs/heads/main",
+      "exit_code": null,
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "argv": null,
+      "url": "https://api.github.com/repos/stellar/stellar-core/releases/latest",
+      "exit_code": null,
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+    }
+  ],
+  "outcomes": {
+    "control": "NOT TESTED",
+    "positive_flagship": "NOT TESTED",
+    "negative": "NOT TESTED",
+    "retry": "NOT TESTED",
+    "archival": "NOT TESTED",
+    "archive_observation": "NOT TESTED",
+    "restore": "NOT TESTED",
+    "application_invariant": "NOT TESTED",
+    "raw_verification": "NOT TESTED",
+    "repeatability": "NOT TESTED"
+  },
+  "fresh_state_campaign_runs": 0,
+  "independent_target_builds": 0,
+  "preflight_attempts_are_not_campaigns": true,
+  "checks": {
+    "python_behavior_tests": {
+      "result": "PASS",
+      "passed": 15,
+      "failed": 0,
+      "command": "PYTHONPATH=src python3 -W error::ResourceWarning -m unittest discover -s tests -v",
+      "log": "tests-final.log"
+    },
+    "python_compile": {
+      "result": "PASS",
+      "command": "python3 -m compileall -q src tests",
+      "log": "python-compile-final.log"
+    },
+    "lint": {
+      "result": "NOT TESTED",
+      "reason": "ruff is not installed (No module named ruff); no install attempted"
+    },
+    "blend_build": {
+      "result": "NOT TESTED"
+    },
+    "core_build": {
+      "result": "NOT TESTED"
+    }
+  },
+  "exit_gates": [
+    {
+      "id": "real_target",
+      "requirement": "Real unchanged Blend artifact",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "unchanged_source",
+      "requirement": "Provision without source modification",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "public_invariant",
+      "requirement": "Public invariant established",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "actual_archive",
+      "requirement": "Actual Core archival",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "archive_verification",
+      "requirement": "Independent archival observation",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "restore",
+      "requirement": "Legitimate restoration",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "resume",
+      "requirement": "Application success after restore",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "raw_state",
+      "requirement": "Independent raw-state agreement",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "negative",
+      "requirement": "Meaningful archival negative",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "retry",
+      "requirement": "Real recovery retry boundary",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "repeatability",
+      "requirement": "Five fresh-state campaigns",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "integration",
+      "requirement": "Acceptable implemented integration",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "general_hooks",
+      "requirement": "No target-specific product branch",
+      "result": "NOT TESTED"
+    },
+    {
+      "id": "behavior_tests",
+      "requirement": "All introduced behavior tests",
+      "result": "PASS"
+    },
+    {
+      "id": "reproduction",
+      "requirement": "Reproducible flagship evidence",
+      "result": "NOT TESTED"
+    }
+  ],
+  "recommendation": "RESEARCH MORE",
+  "next_dependency": "Agent executor must actually reach local RPC and a runnable Core backend, and acquire/pin Blend source/artifacts. Host-terminal access alone is not sufficient.",
+  "initial_recorded_at": "2026-10-15T14:44:56.960598+00:00",
+  "last_resume": {
+    "result": "INCONCLUSIVE",
+    "evidence": "resume-preflight-20261015/result.json",
+    "preflight_report": "resume-preflight-20261015/report.json",
+    "previous_manifest": "resume-preflight-20261015/manifest-before-resume.json"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "deployed_artifact_sha256": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+  "retained_source_rebuild_sha256": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+  "build": "offline --locked from retained sources, cached dependencies; not a second cold dependency build"
+}

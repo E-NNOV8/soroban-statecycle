@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "TransactionMeta",
+    "--input",
+    "single-base64",
+    "AAAABAAAAAAAAAACAAAAAwAAAQYAAAAAAAAAAK0hgo5p4tYA3xPACLjkq0ygSZ8Hl4Bo0zeh1AugqEQ0AAAAF0LkMh8AAAASAAAAIQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAMAAAAAAAABBAAAAABq0TPrAAAAAAAAAAEAAAEGAAAAAAAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAABdC5DIfAAAAEgAAACIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAADAAAAAAAAAQYAAAAAatEz7QAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAfaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAAAoAAAAAAAAAAAAAAAAAAC4OAAAAAgAAAAAAAAAB2LKxTGD+y2X7KqgcvqedCDXK/A4NhR+GESV8HltB4cIAAAABAAAAAAAAAAIAAAAPAAAAA2ZlZQAAAAASAAAAAAAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAAAr//////////////////9owAAAAAA=="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"v4\":{\"ext\":\"v0\",\"tx_changes_before\":[{\"state\":{\"last_modified_ledger_seq\":262,\"data\":{\"account\":{\"account_id\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\",\"balance\":\"99906499103\",\"seq_num\":\"77309411361\",\"num_sub_entries\":0,\"inflation_dest\":null,\"flags\":0,\"home_domain\":\"\",\"thresholds\":\"01000000\",\"signers\":[],\"ext\":{\"v1\":{\"liabilities\":{\"buying\":\"0\",\"selling\":\"0\"},\"ext\":{\"v2\":{\"num_sponsored\":0,\"num_sponsoring\":0,\"signer_sponsoring_i_ds\":[],\"ext\":{\"v3\":{\"ext\":\"v0\",\"seq_ledger\":260,\"seq_time\":\"1792095211\"}}}}}}}},\"ext\":\"v0\"}},{\"updated\":{\"last_modified_ledger_seq\":262,\"data\":{\"account\":{\"account_id\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\",\"balance\":\"99906499103\",\"seq_num\":\"77309411362\",\"num_sub_entries\":0,\"inflation_dest\":null,\"flags\":0,\"home_domain\":\"\",\"thresholds\":\"01000000\",\"signers\":[],\"ext\":{\"v1\":{\"liabilities\":{\"buying\":\"0\",\"selling\":\"0\"},\"ext\":{\"v2\":{\"num_sponsored\":0,\"num_sponsoring\":0,\"signer_sponsoring_i_ds\":[],\"ext\":{\"v3\":{\"ext\":\"v0\",\"seq_ledger\":262,\"seq_time\":\"1792095213\"}}}}}}}},\"ext\":\"v0\"}}],\"operations\":[{\"ext\":\"v0\",\"changes\":[],\"events\":[]}],\"tx_changes_after\":[],\"soroban_meta\":{\"ext\":{\"v1\":{\"ext\":\"v0\",\"total_non_refundable_resource_fee_charged\":\"2010\",\"total_refundable_resource_fee_charged\":\"0\",\"rent_fee_charged\":\"0\"}},\"return_value\":null},\"events\":[{\"stage\":\"before_all_txs\",\"event\":{\"ext\":\"v0\",\"contract_id\":\"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\"type\":\"contract\",\"body\":{\"v0\":{\"topics\":[{\"symbol\":\"fee\"},{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"}],\"data\":{\"i128\":\"11790\"}}}}},{\"stage\":\"after_all_txs\",\"event\":{\"ext\":\"v0\",\"contract_id\":\"CDMLFMKMMD7MWZP3FKUBZPVHTUEDLSX4BYGYKH4GCESXYHS3IHQ4EIG4\",\"type\":\"contract\",\"body\":{\"v0\":{\"topics\":[{\"symbol\":\"fee\"},{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"}],\"data\":{\"i128\":\"-9680\"}}}}}],\"diagnostic_events\":[]}}\n",
+  "stderr": ""
+}

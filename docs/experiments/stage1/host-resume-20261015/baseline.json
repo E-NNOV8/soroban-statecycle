@@ -1,0 +1,17 @@
+{
+  "revision": "ba22b487b2c5057a4ecc28b05b5193c28e4bd117",
+  "factory": "CA3JX42W32345O6AIUO3GJGBXHP2VZCAHQBZOC3RKJ6QAVSNG2VBKMYC",
+  "pool": "CBTTZI3XSOH7UG3YRTRUOI2MMNDUPNNY76KNTMHSDWITU6PKWP7JKI7I",
+  "pool_hash": "274d85836c4e9adf8995f9240c6452cb0ce2e4751e1b10baffffdbfb90319ba1",
+  "factory_hash": "e304170e67184748839dda5fd3b6dd5d8bf1e54055a07b536cede24da072c7a9",
+  "baseline": {
+    "get_config": {
+      "bstop_rate": 1000000,
+      "max_positions": 4,
+      "min_collateral": "10000000",
+      "oracle": "GDIGJ6OENHTHPP6TZA5C5NV2D5JD5TEHIZKWT6OYTUP7YSB4ZHVKU7HJ",
+      "status": 6
+    },
+    "get_admin": "GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN"
+  }
+}

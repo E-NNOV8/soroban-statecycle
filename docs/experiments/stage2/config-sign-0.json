@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "stellar",
+    "tx",
+    "sign",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--sign-with-key",
+    "archival-admin"
+  ],
+  "stdin": "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0Hhlgk9HMAAAAtsAAAAQgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAA=",
+  "started_at": "2026-10-15T18:04:34.812707+00:00",
+  "exit_code": 0,
+  "stdout": "AAAAAgAAAABfCUIRlvhH09Au4rMdBwfbA7cQ5SlJIxH0+F6Va0Hhlgk9HMAAAAtsAAAAQgAAAAAAAAAAAAAAAQAAAAAAAAAaAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAHS5MWchSHKB2CAeHGBEVEQA8SAlNIeXHjOesjpGVRaTUAAAAAAAAH0AAAB9AAAAAAA0c7wAAAAAFrQeGWAAAAQLMTUA9xhqYz1IV42IskP/MbFanEYIvuMZSSfbeP6Q/jh1NvBsEDfADZXBy8yjgLsQsFUe9h8ngUIfwyaLnT9wA=\n",
+  "stderr": "\u2139\ufe0f  Signing transaction: 44fe88c5dfb67dcb385df12d3722ad081f5207583f26239e231639041bf26aca\n"
+}

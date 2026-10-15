@@ -1,0 +1,7 @@
+{
+  "id": "local-rpc",
+  "url": "http://127.0.0.1:8000/soroban/rpc",
+  "started_at": "2026-10-15T14:38:23.647516+00:00",
+  "timeout_seconds": 15,
+  "error": "URLError: <urlopen error [Errno 1] Operation not permitted>"
+}

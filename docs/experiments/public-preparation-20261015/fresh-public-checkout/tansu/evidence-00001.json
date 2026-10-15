@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "stellar",
+    "--config-dir",
+    "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+    "contract",
+    "deploy",
+    "--wasm-hash",
+    "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+    "--salt",
+    "bb2c8b10f6f23f3c197fd79fd8311e0dbca56d2185a88767f85136fb89755876",
+    "--rpc-url",
+    "http://localhost:18002/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "statecycle-admin",
+    "--",
+    "--admin",
+    "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6"
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "CCDRDPE7ZDU4CUSZPDOFZ5VMMYNXEYBCFNMMF3Q74PYKARIBVRS2IJ5X\n",
+  "stderr": "\u2139\ufe0f  Deploying contract using wasm hash 7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\n\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: f31c5252b107f938136ce0aa9a2bd8e7e5564d1bdefa1f37a7fdbb0decdade04\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+}

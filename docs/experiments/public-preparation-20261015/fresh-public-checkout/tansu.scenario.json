@@ -1,0 +1,311 @@
+{
+  "schema": "archival-regression/scenario-v2",
+  "rpc_url": "http://localhost:18002/rpc",
+  "passphrase": "Standalone Network ; February 2017",
+  "protocol": 28,
+  "archive_timeout_seconds": 240,
+  "name": "tansu-project-commit",
+  "source": {
+    "revision": "0524376d293be41ee3bf5ca102cee2a88bea3d03",
+    "wasm_hash": "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6"
+  },
+  "mutation_required": true,
+  "entries": {
+    "instance": {
+      "contract_data": {
+        "contract": "{id}",
+        "key": "ledger_key_contract_instance",
+        "durability": "persistent"
+      }
+    },
+    "project": {
+      "contract_data": {
+        "contract": "{id}",
+        "key": {
+          "vec": [
+            {
+              "symbol": "Key"
+            },
+            {
+              "bytes": "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5"
+            }
+          ]
+        },
+        "durability": "persistent"
+      }
+    },
+    "commit": {
+      "contract_data": {
+        "contract": "{id}",
+        "key": {
+          "vec": [
+            {
+              "symbol": "LastHash"
+            },
+            {
+              "bytes": "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5"
+            }
+          ]
+        },
+        "durability": "persistent"
+      }
+    }
+  },
+  "bindings": {
+    "commit": {
+      "entry": "commit",
+      "path": [
+        "contract_data",
+        "val"
+      ]
+    }
+  },
+  "expected_initial": {
+    "commit": "7bd159a9660d5764fb288977ba97356b3f19c72d"
+  },
+  "expected_before": {
+    "commit": "0524376d293be41ee3bf5ca102cee2a88bea3d03"
+  },
+  "hooks": {
+    "deploy": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "deploy",
+      "--wasm-hash",
+      "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+      "--salt",
+      "bb2c8b10f6f23f3c197fd79fd8311e0dbca56d2185a88767f85136fb89755876",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--",
+      "--admin",
+      "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6"
+    ],
+    "setup": [
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "invoke",
+        "--id",
+        "{id}",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin",
+        "--send",
+        "yes",
+        "--",
+        "set_collateral_contract",
+        "--admin",
+        "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+        "--collateral_contract",
+        "{\"address\": \"CCJX4YMW2OGGYJXULMJSIBWWZLKDWXF3EZYFQTZLV4ACFFLEH2OANJJL\", \"wasm_hash\": null}"
+      ],
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "invoke",
+        "--id",
+        "{id}",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin",
+        "--send",
+        "yes",
+        "--",
+        "pause",
+        "--admin",
+        "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+        "--paused",
+        "false"
+      ],
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "invoke",
+        "--id",
+        "{id}",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin",
+        "--send",
+        "yes",
+        "--",
+        "register",
+        "--maintainer",
+        "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+        "--name",
+        "ArchivalStageTwo",
+        "--maintainers",
+        "[\"GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6\"]",
+        "--url",
+        "https://example.invalid/archival-stage-two.git",
+        "--ipfs",
+        "stage2-project-metadata",
+        "--min_voting_period",
+        "null",
+        "--execute_delay",
+        "null"
+      ],
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "invoke",
+        "--id",
+        "{id}",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin",
+        "--send",
+        "yes",
+        "--",
+        "commit",
+        "--maintainer",
+        "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+        "--project_key",
+        "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5",
+        "--hash",
+        "7bd159a9660d5764fb288977ba97356b3f19c72d"
+      ]
+    ],
+    "mutate": [
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "invoke",
+        "--id",
+        "{id}",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin",
+        "--send",
+        "yes",
+        "--",
+        "commit",
+        "--maintainer",
+        "GBDEQZRQXBC4P4UU334YT6GIYYGVMX2MOJPTW63TPH6KXI4NRRN7KVB6",
+        "--project_key",
+        "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5",
+        "--hash",
+        "0524376d293be41ee3bf5ca102cee2a88bea3d03"
+      ]
+    ],
+    "commit": [
+      "stellar",
+      "--config-dir",
+      "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+      "contract",
+      "invoke",
+      "--id",
+      "{id}",
+      "--rpc-url",
+      "http://localhost:18002/rpc",
+      "--network-passphrase",
+      "Standalone Network ; February 2017",
+      "--source",
+      "statecycle-admin",
+      "--send",
+      "yes",
+      "--",
+      "get_commit",
+      "--project_key",
+      "b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5"
+    ],
+    "restore": [
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "restore",
+        "--wasm-hash",
+        "7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin"
+      ],
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "restore",
+        "--id",
+        "{id}",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin"
+      ],
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "restore",
+        "--id",
+        "{id}",
+        "--key-xdr",
+        "AAAAEAAAAAEAAAACAAAADwAAAANLZXkAAAAADQAAACC4f42ZPWVAr1egZOy6Ur57uixkHDQrPEcNejFAOTVJtQ==",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin"
+      ],
+      [
+        "stellar",
+        "--config-dir",
+        "/tmp/statecycle-public-checkout/.local/fresh/stellar",
+        "contract",
+        "restore",
+        "--id",
+        "{id}",
+        "--key-xdr",
+        "AAAAEAAAAAEAAAACAAAADwAAAAhMYXN0SGFzaAAAAA0AAAAguH+NmT1lQK9XoGTsulK+e7osZBw0KzxHDXoxQDk1SbU=",
+        "--rpc-url",
+        "http://localhost:18002/rpc",
+        "--network-passphrase",
+        "Standalone Network ; February 2017",
+        "--source",
+        "statecycle-admin"
+      ]
+    ]
+  }
+}

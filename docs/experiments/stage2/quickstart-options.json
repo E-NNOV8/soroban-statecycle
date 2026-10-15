@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sh",
+    "-c",
+    "grep -nE \"MANUAL_CLOSE|RUN_STANDALONE|CLOSE_TIME|ACCELERATE\" /start /opt/stellar/core/bin/*"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:08:18.997929+00:00",
+  "exit_code": 0,
+  "stdout": "/start:47:: \"${ENABLE_CORE_MANUAL_CLOSE:=false}\"\n/start:202:      ENABLE_CORE_MANUAL_CLOSE=true\n/start:519:  run_silent \"finalize-core-config-manual-close\" perl -pi -e \"s/__MANUAL_CLOSE__/$ENABLE_CORE_MANUAL_CLOSE/g\" etc/stellar-core.cfg\n",
+  "stderr": ""
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "phase": "archive",
+    "argv": [
+      "python3",
+      "-m",
+      "archival_regression.campaign",
+      "--config",
+      "docs/experiments/stage2/unavailable-host.scenario.json",
+      "--output",
+      "docs/experiments/stage2/unavailable-host",
+      "--phase",
+      "archive"
+    ],
+    "exit_code": 2,
+    "stdout": "{\"result\": \"INCONCLUSIVE\", \"reason\": \"RPC unavailable\", \"phase\": \"archive\", \"exit_code\": 2}\n",
+    "stderr": ""
+  }
+]

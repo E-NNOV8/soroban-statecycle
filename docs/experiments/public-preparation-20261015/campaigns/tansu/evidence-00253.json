@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerEntryData",
+    "--input",
+    "single-base64",
+    "AAAABgAAAAAAAAAB3vAHzG50TXhEfpN22ws6ShuzBKDtRlRzk+iityWR6oYAAAAUAAAAAQAAABMAAAAAeWL0LfUYtqJCidk4s/fi8qRdXQWKd4HQTJodHob8PLYAAAABAAAAAwAAABAAAAABAAAAAQAAAA8AAAAMQWRtaW5zQ29uZmlnAAAAEQAAAAEAAAACAAAADwAAAAZhZG1pbnMAAAAAABAAAAABAAAAAQAAABIAAAAAAAAAAK0hgo5p4tYA3xPACLjkq0ygSZ8Hl4Bo0zeh1AugqEQ0AAAADwAAAAl0aHJlc2hvbGQAAAAAAAADAAAAAQAAABAAAAABAAAAAQAAAA8AAAAKQ29sbGF0ZXJhbAAAAAAAEQAAAAEAAAACAAAADwAAAAdhZGRyZXNzAAAAABIAAAABwoHib6rk9MhI6y1wUdbH+tVILSKDyiSYc4a/dvs3LPkAAAAPAAAACXdhc21faGFzaAAAAAAAAAEAAAAQAAAAAQAAAAEAAAAPAAAABlBhdXNlZAAAAAAAAAAAAAA="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"contract_data\":{\"ext\":\"v0\",\"contract\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"key\":\"ledger_key_contract_instance\",\"durability\":\"persistent\",\"val\":{\"contract_instance\":{\"executable\":{\"wasm\":\"7962f42df518b6a24289d938b3f7e2f2a45d5d058a7781d04c9a1d1e86fc3cb6\"},\"storage\":[{\"key\":{\"vec\":[{\"symbol\":\"AdminsConfig\"}]},\"val\":{\"map\":[{\"key\":{\"symbol\":\"admins\"},\"val\":{\"vec\":[{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"}]}},{\"key\":{\"symbol\":\"threshold\"},\"val\":{\"u32\":1}}]}},{\"key\":{\"vec\":[{\"symbol\":\"Collateral\"}]},\"val\":{\"map\":[{\"key\":{\"symbol\":\"address\"},\"val\":{\"address\":\"CDBIDYTPVLSPJSCI5MWXAUOWY75NKSBNEKB4UJEYOODL65X3G4WPSYWI\"}},{\"key\":{\"symbol\":\"wasm_hash\"},\"val\":\"void\"}]}},{\"key\":{\"vec\":[{\"symbol\":\"Paused\"}]},\"val\":{\"bool\":false}}]}}}}\n",
+  "stderr": ""
+}

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "cargo",
+    "build",
+    "--offline",
+    "--locked",
+    "--release",
+    "--target",
+    "wasm32v1-none",
+    "--manifest-path",
+    "docs/experiments/stage2/sources/tansu/Cargo.toml",
+    "--package",
+    "tansu",
+    "--target-dir",
+    ".local/stage2/tansu-build"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T19:21:24.704457+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "    Finished `release` profile [optimized] target(s) in 1.30s\n"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "decode",
+    "--type",
+    "LedgerEntryData",
+    "--input",
+    "single-base64",
+    "AAAABgAAAAAAAAAB3vAHzG50TXhEfpN22ws6ShuzBKDtRlRzk+iityWR6oYAAAAQAAAAAQAAAAIAAAAPAAAAA0tleQAAAAANAAAAILh/jZk9ZUCvV6Bk7LpSvnu6LGQcNCs8Rw16MUA5NUm1AAAAAQAAABEAAAABAAAABAAAAA8AAAAGY29uZmlnAAAAAAARAAAAAQAAAAIAAAAPAAAABGlwZnMAAAAOAAAAF3N0YWdlMi1wcm9qZWN0LW1ldGFkYXRhAAAAAA8AAAADdXJsAAAAAA4AAAAuaHR0cHM6Ly9leGFtcGxlLmludmFsaWQvYXJjaGl2YWwtc3RhZ2UtdHdvLmdpdAAAAAAADwAAAAttYWludGFpbmVycwAAAAAQAAAAAQAAAAEAAAASAAAAAAAAAACtIYKOaeLWAN8TwAi45KtMoEmfB5eAaNM3odQLoKhENAAAAA8AAAAEbmFtZQAAAA4AAAAQQXJjaGl2YWxTdGFnZVR3bwAAAA8AAAAMc3ViX3Byb2plY3RzAAAAAQ=="
+  ],
+  "stdin": null,
+  "exit_code": 0,
+  "stdout": "{\"contract_data\":{\"ext\":\"v0\",\"contract\":\"CDPPAB6MNZ2E26CEP2JXNWYLHJFBXMYEUDWUMVDTSPUKFNZFSHVINCRS\",\"key\":{\"vec\":[{\"symbol\":\"Key\"},{\"bytes\":\"b87f8d993d6540af57a064ecba52be7bba2c641c342b3c470d7a3140393549b5\"}]},\"durability\":\"persistent\",\"val\":{\"map\":[{\"key\":{\"symbol\":\"config\"},\"val\":{\"map\":[{\"key\":{\"symbol\":\"ipfs\"},\"val\":{\"string\":\"stage2-project-metadata\"}},{\"key\":{\"symbol\":\"url\"},\"val\":{\"string\":\"https://example.invalid/archival-stage-two.git\"}}]}},{\"key\":{\"symbol\":\"maintainers\"},\"val\":{\"vec\":[{\"address\":\"GCWSDAUONHRNMAG7CPAAROHEVNGKASM7A6LYA2GTG6Q5IC5AVBCDI2MZ\"}]}},{\"key\":{\"symbol\":\"name\"},\"val\":{\"string\":\"ArchivalStageTwo\"}},{\"key\":{\"symbol\":\"sub_projects\"},\"val\":\"void\"}]}}}\n",
+  "stderr": ""
+}

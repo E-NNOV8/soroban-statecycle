@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "/home/mxr/martins/soroban-forge",
+    "status",
+    "--short"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:03:27.289615+00:00",
+  "exit_code": 0,
+  "stdout": "?? research.md\n",
+  "stderr": ""
+}

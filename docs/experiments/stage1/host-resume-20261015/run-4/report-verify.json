@@ -1,0 +1,6 @@
+{
+  "result": "FAIL",
+  "reason": "required explicit restoration omitted",
+  "phase": "verify",
+  "exit_code": 1
+}

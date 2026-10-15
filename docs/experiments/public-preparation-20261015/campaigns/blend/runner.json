@@ -1,0 +1,87 @@
+[
+  {
+    "phase": "archive",
+    "argv": [
+      "python3",
+      "-m",
+      "archival_regression.campaign",
+      "--config",
+      ".local/repro-check-2/campaigns/blend.scenario.json",
+      "--output",
+      ".local/repro-check-2/campaigns/blend",
+      "--phase",
+      "archive"
+    ],
+    "exit_code": 2,
+    "stdout": "{\"result\": \"INCONCLUSIVE\", \"reason\": \"checkpoint preserved; recovery is not complete\", \"phase\": \"archive\", \"exit_code\": 2}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "negative",
+    "argv": [
+      "python3",
+      "-m",
+      "archival_regression.campaign",
+      "--config",
+      ".local/repro-check-2/campaigns/blend.scenario.json",
+      "--output",
+      ".local/repro-check-2/campaigns/blend",
+      "--phase",
+      "verify"
+    ],
+    "exit_code": 1,
+    "stdout": "{\"result\": \"FAIL\", \"reason\": \"required explicit restoration omitted\", \"phase\": \"verify\", \"exit_code\": 1}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "restore-checkpoint",
+    "argv": [
+      "python3",
+      "-m",
+      "archival_regression.campaign",
+      "--config",
+      ".local/repro-check-2/campaigns/blend.scenario.json",
+      "--output",
+      ".local/repro-check-2/campaigns/blend",
+      "--phase",
+      "restore"
+    ],
+    "exit_code": 2,
+    "stdout": "{\"result\": \"INCONCLUSIVE\", \"reason\": \"checkpoint preserved; recovery is not complete\", \"phase\": \"restore\", \"exit_code\": 2}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "resume-retry",
+    "argv": [
+      "python3",
+      "-m",
+      "archival_regression.campaign",
+      "--config",
+      ".local/repro-check-2/campaigns/blend.scenario.json",
+      "--output",
+      ".local/repro-check-2/campaigns/blend",
+      "--phase",
+      "recover"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"recover\", \"exit_code\": 0}\n",
+    "stderr": ""
+  },
+  {
+    "phase": "verify",
+    "argv": [
+      "python3",
+      "-m",
+      "archival_regression.campaign",
+      "--config",
+      ".local/repro-check-2/campaigns/blend.scenario.json",
+      "--output",
+      ".local/repro-check-2/campaigns/blend",
+      "--phase",
+      "verify"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"verify\", \"exit_code\": 0}\n",
+    "stderr": ""
+  }
+]

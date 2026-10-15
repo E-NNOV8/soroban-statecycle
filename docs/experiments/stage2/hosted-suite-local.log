@@ -1,0 +1,48 @@
+test_binding_requires_declared_entry (test_scenario.ScenarioTests.test_binding_requires_declared_entry) ... ok
+test_fresh_salt_is_resolved_without_changing_source (test_scenario.ScenarioTests.test_fresh_salt_is_resolved_without_changing_source) ... ok
+test_hook_failure_is_infrastructure_inconclusive_and_retained (test_scenario.ScenarioTests.test_hook_failure_is_infrastructure_inconclusive_and_retained) ... ok
+test_invalid_phase_configuration_exits_inconclusive_in_real_process (test_scenario.ScenarioTests.test_invalid_phase_configuration_exits_inconclusive_in_real_process) ... ok
+test_invalid_salt_is_rejected (test_scenario.ScenarioTests.test_invalid_salt_is_rejected) ... ok
+test_missing_raw_field_is_inconclusive (test_scenario.ScenarioTests.test_missing_raw_field_is_inconclusive) ... ok
+test_missing_restore_is_invalid_configuration (test_scenario.ScenarioTests.test_missing_restore_is_invalid_configuration) ... ok
+test_mutation_requires_distinct_declared_values (test_scenario.ScenarioTests.test_mutation_requires_distinct_declared_values) ... ok
+test_named_instance_model_parses (test_scenario.ScenarioTests.test_named_instance_model_parses) ... ok
+test_persistent_scalar_supports_same_binding_model (test_scenario.ScenarioTests.test_persistent_scalar_supports_same_binding_model) ... ok
+test_raw_projection_reuses_original_real_instance (test_scenario.ScenarioTests.test_raw_projection_reuses_original_real_instance) ... ok
+test_shell_string_is_not_an_argv_hook (test_scenario.ScenarioTests.test_shell_string_is_not_an_argv_hook) ... ok
+test_target_label_does_not_change_engine_model (test_scenario.ScenarioTests.test_target_label_does_not_change_engine_model) ... ok
+test_temporary_storage_cannot_be_archival_observation (test_scenario.ScenarioTests.test_temporary_storage_cannot_be_archival_observation) ... ok
+test_unbounded_archive_timeout_is_rejected (test_scenario.ScenarioTests.test_unbounded_archive_timeout_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.626s
+
+OK
+test_available_backend_still_never_certifies_campaign (test_preflight.PreflightBehavior.test_available_backend_still_never_certifies_campaign) ... ok
+test_cli_retains_nonzero_exit_and_refuses_overwriting_evidence (test_preflight.PreflightBehavior.test_cli_retains_nonzero_exit_and_refuses_overwriting_evidence) ... ok
+test_empty_probe_set_fails_closed (test_preflight.PreflightBehavior.test_empty_probe_set_fails_closed) ... ok
+test_health_response_is_only_health_not_archival (test_preflight.PreflightBehavior.test_health_response_is_only_health_not_archival) ... ok
+test_local_rpc_redirect_is_refused (test_preflight.PreflightBehavior.test_local_rpc_redirect_is_refused) ... ok
+test_missing_and_wrong_type_backend_fields_are_rejected (test_preflight.PreflightBehavior.test_missing_and_wrong_type_backend_fields_are_rejected) ... ok
+test_missing_program_preserves_error (test_preflight.PreflightBehavior.test_missing_program_preserves_error) ... ok
+test_public_and_credential_bearing_urls_are_rejected_before_network (test_preflight.PreflightBehavior.test_public_and_credential_bearing_urls_are_rejected_before_network) ... ok
+test_real_nonzero_process_is_inconclusive_not_contract_fail (test_preflight.PreflightBehavior.test_real_nonzero_process_is_inconclusive_not_contract_fail) ... ok
+test_real_successful_process_is_not_campaign_pass (test_preflight.PreflightBehavior.test_real_successful_process_is_not_campaign_pass) ... ok
+test_rpc_health_does_not_bypass_unavailable_runtime (test_preflight.PreflightBehavior.test_rpc_health_does_not_bypass_unavailable_runtime) ... ok
+test_rpc_malformed_missing_and_error_responses_fail_closed (test_preflight.PreflightBehavior.test_rpc_malformed_missing_and_error_responses_fail_closed) ... ok
+test_successful_empty_or_malformed_backend_output_is_rejected (test_preflight.PreflightBehavior.test_successful_empty_or_malformed_backend_output_is_rejected) ... ok
+test_successful_retry_of_setup_is_not_recovery_proof (test_preflight.PreflightBehavior.test_successful_retry_of_setup_is_not_recovery_proof) ... ok
+test_timeout_never_counts_as_expected_negative (test_preflight.PreflightBehavior.test_timeout_never_counts_as_expected_negative) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.316s
+
+OK
+{
+  "stage1_result": "INCONCLUSIVE",
+  "blockers": [
+    "network/Core configuration failure: no available real Core backend",
+    "provisioning unavailable: Stellar CLI missing or unusable"
+  ],
+  "report": "/tmp/tmpt1ejpxiy/evidence/report.json"
+}

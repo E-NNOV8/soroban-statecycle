@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "/home/mxr/timi/tansu",
+    "status",
+    "--short"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:11:32.878283+00:00",
+  "exit_code": 0,
+  "stdout": "?? Screenshot_20260901_162826.png\n",
+  "stderr": ""
+}

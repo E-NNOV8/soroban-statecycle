@@ -1,0 +1,20 @@
+# Local agent state and private runtime/signing configuration
+/.codex/
+/.local/
+/AGENTS.md
+/.agents/
+/.aws/
+/.env
+/.env.*
+/.venv/
+/venv/
+/outputs/
+/statecycle-local/
+# Generated files; retained historical evidence logs remain public
+__pycache__/
+*.py[cod]
+*.egg-info/
+/build/
+/dist/
+/target/
+.DS_Store

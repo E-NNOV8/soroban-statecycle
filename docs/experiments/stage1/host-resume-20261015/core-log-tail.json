@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "sh",
+    "-c",
+    "tail -30 /var/log/stellar-core/stellar-core-2026-10-15_17-09-14.log"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:09:42.346036+00:00",
+  "exit_code": 0,
+  "stdout": "2026-10-15T17:09:14.490 GCTI6 [Bucket INFO] BucketListDB enabled: pageSizeExponent: 14 indexCutOff: 20MB, persist indexes: true\n2026-10-15T17:09:14.490 GCTI6 [default INFO] Connection effective settings:\n2026-10-15T17:09:14.490 GCTI6 [default INFO] TARGET_PEER_CONNECTIONS: 8\n2026-10-15T17:09:14.490 GCTI6 [default INFO] MAX_ADDITIONAL_PEER_CONNECTIONS: 64\n2026-10-15T17:09:14.490 GCTI6 [default INFO] MAX_PENDING_CONNECTIONS: 500\n2026-10-15T17:09:14.490 GCTI6 [default INFO] MAX_OUTBOUND_PENDING_CONNECTIONS: 56\n2026-10-15T17:09:14.490 GCTI6 [default INFO] MAX_INBOUND_PENDING_CONNECTIONS: 444\n2026-10-15T17:09:14.490 GCTI6 [default INFO] BACKGROUND_OVERLAY_PROCESSING=true\n2026-10-15T17:09:14.490 GCTI6 [default INFO] PARALLEL_LEDGER_APPLY=true\n2026-10-15T17:09:14.490 GCTI6 [Ledger INFO] Loaded LCL header from database: [seq=4069, hash=1dbd1f]\n2026-10-15T17:09:14.490 GCTI6 [default INFO] Establishing 4-entry connection pool to: sqlite3:///opt/stellar/core/stellar.db\n2026-10-15T17:09:14.491 GCTI6 [Ledger ERROR] 13 buckets are missing from bucket directory 'buckets'\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Application destructing\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining ledger close thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining worker thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining overlay thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joining eviction thread\n2026-10-15T17:09:14.492 GCTI6 [default INFO] Joined all 12 threads\n2026-10-15T17:09:14.493 GCTI6 [default INFO] Application destroyed\n2026-10-15T17:09:14.494 GCTI6 [default FATAL] Got an exception: Bucket directory is corrupt\n2026-10-15T17:09:14.494 GCTI6 [default FATAL] Please report this bug along with this log file if this was not expected\n",
+  "stderr": ""
+}

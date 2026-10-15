@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "stellar",
+    "xdr",
+    "encode",
+    "--type",
+    "ConfigUpgradeSetKey"
+  ],
+  "stdin": "{\"contract_id\": \"CCNP4YJQRICXLK6TFQ7QUUAIQPBEALS7YMC5ADEZPZPNZ2DDTWNMIAND\", \"content_hash\": \"79f248f01586dfabd8f2296a46e59fcf93d8fdc099a1dba88ba467ff1da6a7a7\"}",
+  "started_at": "2026-10-15T18:09:21.420567+00:00",
+  "exit_code": 0,
+  "stdout": "mv5hMIoFdavTLD8KUAiDwkAuX8MF0AyZfl7c6GOdmsR58kjwFYbfq9jyKWpG5Z/Pk9j9wJmh26iLpGf/Haanpw==\n",
+  "stderr": ""
+}

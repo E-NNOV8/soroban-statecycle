@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "-m",
+    "archival_regression.campaign",
+    "--config",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/docs/experiments/stage1/host-resume-20261015/run-3-config.json",
+    "--output",
+    "/home/mxr/Documents/Projects/drips_projects/soroban-archival-regression/docs/experiments/stage1/host-resume-20261015/run-3",
+    "--phase",
+    "recover"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"result\": \"PASS\", \"reason\": \"\", \"phase\": \"recover\", \"exit_code\": 0}\n",
+  "stderr": "",
+  "expected_exit": 0
+}

@@ -1,0 +1,1852 @@
+use super::test_utils::{create_test_data, init_contract};
+use crate::events::{AnonymousVotingSetup, ProposalCreated, ProposalExecuted, VoteCast};
+use crate::{
+    errors::ContractErrors,
+    types::{
+        AnonymousVote, Badge, Dao, OutcomeContract, ProposalStatus, PublicVote, TIMELOCK_DELAY,
+        Vote, VoteChoice,
+    },
+};
+use soroban_sdk::testutils::{Address as _, Events, Ledger};
+use soroban_sdk::{
+    Address, BytesN, Env, Event, IntoVal, String, Symbol, contract, contractimpl, vec,
+};
+
+#[contract]
+pub struct TestOutcomeContract;
+
+#[contractimpl]
+impl TestOutcomeContract {
+    pub fn execute_approve(_env: Env, maintainer: Address, _value: u32) {
+        maintainer.require_auth();
+    }
+
+    pub fn execute_reject(_env: Env, _maintainer: Address, _value: u32) {}
+}
+
+#[test]
+fn proposal_flow() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let title = String::from_str(&setup.env, "Integrate with xlm.sh");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let balance_proposer_init = setup.token_stellar.balance(&setup.grogu);
+    let balance_voter_init = setup.token_stellar.balance(&setup.mando);
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    // Verify proposal creation event
+    let event = ProposalCreated {
+        project_key: id.clone(),
+        proposal_id,
+        title: title.clone(),
+        proposer: setup.grogu.clone(),
+        voting_ends_at,
+        public_voting: true,
+        token_contract: None,
+        execute_delay: TIMELOCK_DELAY,
+    };
+
+    let contract_events = setup
+        .env
+        .events()
+        .all()
+        .filter_by_contract(&setup.contract_id);
+
+    assert_eq!(
+        contract_events,
+        [event.to_xdr(&setup.env, &setup.contract_id)]
+    );
+
+    let balance_proposer_ = setup.token_stellar.balance(&setup.grogu);
+    assert!(balance_proposer_init > balance_proposer_);
+
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    // Verify vote cast event
+    let event = VoteCast {
+        project_key: id.clone(),
+        proposal_id,
+        voter: setup.mando.clone(),
+    };
+
+    let contract_events = setup
+        .env
+        .events()
+        .all()
+        .filter_by_contract(&setup.contract_id);
+    assert_eq!(
+        contract_events,
+        [event.to_xdr(&setup.env, &setup.contract_id)]
+    );
+
+    let balance_voter_ = setup.token_stellar.balance(&setup.mando);
+    assert_eq!(balance_voter_init, balance_voter_);
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+    let result = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+
+    // Verify proposal executed event
+    let event = ProposalExecuted {
+        project_key: id.clone(),
+        proposal_id,
+        status: String::from_str(&setup.env, "Approved"),
+        maintainer: setup.mando.clone(),
+    };
+
+    let contract_events = setup
+        .env
+        .events()
+        .all()
+        .filter_by_contract(&setup.contract_id);
+
+    assert_eq!(
+        contract_events,
+        [event.to_xdr(&setup.env, &setup.contract_id)]
+    );
+
+    assert_eq!(result, ProposalStatus::Approved);
+
+    let balance_proposer_ = setup.token_stellar.balance(&setup.grogu);
+    assert_eq!(balance_proposer_init, balance_proposer_);
+
+    let balance_voter_ = setup.token_stellar.balance(&setup.mando);
+    assert_eq!(balance_voter_init, balance_voter_);
+}
+
+#[test]
+fn scf_voting() {
+    let setup = create_test_data();
+    init_contract(&setup);
+
+    // Stellarpg project for SCF voting
+    let name = String::from_str(&setup.env, "stellarpg");
+    let url = String::from_str(&setup.env, "github.com/tansu");
+    let ipfs = String::from_str(&setup.env, "2ef4f49fdd8fa9dc463f1f06a094c26b88710990");
+    let maintainers = vec![&setup.env, setup.grogu.clone(), setup.mando.clone()];
+    let id = setup
+        .contract
+        .register(&setup.grogu, &name, &maintainers, &url, &ipfs, &None, &None);
+
+    let title = String::from_str(&setup.env, "A SCF proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 10_000_000,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+    let result = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+
+    assert_eq!(result, ProposalStatus::Approved);
+}
+
+#[test]
+fn dao_basic_functionality() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    // Test empty DAO initially
+    let dao = setup.contract.get_dao(&id, &0);
+    assert_eq!(
+        dao,
+        Dao {
+            proposals: vec![&setup.env]
+        }
+    );
+
+    let title = String::from_str(&setup.env, "Integrate with xlm.sh");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+    assert_eq!(proposal_id, 0);
+
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+    assert_eq!(proposal.id, 0);
+    assert_eq!(proposal.title, title);
+    assert_eq!(proposal.ipfs, ipfs);
+    assert_eq!(proposal.vote_data.voting_ends_at, voting_ends_at);
+
+    let dao = setup.contract.get_dao(&id, &0);
+    assert_eq!(dao.proposals.len(), 1);
+    let mut expected_stored = proposal.clone();
+    expected_stored.vote_data.votes = vec![&setup.env];
+    assert_eq!(dao.proposals.get(0), Some(expected_stored));
+}
+
+#[test]
+fn dao_anonymous() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let title = String::from_str(&setup.env, "Integrate with xlm.sh");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let public_key = String::from_str(&setup.env, "public key random");
+    setup
+        .contract
+        .anonymous_voting_setup(&setup.mando, &id, &public_key);
+
+    let event = AnonymousVotingSetup {
+        project_key: id.clone(),
+        maintainer: setup.mando.clone(),
+        public_key: public_key.clone(),
+    };
+
+    let all_events = setup
+        .env
+        .events()
+        .all()
+        .filter_by_contract(&setup.contract_id);
+    assert_eq!(all_events, [event.to_xdr(&setup.env, &setup.contract_id)]);
+
+    // Add a member with elevated rights
+    let kuiil = Address::generate(&setup.env);
+    setup.token_stellar.mint(&kuiil, &(10 * 10_000_000));
+    let meta = String::from_str(&setup.env, "abcd");
+    setup
+        .contract
+        .add_member(&kuiil, &meta, &None, &None, &None);
+    let badges = vec![&setup.env, Badge::Community];
+    setup
+        .contract
+        .set_badges(&setup.mando, &id, &kuiil, &badges);
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &false,
+        &None,
+        &None,
+    );
+    assert_eq!(proposal_id, 0);
+
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+
+    // test build_commitments_from_votes and abstain
+    let abstain_vote = Vote::AnonymousVote(AnonymousVote {
+        address: setup.grogu.clone(),
+        weight: 0u32,
+        encrypted_seeds: vec![
+            &setup.env,
+            String::from_str(&setup.env, "0"),
+            String::from_str(&setup.env, "0"),
+            String::from_str(&setup.env, "0"),
+        ],
+        encrypted_votes: vec![
+            &setup.env,
+            String::from_str(&setup.env, "0"),
+            String::from_str(&setup.env, "0"),
+            String::from_str(&setup.env, "1"),
+        ],
+        commitments: setup.contract.build_commitments_from_votes(
+            &id,
+            &vec![&setup.env, 0u128, 0u128, 1u128],
+            &vec![&setup.env, 0u128, 0u128, 0u128],
+        ),
+    });
+
+    assert_eq!(
+        proposal.vote_data.votes,
+        vec![&setup.env, abstain_vote.clone()]
+    );
+
+    let vote_ = Vote::AnonymousVote(AnonymousVote {
+        address: kuiil.clone(),
+        weight: 3,
+        encrypted_seeds: vec![
+            &setup.env,
+            String::from_str(&setup.env, "fafdas"),
+            String::from_str(&setup.env, "fafdas"),
+            String::from_str(&setup.env, "fafdas"),
+        ],
+        encrypted_votes: vec![
+            &setup.env,
+            String::from_str(&setup.env, "fafdas"),
+            String::from_str(&setup.env, "fafdas"),
+            String::from_str(&setup.env, "rewrewr"),
+        ],
+        commitments: setup.contract.build_commitments_from_votes(
+            &id,
+            &vec![&setup.env, 3u128, 1u128, 1u128],
+            &vec![&setup.env, 5u128, 4u128, 6u128],
+        ),
+    });
+    setup.contract.vote(&kuiil, &id, &proposal_id, &vote_);
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    let vote_result = setup.contract.execute(
+        &setup.grogu,
+        &id,
+        &proposal_id,
+        &Some(vec![&setup.env, 9u128, 3u128, 3u128]),
+        &Some(vec![&setup.env, 15u128, 12u128, 18u128]),
+    );
+
+    assert_eq!(vote_result, ProposalStatus::Approved);
+}
+
+#[test]
+fn voting_errors() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let title = String::from_str(&setup.env, "Test Proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    // Start testing bad behaviours
+
+    // Not initialized private voting
+    let error = setup
+        .contract
+        .try_create_proposal(
+            &setup.grogu,
+            &id,
+            &title,
+            &ipfs,
+            &voting_ends_at,
+            &false,
+            &None,
+            &None,
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(error, ContractErrors::NoAnonymousVotingConfig.into());
+
+    let public_key = String::from_str(&setup.env, "public key random");
+    setup
+        .contract
+        .anonymous_voting_setup(&setup.mando, &id, &public_key);
+
+    let proposal_id_anonymous = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &false,
+        &None,
+        &None,
+    );
+
+    // Wrong vote type anonymous vs public
+    let err = setup
+        .contract
+        .try_vote(
+            &setup.mando,
+            &id,
+            &proposal_id_anonymous,
+            &Vote::PublicVote(PublicVote {
+                address: setup.mando.clone(),
+                weight: 1,
+                vote_choice: VoteChoice::Approve,
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::WrongVoteType.into());
+
+    // Cannot vote for your own proposal (creator automatically abstains)
+    let err = setup
+        .contract
+        .try_vote(
+            &setup.grogu,
+            &id,
+            &proposal_id,
+            &Vote::PublicVote(PublicVote {
+                address: setup.grogu.clone(),
+                weight: 1,
+                vote_choice: VoteChoice::Approve,
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::AlreadyVoted.into());
+
+    // Sending wrong commitments
+    let error = setup
+        .contract
+        .try_vote(
+            &setup.mando,
+            &id,
+            &proposal_id_anonymous,
+            &Vote::AnonymousVote(AnonymousVote {
+                address: setup.mando.clone(),
+                weight: 0u32,
+                encrypted_seeds: vec![&setup.env, String::from_str(&setup.env, "abcd")],
+                encrypted_votes: vec![&setup.env, String::from_str(&setup.env, "fsfds")],
+                commitments: vec![
+                    &setup.env,
+                    BytesN::from_array(&setup.env, &[0; 96]),
+                    BytesN::from_array(&setup.env, &[0; 96]),
+                ],
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(error, ContractErrors::BadCommitment.into());
+
+    // Vote successfully with another user
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    // Cannot vote twice
+    let err = setup
+        .contract
+        .try_vote(
+            &setup.mando,
+            &id,
+            &proposal_id,
+            &Vote::PublicVote(PublicVote {
+                address: setup.mando.clone(),
+                weight: 1,
+                vote_choice: VoteChoice::Approve,
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::AlreadyVoted.into());
+
+    // Cannot vote for someone else
+    let kuiil = Address::generate(&setup.env);
+    let meta = String::from_str(&setup.env, "test");
+    setup
+        .contract
+        .add_member(&kuiil, &meta, &None, &None, &None);
+
+    let err = setup
+        .contract
+        .try_vote(
+            &kuiil,
+            &id,
+            &proposal_id,
+            &Vote::PublicVote(PublicVote {
+                address: setup.mando.clone(),
+                weight: 1,
+                vote_choice: VoteChoice::Approve,
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::WrongVoter.into());
+
+    // Non-existent proposal
+    let err = setup
+        .contract
+        .try_get_proposal(&id, &10)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::NoProposalorPageFound.into());
+
+    // Too early to execute
+    let err = setup
+        .contract
+        .try_execute(&setup.mando, &id, &proposal_id, &None, &None)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalVotingTime.into());
+
+    // advance time to allow execution
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    // Using args for anonymous voting in public votes. And the other way
+    let err = setup
+        .contract
+        .try_execute(
+            &setup.mando,
+            &id,
+            &proposal_id,
+            &Some(vec![&setup.env, 9u128, 3u128, 500003u128]),
+            &None,
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::TallySeedError.into());
+
+    let err = setup
+        .contract
+        .try_execute(&setup.mando, &id, &proposal_id_anonymous, &None, &None)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::TallySeedError.into());
+
+    // Wrong tallies for proof
+    let err = setup
+        .contract
+        .try_execute(
+            &setup.grogu,
+            &id,
+            &proposal_id_anonymous,
+            &Some(vec![&setup.env, 0u128, 0u128, 500_001u128]), // 500_000u128
+            &Some(vec![&setup.env, 0u128, 0u128, 0u128]),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::InvalidProof.into());
+
+    // Execute proposal for real
+    setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+
+    // Already executed
+    let err = setup
+        .contract
+        .try_execute(&setup.mando, &id, &proposal_id, &None, &None)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalActive.into());
+}
+
+#[test]
+fn proposal_execution() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    setup.env.ledger().set_timestamp(1234567890);
+    let voting_ends_at = 1234567890 + 3600 * 24 * 2;
+
+    let title = String::from_str(&setup.env, "Test Proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    // Add member with badge
+    let kuiil = Address::generate(&setup.env);
+    setup.token_stellar.mint(&kuiil, &(10 * 10_000_000));
+    let meta = String::from_str(&setup.env, "test");
+    setup
+        .contract
+        .add_member(&kuiil, &meta, &None, &None, &None);
+    let badges = vec![&setup.env, Badge::Community];
+    setup
+        .contract
+        .set_badges(&setup.mando, &id, &kuiil, &badges);
+
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    setup.contract.vote(
+        &kuiil,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: kuiil.clone(),
+            weight: Badge::Community as u32,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    let vote_result = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+    assert_eq!(vote_result, ProposalStatus::Approved);
+
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+    assert_eq!(proposal.status, ProposalStatus::Approved);
+}
+
+#[test]
+fn proposal_revoke() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    setup.env.ledger().set_timestamp(1234567890);
+    let voting_ends_at = 1234567890 + 3600 * 24 * 2;
+
+    let title = String::from_str(&setup.env, "Test Proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    let kuiil = Address::generate(&setup.env);
+    let err = setup
+        .contract
+        .try_revoke_proposal(&kuiil, &id, &proposal_id)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::UnauthorizedSigner.into());
+
+    setup
+        .contract
+        .revoke_proposal(&setup.mando, &id, &proposal_id);
+
+    let event = ProposalExecuted {
+        project_key: id.clone(),
+        proposal_id,
+        status: String::from_str(&setup.env, "Malicious"),
+        maintainer: setup.mando.clone(),
+    };
+
+    let all_events = setup
+        .env
+        .events()
+        .all()
+        .filter_by_contract(&setup.contract_id);
+    assert_eq!(all_events, [event.to_xdr(&setup.env, &setup.contract_id)]);
+
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+    assert_eq!(proposal.title, String::from_str(&setup.env, "REDACTED"));
+    assert_eq!(proposal.ipfs, String::from_str(&setup.env, "NONE"));
+    assert_eq!(proposal.status, ProposalStatus::Malicious);
+
+    // already revoked and also try to call as an admin should go through the
+    // auth part and fail later
+    let err = setup
+        .contract
+        .try_revoke_proposal(&setup.contract_admin, &id, &proposal_id)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalActive.into());
+}
+
+#[test]
+fn voter_weight_validation() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    setup.env.ledger().set_timestamp(1234567890);
+    let voting_ends_at = 1234567890 + 3600 * 24 * 2;
+
+    let title = String::from_str(&setup.env, "Test Proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.mando,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    let kuiil = Address::generate(&setup.env);
+    setup.token_stellar.mint(&kuiil, &(10 * 10_000_000));
+    let meta = String::from_str(&setup.env, "test");
+    setup
+        .contract
+        .add_member(&kuiil, &meta, &None, &None, &None);
+
+    // Cannot vote with weight higher than max allowed
+    let err = setup
+        .contract
+        .try_vote(
+            &kuiil,
+            &id,
+            &proposal_id,
+            &Vote::PublicVote(PublicVote {
+                address: kuiil.clone(),
+                weight: u32::MAX,
+                vote_choice: VoteChoice::Approve,
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::VoterWeight.into());
+
+    // Add developer badge and test reduced weight voting
+    let badges = vec![&setup.env, Badge::Developer, Badge::Community];
+    setup
+        .contract
+        .set_badges(&setup.mando, &id, &kuiil, &badges);
+
+    let max_weight = setup.contract.get_max_weight(&id, &kuiil);
+    assert_eq!(max_weight, 11_000_000u32);
+
+    // Vote with reduced weight (should work)
+    setup.contract.vote(
+        &kuiil,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: kuiil.clone(),
+            weight: 42, // kuiil has up to 11M
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+    let votes = &proposal.vote_data.votes;
+
+    // Find kuiil's vote
+    let kuiil_vote = votes.iter().find(|vote| {
+        if let Vote::PublicVote(public_vote) = vote {
+            public_vote.address == kuiil
+        } else {
+            false
+        }
+    });
+
+    assert!(kuiil_vote.is_some());
+    if let Some(Vote::PublicVote(public_vote)) = kuiil_vote {
+        assert_eq!(public_vote.weight, 42);
+        assert_eq!(public_vote.vote_choice, VoteChoice::Approve);
+    }
+}
+
+#[test]
+fn outcomes_execution() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    // Register a simple test outcome contract
+    let outcome_contract_id = setup.env.register(TestOutcomeContract, ());
+
+    setup.env.ledger().set_timestamp(1234567890);
+    let voting_ends_at = 1234567890 + 3600 * 24 * 2;
+
+    let title = String::from_str(&setup.env, "Test Proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+
+    // Create outcome contracts with approve and reject functions
+    let approve_outcome = OutcomeContract {
+        address: outcome_contract_id.clone(),
+        execute_fn: Symbol::new(&setup.env, "execute_approve"),
+        args: vec![
+            &setup.env,
+            setup.mando.clone().into_val(&setup.env),
+            100u32.into_val(&setup.env),
+        ],
+    };
+
+    let reject_outcome = OutcomeContract {
+        address: outcome_contract_id.clone(),
+        execute_fn: Symbol::new(&setup.env, "execute_reject"),
+        args: vec![
+            &setup.env,
+            setup.mando.clone().into_val(&setup.env),
+            200u32.into_val(&setup.env),
+        ],
+    };
+
+    let outcome_contracts = vec![
+        &setup.env,
+        approve_outcome,
+        reject_outcome,
+        OutcomeContract {
+            address: Address::generate(&setup.env), // dummy for abstain
+            execute_fn: Symbol::new(&setup.env, "dummy"),
+            args: vec![&setup.env],
+        },
+    ];
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &Some(outcome_contracts),
+    );
+
+    // Add member with badge
+    let kuiil = Address::generate(&setup.env);
+    setup.token_stellar.mint(&kuiil, &(10 * 10_000_000));
+    let meta = String::from_str(&setup.env, "test");
+    setup
+        .contract
+        .add_member(&kuiil, &meta, &None, &None, &None);
+    let badges = vec![&setup.env, Badge::Community];
+    setup
+        .contract
+        .set_badges(&setup.mando, &id, &kuiil, &badges);
+
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    setup.contract.vote(
+        &kuiil,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: kuiil.clone(),
+            weight: Badge::Community as u32,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    let vote_result = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+    assert_eq!(vote_result, ProposalStatus::Approved);
+
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+    assert_eq!(proposal.status, ProposalStatus::Approved);
+}
+
+#[test]
+fn token_based_proposal_flow() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let title = String::from_str(&setup.env, "Token-based voting test");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    // Record initial balances
+    let balance_proposer_init = setup.token_stellar.balance(&setup.grogu);
+    let balance_voter_init = setup.token_stellar.balance(&setup.mando);
+
+    // Create token-based proposal
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,                                      // public_voting
+        &Some(setup.token_stellar.address.clone()), // token_contract
+        &None,
+    );
+
+    // Verify proposal was created with token_contract
+    let proposal = setup.contract.get_proposal(&id, &proposal_id);
+    assert!(proposal.vote_data.token_contract.is_some());
+
+    // Check proposer balance decreased by PROPOSAL_COLLATERAL only
+    let balance_proposer_after_create = setup.token_stellar.balance(&setup.grogu);
+    let expected_proposer_deduction = 5 * 10_000_000; // PROPOSAL_COLLATERAL
+    assert_eq!(
+        balance_proposer_init - balance_proposer_after_create,
+        expected_proposer_deduction
+    );
+
+    // Vote with weight based on token balance
+    let vote_weight = 1000u32;
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: vote_weight,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    let balance_voter_after_vote = setup.token_stellar.balance(&setup.mando);
+    assert_eq!(balance_voter_init, balance_voter_after_vote);
+
+    // Move time forward to end voting period
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    // Execute the proposal
+    let vote_result = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+    assert_eq!(vote_result, ProposalStatus::Approved);
+
+    // Proposer gets back PROPOSAL_COLLATERAL; voter was never locked
+    let balance_proposer_final = setup.token_stellar.balance(&setup.grogu);
+    let balance_voter_final = setup.token_stellar.balance(&setup.mando);
+    assert_eq!(balance_proposer_final, balance_proposer_init);
+    assert_eq!(balance_voter_final, balance_voter_init);
+}
+
+#[test]
+fn token_based_get_max_weight() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    // For token-based proposals, get_max_weight returns badge-based weight.
+    // Token balance validation happens in vote() without locking.
+    let max_weight = setup.contract.get_max_weight(&id, &setup.mando);
+
+    // Should return default badge weight (1) since no badges assigned
+    assert_eq!(max_weight, 1);
+}
+
+#[test]
+fn badge_based_get_max_weight_still_works() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    // get_max_weight always returns badge-based weight
+    let max_weight = setup.contract.get_max_weight(&id, &setup.mando);
+
+    // Should return default badge weight (1) since no badges assigned
+    assert_eq!(max_weight, 1);
+}
+
+#[test]
+fn conflict_of_interest_flow() {
+    use soroban_sdk::testutils::Address as _;
+
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let outsider = Address::generate(&setup.env);
+    let genesis_amount: i128 = 1_000_000_000 * 10_000_000;
+    setup.token_stellar.mint(&outsider, &genesis_amount);
+
+    let title = String::from_str(&setup.env, "Conflict Proposal");
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    // Initially empty
+    let list = setup.contract.get_conflict_of_interest(&id, &proposal_id);
+    assert_eq!(list.len(), 0);
+
+    // Non-maintainer cannot edit the list
+    let err = setup
+        .contract
+        .try_add_conflict_of_interest(
+            &outsider,
+            &id,
+            &proposal_id,
+            &vec![&setup.env, outsider.clone()],
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::UnauthorizedSigner.into());
+
+    // Maintainer adds 2 addresses first
+    let addr1 = outsider.clone();
+    let addr2 = Address::generate(&setup.env);
+    setup.contract.add_conflict_of_interest(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &vec![&setup.env, addr1.clone(), addr2.clone()],
+    );
+    let list = setup.contract.get_conflict_of_interest(&id, &proposal_id);
+    assert_eq!(list.len(), 2);
+
+    // Maintainer adds 3 more addresses, including a duplicate of addr1 which
+    // must be ignored to keep the list de-duplicated
+    let addr3 = Address::generate(&setup.env);
+    let addr4 = Address::generate(&setup.env);
+    let addr5 = Address::generate(&setup.env);
+    setup.contract.add_conflict_of_interest(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &vec![
+            &setup.env,
+            addr1.clone(),
+            addr3.clone(),
+            addr4.clone(),
+            addr5.clone(),
+        ],
+    );
+    let list = setup.contract.get_conflict_of_interest(&id, &proposal_id);
+    assert_eq!(list.len(), 5);
+    assert_eq!(list.get(0).unwrap(), addr1);
+    assert_eq!(list.get(1).unwrap(), addr2);
+    assert_eq!(list.get(2).unwrap(), addr3);
+    assert_eq!(list.get(3).unwrap(), addr4);
+    assert_eq!(list.get(4).unwrap(), addr5);
+
+    // Conflicted voter is blocked
+    let err = setup
+        .contract
+        .try_vote(
+            &outsider,
+            &id,
+            &proposal_id,
+            &Vote::PublicVote(PublicVote {
+                address: outsider.clone(),
+                weight: 1,
+                vote_choice: VoteChoice::Approve,
+            }),
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::VoterConflicted.into());
+
+    // Maintainer removes the 2nd and 4th entries to exercise removal in the
+    // middle of the list while preserving the rest
+    setup.contract.remove_conflict_of_interest(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &vec![&setup.env, addr2.clone(), addr4.clone()],
+    );
+    let list = setup.contract.get_conflict_of_interest(&id, &proposal_id);
+    assert_eq!(list.len(), 3);
+    assert_eq!(list.get(0).unwrap(), addr1);
+    assert_eq!(list.get(1).unwrap(), addr3);
+    assert_eq!(list.get(2).unwrap(), addr5);
+
+    // Maintainer removes addr1 so the previously-blocked voter can vote
+    setup.contract.remove_conflict_of_interest(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &vec![&setup.env, addr1.clone()],
+    );
+    setup.contract.vote(
+        &outsider,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: outsider.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    // Non-maintainer cannot remove themselves
+    setup.contract.add_conflict_of_interest(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &vec![&setup.env, outsider.clone()],
+    );
+    let err = setup
+        .contract
+        .try_remove_conflict_of_interest(
+            &outsider,
+            &id,
+            &proposal_id,
+            &vec![&setup.env, outsider.clone()],
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::UnauthorizedSigner.into());
+}
+
+#[test]
+fn remove_vote_public_flips_outcome() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &String::from_str(&setup.env, "Test remove vote"),
+        &ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    // Auth check: outsider cannot remove a vote
+    let outsider = Address::generate(&setup.env);
+    assert_eq!(
+        setup
+            .contract
+            .try_remove_vote(&outsider, &id, &proposal_id, &setup.mando),
+        Err(Ok(ContractErrors::UnauthorizedSigner.into()))
+    );
+
+    // VoteNotFound check: cannot remove a vote that doesn't exist
+    let non_voter = Address::generate(&setup.env);
+    assert_eq!(
+        setup
+            .contract
+            .try_remove_vote(&setup.grogu, &id, &proposal_id, &non_voter),
+        Err(Ok(ContractErrors::VoteNotFound.into()))
+    );
+
+    // Give rex a Community badge so their vote carries more weight
+    let rex = Address::generate(&setup.env);
+    setup
+        .token_stellar
+        .mint(&rex, &(1_000_000_000 * 10_000_000));
+    let meta = String::from_str(&setup.env, "rex");
+    setup.contract.add_member(&rex, &meta, &None, &None, &None);
+    setup
+        .contract
+        .set_badges(&setup.mando, &id, &rex, &vec![&setup.env, Badge::Community]);
+
+    // mando votes Approve (weight 1)
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    // rex votes Reject with high weight outcome would be Rejected without removal
+    setup.contract.vote(
+        &rex,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: rex.clone(),
+            weight: Badge::Community as u32,
+            vote_choice: VoteChoice::Reject,
+        }),
+    );
+
+    let balance_rex_after_vote = setup.token_stellar.balance(&rex);
+
+    // Advance past voting period — removal must still work after deadline
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    // Maintainer removes rex's malicious reject vote
+    setup
+        .contract
+        .remove_vote(&setup.grogu, &id, &proposal_id, &rex);
+
+    assert_eq!(setup.token_stellar.balance(&rex), balance_rex_after_vote);
+
+    let result = setup
+        .contract
+        .execute(&setup.grogu, &id, &proposal_id, &None, &None);
+    assert_eq!(result, ProposalStatus::Approved);
+}
+
+#[test]
+fn remove_vote_anonymous_flips_outcome() {
+    let setup = create_test_data();
+    let id = init_contract(&setup);
+
+    let public_key = String::from_str(&setup.env, "public key random");
+    setup
+        .contract
+        .anonymous_voting_setup(&setup.mando, &id, &public_key);
+
+    let kuiil = Address::generate(&setup.env);
+    setup.token_stellar.mint(&kuiil, &(10 * 10_000_000));
+    setup.contract.add_member(
+        &kuiil,
+        &String::from_str(&setup.env, "kuiil"),
+        &None,
+        &None,
+        &None,
+    );
+    setup.contract.set_badges(
+        &setup.mando,
+        &id,
+        &kuiil,
+        &vec![&setup.env, Badge::Community],
+    );
+
+    let rex = Address::generate(&setup.env);
+    setup.token_stellar.mint(&rex, &(10 * 10_000_000));
+    setup.contract.add_member(
+        &rex,
+        &String::from_str(&setup.env, "rex"),
+        &None,
+        &None,
+        &None,
+    );
+    setup
+        .contract
+        .set_badges(&setup.mando, &id, &rex, &vec![&setup.env, Badge::Community]);
+
+    let ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 3600 * 24 * 2;
+
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &String::from_str(&setup.env, "Anonymous remove vote test"),
+        &ipfs,
+        &voting_ends_at,
+        &false,
+        &None,
+        &None,
+    );
+
+    let kuiil_vote = Vote::AnonymousVote(AnonymousVote {
+        address: kuiil.clone(),
+        weight: 3,
+        encrypted_seeds: vec![
+            &setup.env,
+            String::from_str(&setup.env, "s0"),
+            String::from_str(&setup.env, "s1"),
+            String::from_str(&setup.env, "s2"),
+        ],
+        encrypted_votes: vec![
+            &setup.env,
+            String::from_str(&setup.env, "v0"),
+            String::from_str(&setup.env, "v1"),
+            String::from_str(&setup.env, "v2"),
+        ],
+        commitments: setup.contract.build_commitments_from_votes(
+            &id,
+            &vec![&setup.env, 1u128, 0u128, 0u128],
+            &vec![&setup.env, 2u128, 0u128, 0u128],
+        ),
+    });
+    setup.contract.vote(&kuiil, &id, &proposal_id, &kuiil_vote);
+
+    // rex votes Reject, weight=3 (Community badge)
+    // Without removal: reject=3 ties approve=3 → Cancelled
+    // With removal: approve=3 > reject=0 → Approved
+    let rex_vote = Vote::AnonymousVote(AnonymousVote {
+        address: rex.clone(),
+        weight: 3,
+        encrypted_seeds: vec![
+            &setup.env,
+            String::from_str(&setup.env, "r0"),
+            String::from_str(&setup.env, "r1"),
+            String::from_str(&setup.env, "r2"),
+        ],
+        encrypted_votes: vec![
+            &setup.env,
+            String::from_str(&setup.env, "rv0"),
+            String::from_str(&setup.env, "rv1"),
+            String::from_str(&setup.env, "rv2"),
+        ],
+        commitments: setup.contract.build_commitments_from_votes(
+            &id,
+            &vec![&setup.env, 0u128, 1u128, 0u128],
+            &vec![&setup.env, 0u128, 3u128, 0u128],
+        ),
+    });
+    setup.contract.vote(&rex, &id, &proposal_id, &rex_vote);
+
+    // Remove rex's reject vote (maintainer action)
+    setup
+        .contract
+        .remove_vote(&setup.grogu, &id, &proposal_id, &rex);
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + TIMELOCK_DELAY + 1);
+
+    let result = setup.contract.execute(
+        &setup.grogu,
+        &id,
+        &proposal_id,
+        &Some(vec![&setup.env, 3u128, 0u128, 0u128]),
+        &Some(vec![&setup.env, 6u128, 0u128, 0u128]),
+    );
+    assert_eq!(result, ProposalStatus::Approved);
+}
+
+#[test]
+fn min_voting_period_override_applies_to_create_proposal() {
+    // A project with a per-project minimum of 7 days should reject a 2-day
+    // proposal even though 2 days clears the global 24h default.
+    let setup = create_test_data();
+
+    let name = String::from_str(&setup.env, "stricter");
+    let url = String::from_str(&setup.env, "github.com/stricter");
+    let ipfs = String::from_str(&setup.env, "2ef4f49fdd8fa9dc463f1f06a094c26b88710990");
+    let maintainers = vec![&setup.env, setup.grogu.clone(), setup.mando.clone()];
+
+    let genesis_amount: i128 = 1_000_000_000 * 10_000_000;
+    setup.token_stellar.mint(&setup.grogu, &genesis_amount);
+    setup.token_stellar.mint(&setup.mando, &genesis_amount);
+
+    let seven_days = 7 * 24 * 3600u64;
+    let id = setup.contract.register(
+        &setup.grogu,
+        &name,
+        &maintainers,
+        &url,
+        &ipfs,
+        &Some(seven_days),
+        &None,
+    );
+
+    let title = String::from_str(&setup.env, "Some proposal title");
+    let prop_ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let two_days_out = setup.env.ledger().timestamp() + 2 * 24 * 3600;
+
+    let err = setup
+        .contract
+        .try_create_proposal(
+            &setup.grogu,
+            &id,
+            &title,
+            &prop_ipfs,
+            &two_days_out,
+            &true,
+            &None,
+            &None,
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalInputValidation.into());
+
+    // And a proposal that respects the 7-day floor succeeds.
+    let eight_days_out = setup.env.ledger().timestamp() + 8 * 24 * 3600;
+    let _proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &eight_days_out,
+        &true,
+        &None,
+        &None,
+    );
+}
+
+#[test]
+fn execute_delay_override_applies_to_execute() {
+    // A project with a per-project execute delay of 60s should allow execute()
+    // 60s past voting_ends_at, even though TIMELOCK_DELAY is 24h.
+    let setup = create_test_data();
+
+    let name = String::from_str(&setup.env, "fastdao");
+    let url = String::from_str(&setup.env, "github.com/fastdao");
+    let ipfs = String::from_str(&setup.env, "2ef4f49fdd8fa9dc463f1f06a094c26b88710990");
+    let maintainers = vec![&setup.env, setup.grogu.clone(), setup.mando.clone()];
+
+    let genesis_amount: i128 = 1_000_000_000 * 10_000_000;
+    setup.token_stellar.mint(&setup.grogu, &genesis_amount);
+    setup.token_stellar.mint(&setup.mando, &genesis_amount);
+
+    let fast_delay = 60u64;
+    let id = setup.contract.register(
+        &setup.grogu,
+        &name,
+        &maintainers,
+        &url,
+        &ipfs,
+        &None,
+        &Some(fast_delay),
+    );
+
+    let title = String::from_str(&setup.env, "Some proposal title");
+    let prop_ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 2 * 24 * 3600;
+    let proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_id,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    // Before per-project delay: execute should panic.
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + fast_delay - 1);
+    let err = setup
+        .contract
+        .try_execute(&setup.mando, &id, &proposal_id, &None, &None)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalVotingTime.into());
+
+    // Exactly at per-project delay: execute should succeed (even though
+    // TIMELOCK_DELAY=24h hasn't elapsed).
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + fast_delay);
+    let status = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_id, &None, &None);
+    assert_eq!(status, ProposalStatus::Approved);
+}
+
+#[test]
+fn update_config_min_voting_period_applies_to_new_proposals() {
+    // A floor set after registration binds future proposals; clearing it
+    // restores the global default.
+    let setup = create_test_data();
+
+    let name = String::from_str(&setup.env, "latergov");
+    let url = String::from_str(&setup.env, "github.com/latergov");
+    let ipfs = String::from_str(&setup.env, "2ef4f49fdd8fa9dc463f1f06a094c26b88710990");
+    let maintainers = vec![&setup.env, setup.grogu.clone(), setup.mando.clone()];
+
+    let genesis_amount: i128 = 1_000_000_000 * 10_000_000;
+    setup.token_stellar.mint(&setup.grogu, &genesis_amount);
+    setup.token_stellar.mint(&setup.mando, &genesis_amount);
+
+    let id = setup
+        .contract
+        .register(&setup.grogu, &name, &maintainers, &url, &ipfs, &None, &None);
+
+    let seven_days = 7 * 24 * 3600u64;
+    setup.contract.update_config(
+        &setup.grogu,
+        &id,
+        &maintainers,
+        &url,
+        &ipfs,
+        &Some(seven_days),
+        &None,
+    );
+
+    let title = String::from_str(&setup.env, "Some proposal title");
+    let prop_ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let two_days_out = setup.env.ledger().timestamp() + 2 * 24 * 3600;
+
+    let err = setup
+        .contract
+        .try_create_proposal(
+            &setup.grogu,
+            &id,
+            &title,
+            &prop_ipfs,
+            &two_days_out,
+            &true,
+            &None,
+            &None,
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalInputValidation.into());
+
+    // Restoring the default floor is a loosening update: it only takes
+    // effect after the notice window (old 7d min + 24h delay).
+    setup.contract.update_config(
+        &setup.grogu,
+        &id,
+        &maintainers,
+        &url,
+        &ipfs,
+        &Some(24 * 3600u64),
+        &None,
+    );
+    let err = setup
+        .contract
+        .try_create_proposal(
+            &setup.grogu,
+            &id,
+            &title,
+            &prop_ipfs,
+            &two_days_out,
+            &true,
+            &None,
+            &None,
+        )
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalInputValidation.into());
+
+    let notice = seven_days + 24 * 3600;
+    setup
+        .env
+        .ledger()
+        .set_timestamp(setup.env.ledger().timestamp() + notice);
+    let two_days_out = setup.env.ledger().timestamp() + 2 * 24 * 3600;
+    let _proposal_id = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &two_days_out,
+        &true,
+        &None,
+        &None,
+    );
+}
+
+#[test]
+fn execute_delay_snapshot_shields_in_flight_proposals() {
+    // Changing the project delay after a proposal is created must not change
+    // that proposal's timelock; only proposals created afterwards see it.
+    let setup = create_test_data();
+
+    let name = String::from_str(&setup.env, "fastdao");
+    let url = String::from_str(&setup.env, "github.com/fastdao");
+    let ipfs = String::from_str(&setup.env, "2ef4f49fdd8fa9dc463f1f06a094c26b88710990");
+    let maintainers = vec![&setup.env, setup.grogu.clone(), setup.mando.clone()];
+
+    let genesis_amount: i128 = 1_000_000_000 * 10_000_000;
+    setup.token_stellar.mint(&setup.grogu, &genesis_amount);
+    setup.token_stellar.mint(&setup.mando, &genesis_amount);
+
+    let fast_delay = 60u64;
+    let id = setup.contract.register(
+        &setup.grogu,
+        &name,
+        &maintainers,
+        &url,
+        &ipfs,
+        &None,
+        &Some(fast_delay),
+    );
+
+    let title = String::from_str(&setup.env, "Some proposal title");
+    let prop_ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+    let voting_ends_at = setup.env.ledger().timestamp() + 2 * 24 * 3600;
+    let proposal_a = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    // Lengthen the delay after proposal A exists; proposal B inherits it.
+    let seven_days = 7 * 24 * 3600u64;
+    setup.contract.update_config(
+        &setup.grogu,
+        &id,
+        &maintainers,
+        &url,
+        &ipfs,
+        &None,
+        &Some(seven_days),
+    );
+    let proposal_b = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &voting_ends_at,
+        &true,
+        &None,
+        &None,
+    );
+
+    for pid in [proposal_a, proposal_b] {
+        setup.contract.vote(
+            &setup.mando,
+            &id,
+            &pid,
+            &Vote::PublicVote(PublicVote {
+                address: setup.mando.clone(),
+                weight: 1,
+                vote_choice: VoteChoice::Approve,
+            }),
+        );
+    }
+
+    setup
+        .env
+        .ledger()
+        .set_timestamp(voting_ends_at + fast_delay);
+
+    // A keeps its snapshotted 60s delay.
+    let status = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_a, &None, &None);
+    assert_eq!(status, ProposalStatus::Approved);
+
+    // B was created under the 7-day delay and is still locked.
+    let err = setup
+        .contract
+        .try_execute(&setup.mando, &id, &proposal_b, &None, &None)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalVotingTime.into());
+}
+
+#[test]
+fn execute_delay_loosening_waits_out_notice() {
+    // Lowering the timelock is pending for old min + old delay (24h + 24h);
+    // proposals created before activation keep the old delay, proposals
+    // created after get the new one.
+    let setup = create_test_data();
+
+    let name = String::from_str(&setup.env, "slowdao");
+    let url = String::from_str(&setup.env, "github.com/slowdao");
+    let ipfs = String::from_str(&setup.env, "2ef4f49fdd8fa9dc463f1f06a094c26b88710990");
+    let maintainers = vec![&setup.env, setup.grogu.clone(), setup.mando.clone()];
+
+    let genesis_amount: i128 = 1_000_000_000 * 10_000_000;
+    setup.token_stellar.mint(&setup.grogu, &genesis_amount);
+    setup.token_stellar.mint(&setup.mando, &genesis_amount);
+
+    let id = setup
+        .contract
+        .register(&setup.grogu, &name, &maintainers, &url, &ipfs, &None, &None);
+
+    let t0 = setup.env.ledger().timestamp();
+    let fast_delay = 60u64;
+    setup.contract.update_config(
+        &setup.grogu,
+        &id,
+        &maintainers,
+        &url,
+        &ipfs,
+        &None,
+        &Some(fast_delay),
+    );
+
+    let title = String::from_str(&setup.env, "Some proposal title");
+    let prop_ipfs = String::from_str(
+        &setup.env,
+        "bafybeib6ioupho3p3pliusx7tgs7dvi6mpu2bwfhayj6w6ie44lo3vvc4i",
+    );
+
+    // Proposal A is created while the update is still pending: no snapshot,
+    // so it keeps the global 24h delay.
+    let ends_a = t0 + 3 * 24 * 3600;
+    let proposal_a = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &ends_a,
+        &true,
+        &None,
+        &None,
+    );
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_a,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    // Past the 48h notice window: proposal B picks up the 60s delay.
+    setup.env.ledger().set_timestamp(t0 + 2 * 24 * 3600 + 10);
+    let ends_b = setup.env.ledger().timestamp() + 24 * 3600;
+    let proposal_b = setup.contract.create_proposal(
+        &setup.grogu,
+        &id,
+        &title,
+        &prop_ipfs,
+        &ends_b,
+        &true,
+        &None,
+        &None,
+    );
+    setup.contract.vote(
+        &setup.mando,
+        &id,
+        &proposal_b,
+        &Vote::PublicVote(PublicVote {
+            address: setup.mando.clone(),
+            weight: 1,
+            vote_choice: VoteChoice::Approve,
+        }),
+    );
+
+    setup.env.ledger().set_timestamp(ends_b + fast_delay);
+    let status = setup
+        .contract
+        .execute(&setup.mando, &id, &proposal_b, &None, &None);
+    assert_eq!(status, ProposalStatus::Approved);
+
+    // A (voting ended at ends_a = t0+72h) still needs the full 24h it was
+    // created under, and ends_b + 60 < ends_a + 24h.
+    let err = setup
+        .contract
+        .try_execute(&setup.mando, &id, &proposal_a, &None, &None)
+        .unwrap_err()
+        .unwrap();
+    assert_eq!(err, ContractErrors::ProposalVotingTime.into());
+}

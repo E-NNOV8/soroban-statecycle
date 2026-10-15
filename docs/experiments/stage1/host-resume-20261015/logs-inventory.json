@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "ls",
+    "-lt",
+    "/var/log/stellar-core"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T17:14:57.323862+00:00",
+  "exit_code": 0,
+  "stdout": "total 73584\n-rw-r--r--. 1 stellar stellar 75332406 Oct 15 17:14 stellar-core-2026-10-15_15-02-36.log\n-rw-r--r--. 1 root    root        1541 Oct 15 17:09 stellar-core-2026-10-15_17-09-42.log\n-rw-r--r--. 1 root    root        2625 Oct 15 17:09 stellar-core-2026-10-15_17-09-14.log\n-rw-rw-r--. 1 stellar stellar     7074 Oct 15 15:02 stellar-core-2026-10-15_15-02-30.log\n",
+  "stderr": ""
+}

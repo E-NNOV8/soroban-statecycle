@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "stellar",
+    "contract",
+    "asset",
+    "deploy",
+    "--asset",
+    "ARST2:GBPQSQQRS34EPU6QF3RLGHIHA7NQHNYQ4UUUSIYR6T4F5FLLIHQZMQEN",
+    "--rpc-url",
+    "http://localhost:8000/rpc",
+    "--network-passphrase",
+    "Standalone Network ; February 2017",
+    "--source",
+    "archival-admin"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:04:31.595099+00:00",
+  "exit_code": 0,
+  "stdout": "CADGP5CFFEKXJLYFXHS7R5EPSMEBUC5HJBK6SKAYXA6KWDER6QMBLOPG\n",
+  "stderr": "\u2139\ufe0f  Simulating transaction\u2026\n\u2139\ufe0f  Signing transaction: b9772d7b1f492fca0f29a23c313b54e4f0e8bf4305cf6fc700285bd3802b9d58\n\ud83c\udf0e Sending transaction\u2026\n\u2705 Transaction submitted successfully!\n\u2705 Deployed!\n"
+}

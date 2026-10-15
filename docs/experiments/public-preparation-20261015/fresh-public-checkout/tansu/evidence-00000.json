@@ -1,0 +1,9 @@
+{
+  "url": "http://localhost:18002/rpc",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "getNetwork"
+  },
+  "body": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"friendbotUrl\":\"http://localhost:8000/friendbot\",\"passphrase\":\"Standalone Network ; February 2017\",\"protocolVersion\":28}}"
+}

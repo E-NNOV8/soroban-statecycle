@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "curl",
+    "-sSG",
+    "http://localhost:11626/upgrades?mode=set&upgradetime=1970-01-01T00:00:00Z",
+    "--data-urlencode",
+    "configupgradesetkey=mv5hMIoFdavTLD8KUAiDwkAuX8MF0AyZfl7c6GOdmsSyXhecJugKZ2cWLJ7cuoMhh0TtPw9i+/nC14AAnshACQ=="
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:04:55.382262+00:00",
+  "exit_code": 0,
+  "stdout": "Error setting configUpgradeSet",
+  "stderr": ""
+}

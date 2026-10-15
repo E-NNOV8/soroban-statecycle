@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "/home/mxr/timi/tansu",
+    "rev-parse",
+    "HEAD"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T18:11:32.790696+00:00",
+  "exit_code": 0,
+  "stdout": "0524376d293be41ee3bf5ca102cee2a88bea3d03\n",
+  "stderr": ""
+}

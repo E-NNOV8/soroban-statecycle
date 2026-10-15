@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "docker",
+    "exec",
+    "stellar-local",
+    "stellar-core",
+    "get-settings-upgrade-txs",
+    "--help"
+  ],
+  "stdin": null,
+  "started_at": "2026-10-15T16:00:44.367272+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "PublicKey argument is required\n\nreturns all transactions that need to be submitted to do a settings upgrade\n\nusage:\n  stellar-core get-settings-upgrade-txs <PublicKey> <SequenceNumber> <NetworkPassphrase> options\n\nwhere options are:\n  -?, -h, --help                           display usage information\n  --xdr <XDR-BASE64>                       ConfigUpgradeSet in base64\n  --signtxs                                sign all transactions\n  --add-resource-fee <ADD-RESOURCE-FEE>    additional resource fee for all\n                                           the transactions\n"
+}
