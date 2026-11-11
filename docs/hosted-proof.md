@@ -84,6 +84,11 @@ the retained baseline and GitHub metadata, not a signed external attestation.
 
 ## Independently verify from a checkout
 
+The retained hosted run and its artifact are **project-controlled proof**, not an
+independent reproduction or reviewer result. Follow the [independent reproduction
+checklist](reproducibility.md#independent-reproduction-handoff) for a fresh
+clean-checkout Core execution and a structured reviewer record.
+
 With the documented Python and Stellar CLI on PATH, from the checkout root:
 
 ```sh
@@ -106,7 +111,7 @@ and [limitations](limitations.md) for exact trust and support boundaries.
 ## Hardened producer validation
 
 The validation/classification/invariant hardening subsequently passed on exact
-producer [`615522022c7a8fdcc957b111fb13073cba47094d`](https://github.com/mxrtins04/soroban-statecycle/commit/615522022c7a8fdcc957b111fb13073cba47094d):
+producer [`615522022c7a8fdcc957b111fb13073cba47094d`](https://github.com/E-NNOV8/soroban-statecycle/commit/615522022c7a8fdcc957b111fb13073cba47094d):
 
 - [Fast run 38813239421](https://github.com/mxrtins04/soroban-statecycle/actions/runs/38813239421): **68 tests**, compilation, original local
   proof, original hosted proof and checkout sanity PASS.

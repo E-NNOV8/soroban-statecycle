@@ -13,3 +13,13 @@ The source trees include their own dependency declarations, copyright and notice
 Retaining them does not assert ownership by StateCycle. The pinned Quickstart image
 and Stellar CLI are external prerequisites downloaded from their upstream publishers;
 their executable distributions are not bundled here.
+
+## Known advisories in retained upstream lockfiles
+
+The retained Blend (`docs/vendor/blend`) and Tansu (`docs/experiments/stage2/sources/tansu`)
+trees keep their upstream `Cargo.lock` files unchanged, because their hashes are part of the
+retained evidence (`docs/evidence-integrity.json`). Dependency audit tools report
+RUSTSEC-2026-0387 (`crypto-bigint`) and RUSTSEC-2026-0009 (`time`) for these files. Those crates
+are not built by this repository's CI and are not part of StateCycle's own code, which is the
+Python package in `src/archival_regression`.
+
