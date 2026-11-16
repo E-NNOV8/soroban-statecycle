@@ -13,10 +13,14 @@ live state → real Core archival → restoration → invariant verification
            → negative / retry verification → retained RPC, XDR and receipts
 ```
 
-SDK-only TTL tests do not execute Core's eviction scanner, hot archive or actual
-RestoreFootprint transactions. StateCycle requires Core eviction metadata and
-restoration receipts for every declared key; expired TTL or missing RPC data alone
-cannot establish archival.
+### Real Core archival vs. SDK unit-test mocks
+
+StateCycle exists because unit-level SDK test environments (such as `env.ledger().set()`) manipulate synthetic TTL counters in memory. Such tests cannot validate:
+1. **Consensus Archival Boundaries**: In-memory mocks do not execute Stellar Core's real eviction scanner or hot-archive bucket transitions.
+2. **RPC Eviction Detection**: SDK mocks bypass `getLedgers` ledger-close metadata (`LedgerCloseMeta` v2) where actual `evicted_keys` are witnessed.
+3. **Transaction-level Restore Receipts**: Mocks cannot assert real `RestoreFootprintOp` transaction envelope validation, footprint fee calculation, or transaction metadata receipts.
+
+Testing exclusively against SDK mocks risks silent contract bricking on Mainnet if state transitions or restoration dependencies fail. StateCycle bridges this critical gap by executing the real node lifecycle against a genuine Stellar Core instance.
 
 For Soroban contract developers and reviewers who need a repeatable test of
 persistent-state continuity, the scenario supplies application calls, explicit
@@ -32,10 +36,12 @@ proofs, not audits or complete coverage of either application.
 ## Run locally
 
 Prerequisites: Python 3.12 or later, Stellar CLI **28.1.0**, Docker Engine with a
-working daemon, and `curl`/`tar` for the optional CLI installer. The pinned Linux
-Quickstart image runs Core 29.0.0 with active **protocol 28**. Allow several minutes
-and sufficient Docker memory/disk. See [versions and setup](docs/reproducibility.md).
-No Python package dependencies are required.
+working daemon, and `curl`/`tar` for the optional CLI installer. Docker is a **mandatory
+operational prerequisite** because StateCycle executes a genuine local Stellar Core
+instance running protocol 28 with an accelerated archival test profile, rather than
+mocking network behavior. The pinned Linux Quickstart image runs Core 29.0.0 with active
+**protocol 28**. Allow several minutes and sufficient Docker memory/disk. See [versions
+and setup](docs/reproducibility.md). No Python package dependencies are required.
 
 From the checkout root, install the pinned Linux x86_64 CLI if needed:
 
@@ -78,6 +84,20 @@ numbers and transaction metadata. INCONCLUSIVE must never be treated as product 
 
 [Scenario reference](docs/scenarios.md) documents hooks, keys, bindings and outputs.
 Hooks execute trusted local commands: review a scenario before running it.
+
+## Authoring scenarios for custom contracts
+
+Third-party contracts can be onboarded into StateCycle without modifying engine code.
+See the step-by-step [Scenario Authoring Guide](docs/SCENARIO_AUTHORING_GUIDE.md) and
+use the fail-closed scaffolding utility to bootstrap a validated template:
+
+```sh
+python3 scripts/scaffold_scenario.py \
+  --name my-token-contract \
+  --bindings get_balance,get_admin \
+  --has-mutation \
+  --output scenarios/my-token-contract.json
+```
 
 ## Verify the checkout
 

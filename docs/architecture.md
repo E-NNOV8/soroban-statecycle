@@ -25,6 +25,15 @@ public results and exact live LedgerEntryData. Repeated public/raw calls provide
 the unchanged live control. Type-sensitive equality prevents boolean/integer aliasing.
 Bindings project declared SCVals into public JSON; large integer SCVals remain strings.
 
+## Real Core archival versus SDK unit-test mocks
+
+StateCycle exists because unit-level SDK test environments (e.g. `env.ledger().set()`) manipulate synthetic TTL counters in memory. Such mocks cannot validate:
+1. **Core Eviction Consensus Scanner**: Mocks do not run the actual Stellar Core bucket-list scanning, archival boundaries, or state eviction triggers.
+2. **RPC getLedgers Eviction Detection**: Mocks bypass RPC ledger-close metadata (`LedgerCloseMeta` v2) where genuine `evicted_keys` are recorded.
+3. **Transaction-level RestoreFootprintOp Validation**: In-memory test environments do not enforce real transaction footprint decoding, resource footprint fee validation, or real consensus transaction metadata emission.
+
+Testing only with SDK mocks creates a false sense of security while leaving smart contracts vulnerable to silent bricking on Mainnet if state transitions or restoration dependencies fail. StateCycle runs against a genuine local Stellar Core instance, validating the complete operational lifecycle from eviction to restored footprint receipts.
+
 ## Genuine archival boundary
 
 The engine polls RPC `getLedgers` from the recorded live ledger, requiring contiguous
