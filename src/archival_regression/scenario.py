@@ -26,6 +26,8 @@ def validate(config):
     if not isinstance(config['entries'],dict) or not config['entries']:
         raise Inconclusive('nonempty named ledger entries required')
     for name,key in config['entries'].items():
+        if not name or not name.strip():
+            raise Inconclusive('empty entry name disallowed')
         if (not isinstance(name,str) or not isinstance(key,dict) or
                 set(key)!={'contract_data'} or not isinstance(key['contract_data'], dict)
                 or key['contract_data'].get('durability')!='persistent'):
