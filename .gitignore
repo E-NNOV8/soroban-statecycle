@@ -18,3 +18,11 @@ __pycache__/
 /dist/
 /target/
 .DS_Store
+
+# Local developer planning & checkpoints
+tasks.json
+plan.json
+PLAN.md
+DAY-*.md
+.quota_session.json
+.checkpoints/
