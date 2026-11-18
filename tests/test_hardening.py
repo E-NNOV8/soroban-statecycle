@@ -22,6 +22,19 @@ SPEC.loader.exec_module(hosted)
 
 
 class ScenarioBoundaryTests(unittest.TestCase):
+    def test_scenario_validation_catches_empty_entry_names(self):
+        config = load_scenario(ROOT / 'scenarios/blend-config-admin.json')
+        config['entries'][''] = {'contract_data': {'contract': 'C1', 'key': 'K1', 'durability': 'persistent'}}
+        with self.assertRaises(Inconclusive):
+            validate(config)
+
+    def test_scenario_validation_catches_malformed_protocol(self):
+        config = load_scenario(ROOT / 'scenarios/blend-config-admin.json')
+        config['protocol'] = 27
+        with self.assertRaises(Inconclusive) as ctx:
+            validate(config)
+        self.assertIn('protocol 28 is supported', str(ctx.exception))
+
     def test_invariants_distinguish_json_boolean_and_integer(self):
         from archival_regression.campaign import compare, same
         from archival_regression.errors import Violation
