@@ -37,6 +37,8 @@ def scval(value):
         return data
     if tag in ('i128', 'u128', 'i64', 'u64'):
         return str(data)
+    if tag in ('timepoint', 'duration'):
+        return int(data)
     if tag == 'vec' and isinstance(data, list):
         return [scval(v) for v in data]
     if tag == 'void':

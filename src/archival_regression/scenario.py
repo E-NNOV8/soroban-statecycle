@@ -75,6 +75,12 @@ def validate(config):
     timeout = config.get('archive_timeout_seconds', 240)
     if type(timeout) not in (int, float) or not 1 <= timeout <= 3600:
         raise Inconclusive('archive timeout must be bounded to 1..3600 seconds')
+    if 'min_ttl_ledgers' in config:
+        if type(config['min_ttl_ledgers']) is not int or config['min_ttl_ledgers'] < 1:
+            raise Inconclusive('min_ttl_ledgers must be a positive integer')
+    if 'max_ttl_ledgers' in config:
+        if type(config['max_ttl_ledgers']) is not int or config['max_ttl_ledgers'] < config.get('min_ttl_ledgers', 1):
+            raise Inconclusive('max_ttl_ledgers must be >= min_ttl_ledgers')
 
 
 def fresh(config, salt):
