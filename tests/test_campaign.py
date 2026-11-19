@@ -94,4 +94,26 @@ class CampaignTests(unittest.TestCase):
             record['body']=json.dumps(data); path.write_text(json.dumps(record))
             with self.assertRaises(Inconclusive):campaign.verify_recovery()
 
+    def test_ledger_sequence_monotonic_advancement(self):
+        with tempfile.TemporaryDirectory() as directory:
+            campaign=self.retained_campaign(Path(directory))
+            self.assertEqual(campaign.track_ledger_sequence(100),100)
+            self.assertEqual(campaign.track_ledger_sequence(101),101)
+            self.assertEqual(campaign.state['last_ledger_sequence'],101)
+
+    def test_ledger_sequence_regression_raises_violation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            campaign=self.retained_campaign(Path(directory))
+            campaign.track_ledger_sequence(105)
+            with self.assertRaises(Violation):
+                campaign.track_ledger_sequence(104)
+
+    def test_invalid_ledger_sequence_raises_inconclusive(self):
+        with tempfile.TemporaryDirectory() as directory:
+            campaign=self.retained_campaign(Path(directory))
+            with self.assertRaises(Inconclusive):
+                campaign.track_ledger_sequence(-1)
+            with self.assertRaises(Inconclusive):
+                campaign.track_ledger_sequence("not-an-int")
+
 if __name__=='__main__':unittest.main()
