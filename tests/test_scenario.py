@@ -88,4 +88,24 @@ class ScenarioTests(unittest.TestCase):
         self.config['archive_timeout_seconds']=1000000000
         with self.assertRaises(Inconclusive):validate(self.config)
 
+    def test_ttl_ledger_bounds_validation(self):
+        cfg = copy.deepcopy(self.config)
+        cfg['min_ttl_ledgers'] = 100
+        cfg['max_ttl_ledgers'] = 500
+        validate(cfg)
+
+        # Invalid: min < 1
+        cfg['min_ttl_ledgers'] = 0
+        with self.assertRaises(Inconclusive):validate(cfg)
+
+        # Invalid: max < min
+        cfg['min_ttl_ledgers'] = 500
+        cfg['max_ttl_ledgers'] = 200
+        with self.assertRaises(Inconclusive):validate(cfg)
+
+    def test_scval_decoding_timepoint_and_duration(self):
+        from archival_regression.campaign import scval
+        self.assertEqual(scval({'timepoint': 1732014000}), 1732014000)
+        self.assertEqual(scval({'duration': 3600}), 3600)
+
 if __name__=='__main__':unittest.main()
