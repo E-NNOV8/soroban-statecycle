@@ -50,6 +50,10 @@ def scval(value):
             if not isinstance(key,str) or key in storage:
                 raise Inconclusive('instance projection requires unique string keys')
             storage[key]=scval(pair['val'])
+        executable = data.get('executable')
+        if isinstance(executable, dict):
+            from .scenario import validate_executable_hash
+            validate_executable_hash(executable)
         return {'executable':data['executable'],'storage':storage}
     if tag == 'map' and isinstance(data, list):
         result = {}

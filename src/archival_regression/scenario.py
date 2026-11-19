@@ -83,6 +83,21 @@ def validate(config):
             raise Inconclusive('max_ttl_ledgers must be >= min_ttl_ledgers')
 
 
+def validate_executable_hash(executable):
+    """Validate contract instance executable format and SHA256 byte hash integrity."""
+    if not isinstance(executable, dict) or not executable:
+        raise Inconclusive('contract executable requires a nonempty object')
+    wasm_key = 'wasm' if 'wasm' in executable else ('wasm_hash' if 'wasm_hash' in executable else None)
+    if wasm_key:
+        h = executable[wasm_key]
+        if not isinstance(h, str) or len(h) != 64 or any(c not in '0123456789abcdefABCDEF' for c in h):
+            raise Inconclusive('invalid contract wasm hash: must be 64-character hex string')
+        return h.lower()
+    if 'token' in executable:
+        return 'token'
+    raise Inconclusive('unsupported contract executable type')
+
+
 def fresh(config, salt):
     """Resolve only explicitly declared fresh salt placeholders."""
     if len(salt)!=64 or any(c not in '0123456789abcdef' for c in salt):
