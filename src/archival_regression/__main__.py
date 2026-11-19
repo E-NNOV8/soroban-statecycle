@@ -15,10 +15,17 @@ def main(argv=None):
     sub=parser.add_subparsers(dest='action',required=True)
     run=sub.add_parser('run')
     run.add_argument('scenario',type=Path)
-    run.add_argument('--output',type=Path,required=True)
+    run.add_argument('--output',type=Path,required=False)
+    run.add_argument('--validate-only',action='store_true',help='Validate scenario syntax and schema without executing lifecycle')
     args=parser.parse_args(argv)
     try:
-        config=fresh(load_scenario(args.scenario),secrets.token_hex(32))
+        config=load_scenario(args.scenario)
+        if args.validate_only:
+            print(json.dumps({'result':'VALID','scenario':str(args.scenario),'protocol':config['protocol'],'entries':list(config['entries'])}))
+            return 0
+        if not args.output:
+            raise Inconclusive('campaign execution requires --output directory')
+        config=fresh(config,secrets.token_hex(32))
         if args.output.exists():
             raise Inconclusive('refusing existing campaign output')
         resolved=args.output.with_name(args.output.name+'.scenario.json')
