@@ -112,6 +112,16 @@ class Campaign:
         self.state = json.loads(self.state_path.read_text()) if self.state_path.exists() else {}
         self.index = 1+max((int(p.stem.split('-')[1]) for p in output.glob('evidence-*.json')),default=-1)
 
+    def track_ledger_sequence(self, sequence):
+        """Track monotonic ledger sequence advancement in campaign state."""
+        if not isinstance(sequence, int) or sequence < 0:
+            raise Inconclusive('ledger sequence must be a non-negative integer')
+        last_seq = self.state.get('last_ledger_sequence')
+        if last_seq is not None and sequence < last_seq:
+            raise Violation(f'ledger sequence regressed from {last_seq} to {sequence}')
+        self.state['last_ledger_sequence'] = sequence
+        return sequence
+
     def save(self):
         temp = self.output/'checkpoint.tmp'
         temp.write_text(json.dumps(self.state, indent=2)+'\n')
@@ -298,6 +308,7 @@ class Campaign:
                 seq=item['sequence']
                 if seq != cursor:
                     raise Inconclusive('ledger metadata coverage gap')
+                self.track_ledger_sequence(seq)
                 decoded=self.decode('LedgerCloseMeta',item['metadataXdr'])
                 body=decoded.get('v2')
                 if body is None or body['ledger_header']['header']['ledger_seq'] != seq or body['ledger_header']['hash'] != item['hash']:
