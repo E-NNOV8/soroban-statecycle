@@ -108,4 +108,23 @@ class ScenarioTests(unittest.TestCase):
         self.assertEqual(scval({'timepoint': 1732014000}), 1732014000)
         self.assertEqual(scval({'duration': 3600}), 3600)
 
+    def test_executable_hash_validation(self):
+        from archival_regression.scenario import validate_executable_hash
+        valid_hash = 'a' * 64
+        self.assertEqual(validate_executable_hash({'wasm': valid_hash}), valid_hash)
+        self.assertEqual(validate_executable_hash({'wasm_hash': valid_hash.upper()}), valid_hash)
+        self.assertEqual(validate_executable_hash({'token': True}), 'token')
+
+        # Invalid length
+        with self.assertRaises(Inconclusive):
+            validate_executable_hash({'wasm': 'short'})
+        # Invalid non-hex characters
+        with self.assertRaises(Inconclusive):
+            validate_executable_hash({'wasm': 'z' * 64})
+        # Empty or non-dict
+        with self.assertRaises(Inconclusive):
+            validate_executable_hash({})
+        with self.assertRaises(Inconclusive):
+            validate_executable_hash(None)
+
 if __name__=='__main__':unittest.main()
