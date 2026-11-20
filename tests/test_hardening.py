@@ -135,3 +135,18 @@ class HostedEvidenceTests(unittest.TestCase):
 
     def test_retained_raw_campaigns_pass_the_current_verifier(self):
         self.assertEqual(hosted.verify()['campaigns'], ['blend', 'tansu'])
+
+    def test_violation_error_taxonomy_and_serialization(self):
+        from archival_regression.errors import Violation
+        v = Violation('state divergence', code='STATE_DIVERGENCE', details={'key': 'foo'})
+        self.assertEqual(str(v), '[STATE_DIVERGENCE] state divergence')
+        payload = v.to_dict()
+        self.assertEqual(payload['error_type'], 'Violation')
+        self.assertEqual(payload['code'], 'STATE_DIVERGENCE')
+        self.assertEqual(payload['message'], 'state divergence')
+        self.assertEqual(payload['details'], {'key': 'foo'})
+
+        v_default = Violation('simple violation')
+        self.assertEqual(str(v_default), 'simple violation')
+        self.assertEqual(v_default.code, 'INVARIANT_VIOLATION')
+
