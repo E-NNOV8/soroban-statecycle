@@ -116,4 +116,24 @@ class CampaignTests(unittest.TestCase):
             with self.assertRaises(Inconclusive):
                 campaign.track_ledger_sequence("not-an-int")
 
+    def test_multi_entry_restoration_success_and_failure(self):
+        with tempfile.TemporaryDirectory() as directory:
+            campaign = self.retained_campaign(Path(directory))
+            entries = [
+                {'key': 'contract_a_data', 'restored': True},
+                {'key': 'contract_b_instance', 'restored': True},
+            ]
+            tx = {'tx_hash': '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'}
+            result = campaign.verify_multi_entry_restoration(entries, tx)
+            self.assertEqual(result['status'], 'VERIFIED')
+            self.assertEqual(result['count'], 2)
+
+            unrestored = [
+                {'key': 'contract_a_data', 'restored': True},
+                {'key': 'contract_b_instance', 'restored': False},
+            ]
+            with self.assertRaises(Violation):
+                campaign.verify_multi_entry_restoration(unrestored, tx)
+
 if __name__=='__main__':unittest.main()
+
