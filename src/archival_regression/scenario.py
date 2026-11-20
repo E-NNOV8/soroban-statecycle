@@ -81,6 +81,26 @@ def validate(config):
     if 'max_ttl_ledgers' in config:
         if type(config['max_ttl_ledgers']) is not int or config['max_ttl_ledgers'] < config.get('min_ttl_ledgers', 1):
             raise Inconclusive('max_ttl_ledgers must be >= min_ttl_ledgers')
+    if 'archive_witness_metadata' in config:
+        validate_archive_witness_metadata(config['archive_witness_metadata'])
+
+
+def validate_archive_witness_metadata(metadata):
+    """Validate optional archive witness metadata structure and fields."""
+    if not isinstance(metadata, dict):
+        raise Inconclusive('archive witness metadata must be an object')
+    if 'ledger_sequence' in metadata:
+        seq = metadata['ledger_sequence']
+        if not isinstance(seq, int) or seq < 0:
+            raise Inconclusive('witness ledger_sequence must be a non-negative integer')
+    if 'eviction_keys' in metadata:
+        keys = metadata['eviction_keys']
+        if not isinstance(keys, list) or not keys:
+            raise Inconclusive('witness eviction_keys must be a non-empty list')
+        for k in keys:
+            if not isinstance(k, str) or not k.strip():
+                raise Inconclusive('eviction key must be a non-empty string')
+    return True
 
 
 def validate_executable_hash(executable):
