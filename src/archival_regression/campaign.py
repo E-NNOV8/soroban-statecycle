@@ -126,6 +126,19 @@ class Campaign:
         self.state['last_ledger_sequence'] = sequence
         return sequence
 
+    def verify_multi_entry_restoration(self, entries, restore_tx):
+        """Verify atomic restoration across multiple interdependent state entries."""
+        if not isinstance(entries, list) or not entries:
+            raise Inconclusive('multi-entry restoration requires non-empty entry list')
+        if not isinstance(restore_tx, dict) or not restore_tx.get('tx_hash'):
+            raise Inconclusive('valid restore transaction with tx_hash required')
+        for entry in entries:
+            if not isinstance(entry, dict) or not entry.get('key'):
+                raise Inconclusive('each restored entry must contain a valid key')
+            if not entry.get('restored'):
+                raise Violation(f"entry {entry.get('key')} was not restored in transaction {restore_tx['tx_hash']}")
+        return {'status': 'VERIFIED', 'count': len(entries), 'tx_hash': restore_tx['tx_hash']}
+
     def save(self):
         temp = self.output/'checkpoint.tmp'
         temp.write_text(json.dumps(self.state, indent=2)+'\n')
