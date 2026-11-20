@@ -127,4 +127,26 @@ class ScenarioTests(unittest.TestCase):
         with self.assertRaises(Inconclusive):
             validate_executable_hash(None)
 
+    def test_archive_witness_metadata_validation(self):
+        from archival_regression.scenario import validate_archive_witness_metadata
+        valid = {'ledger_sequence': 1234, 'eviction_keys': ['key1', 'key2']}
+        self.assertTrue(validate_archive_witness_metadata(valid))
+
+        cfg = copy.deepcopy(self.config)
+        cfg['archive_witness_metadata'] = valid
+        validate(cfg)
+
+        with self.assertRaises(Inconclusive):
+            validate_archive_witness_metadata('not-a-dict')
+
+        with self.assertRaises(Inconclusive):
+            validate_archive_witness_metadata({'ledger_sequence': -5})
+
+        with self.assertRaises(Inconclusive):
+            validate_archive_witness_metadata({'eviction_keys': []})
+
+        with self.assertRaises(Inconclusive):
+            validate_archive_witness_metadata({'eviction_keys': ['']})
+
 if __name__=='__main__':unittest.main()
+
