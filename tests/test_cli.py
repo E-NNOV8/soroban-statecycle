@@ -38,6 +38,25 @@ class CliTests(unittest.TestCase):
         data = json.loads(res.stdout)
         self.assertEqual(data.get('result'), 'INCONCLUSIVE')
 
+    def test_validate_with_summary_flag(self):
+        cmd = [
+            sys.executable,
+            '-m',
+            'archival_regression',
+            'run',
+            str(SCENARIO),
+            '--validate-only',
+            '--summary',
+        ]
+        res = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"CLI stderr: {res.stderr}")
+        data = json.loads(res.stdout)
+        self.assertEqual(data.get('result'), 'VALID')
+        self.assertIn('phases', data)
+        self.assertEqual(data['phases'], ['archive', 'negative', 'restore-checkpoint', 'resume-retry', 'verify'])
+        self.assertIn('bindings_count', data)
+
 
 if __name__ == '__main__':
+
     unittest.main()
