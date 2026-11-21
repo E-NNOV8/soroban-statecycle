@@ -148,5 +148,13 @@ class ScenarioTests(unittest.TestCase):
         with self.assertRaises(Inconclusive):
             validate_archive_witness_metadata({'eviction_keys': ['']})
 
+    def test_archival_checkpoint_fixture_structure(self):
+        fixture_p = ROOT / 'examples' / 'fixtures' / 'archival_checkpoint_fixture.json'
+        self.assertTrue(fixture_p.exists())
+        data = json.loads(fixture_p.read_text())
+        self.assertEqual(data['scenario_name'], 'vault_archival_recovery')
+        self.assertEqual(len(data['checkpoints']), 3)
+        self.assertIn('live_until_ledger', data['checkpoints'][0])
+
 if __name__=='__main__':unittest.main()
 
