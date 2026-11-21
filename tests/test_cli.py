@@ -56,6 +56,15 @@ class CliTests(unittest.TestCase):
         self.assertEqual(data['phases'], ['archive', 'negative', 'restore-checkpoint', 'resume-retry', 'verify'])
         self.assertIn('bindings_count', data)
 
+    def test_cli_guide_exists_and_contains_sections(self):
+        guide = ROOT / 'docs' / 'CLI_GUIDE.md'
+        self.assertTrue(guide.exists())
+        content = guide.read_text()
+        self.assertIn('# Soroban Statecycle Archival Regression Campaign Guide', content)
+        self.assertIn('Lifecycle Phases Verified', content)
+        self.assertIn('--phase archive', content)
+        self.assertIn('--phase recover', content)
+
 
 if __name__ == '__main__':
 
