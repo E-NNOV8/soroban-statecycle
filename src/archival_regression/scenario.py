@@ -128,3 +128,18 @@ def fresh(config, salt):
         if isinstance(value,dict):return {k:visit(v) for k,v in value.items()}
         return value
     return visit(copy.deepcopy(config))
+
+
+def validate_ttl_monotonicity(checkpoints):
+    """Validate that live_until_ledger is strictly non-decreasing across active ledger checkpoints."""
+    prev_live_until = None
+    for i, cp in enumerate(checkpoints):
+        if not isinstance(cp, dict):
+            continue
+        live_until = cp.get("live_until_ledger")
+        if live_until is not None:
+            if prev_live_until is not None and live_until < prev_live_until and not cp.get("archived", False):
+                return False, f"Checkpoint {i} live_until_ledger ({live_until}) regressed from previous ({prev_live_until})"
+            prev_live_until = live_until
+    return True, None
+
