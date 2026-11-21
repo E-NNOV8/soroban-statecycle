@@ -509,5 +509,16 @@ def main(argv=None):
     print(json.dumps(report))
     return code
 
+
+def export_phase_timings_csv(timings):
+    """Export phase duration timings to CSV format."""
+    lines = ["phase,duration_seconds,status"]
+    for phase, data in timings.items():
+        dur = data.get("duration", 0.0) if isinstance(data, dict) else float(data)
+        stat = data.get("status", "COMPLETED") if isinstance(data, dict) else "COMPLETED"
+        lines.append(f"{phase},{dur:.2f},{stat}")
+    return "\n".join(lines) + "\n"
+
+
 if __name__=='__main__':
     sys.exit(main())
