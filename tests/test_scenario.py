@@ -156,5 +156,25 @@ class ScenarioTests(unittest.TestCase):
         self.assertEqual(len(data['checkpoints']), 3)
         self.assertIn('live_until_ledger', data['checkpoints'][0])
 
+    def test_ttl_monotonicity_validator(self):
+        from archival_regression.scenario import validate_ttl_monotonicity
+        # Monotonic checkpoints
+        cps = [
+            {'ledger': 100, 'live_until_ledger': 500, 'archived': False},
+            {'ledger': 200, 'live_until_ledger': 600, 'archived': False},
+        ]
+        valid, err = validate_ttl_monotonicity(cps)
+        self.assertTrue(valid)
+        self.assertIsNone(err)
+
+        # Regressed checkpoints
+        bad_cps = [
+            {'ledger': 100, 'live_until_ledger': 600, 'archived': False},
+            {'ledger': 200, 'live_until_ledger': 400, 'archived': False},
+        ]
+        bad_valid, bad_err = validate_ttl_monotonicity(bad_cps)
+        self.assertFalse(bad_valid)
+        self.assertIn('regressed from previous', bad_err)
+
 if __name__=='__main__':unittest.main()
 
