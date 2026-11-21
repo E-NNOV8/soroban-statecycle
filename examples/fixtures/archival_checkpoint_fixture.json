@@ -1,0 +1,24 @@
+{
+  "scenario_name": "vault_archival_recovery",
+  "contract_id": "CA3D5KRYMCMCZVACQY3QUY7F7RCHLNDSJD37GNOOELVML64OHTPBFRHQ",
+  "checkpoints": [
+    {
+      "phase": "active",
+      "ledger": 1000000,
+      "live_until_ledger": 1050000,
+      "archived": false
+    },
+    {
+      "phase": "archived",
+      "ledger": 1055000,
+      "live_until_ledger": 1050000,
+      "archived": true
+    },
+    {
+      "phase": "restored",
+      "ledger": 1060000,
+      "live_until_ledger": 1150000,
+      "archived": false
+    }
+  ]
+}
