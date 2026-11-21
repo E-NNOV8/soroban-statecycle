@@ -135,5 +135,17 @@ class CampaignTests(unittest.TestCase):
             with self.assertRaises(Violation):
                 campaign.verify_multi_entry_restoration(unrestored, tx)
 
+    def test_campaign_phase_timings_csv_export(self):
+        from archival_regression.campaign import export_phase_timings_csv
+        timings = {
+            'deploy': {'duration': 1.25, 'status': 'COMPLETED'},
+            'archive': {'duration': 4.50, 'status': 'COMPLETED'},
+            'restore': {'duration': 2.10, 'status': 'COMPLETED'},
+        }
+        csv = export_phase_timings_csv(timings)
+        self.assertTrue(csv.startswith("phase,duration_seconds,status\n"))
+        self.assertIn("deploy,1.25,COMPLETED", csv)
+        self.assertIn("archive,4.50,COMPLETED", csv)
+
 if __name__=='__main__':unittest.main()
 
