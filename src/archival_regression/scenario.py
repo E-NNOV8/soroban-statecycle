@@ -143,3 +143,23 @@ def validate_ttl_monotonicity(checkpoints):
             prev_live_until = live_until
     return True, None
 
+
+def verify_contract_durability(before_state, after_state):
+    """Verify that contract state entries and their data remain immutable across archive and restore."""
+    if not isinstance(before_state, dict) or not isinstance(after_state, dict):
+        return False, "States must be dictionaries"
+    before_keys = set(before_state.keys())
+    after_keys = set(after_state.keys())
+    if before_keys != after_keys:
+        missing = before_keys - after_keys
+        extra = after_keys - before_keys
+        return False, f"Key set mismatch: missing={list(missing)}, extra={list(extra)}"
+    for key in before_keys:
+        val_before = before_state[key]
+        val_after = after_state[key]
+        if type(val_before) is not type(val_after):
+            return False, f"Type mismatch for key '{key}': expected {type(val_before).__name__}, got {type(val_after).__name__}"
+        if val_before != val_after:
+            return False, f"Value mismatch for key '{key}': expected {val_before}, got {val_after}"
+    return True, None
+
