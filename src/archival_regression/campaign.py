@@ -520,5 +520,14 @@ def export_phase_timings_csv(timings):
     return "\n".join(lines) + "\n"
 
 
+def dry_run_validate(config):
+    """Validate scenario configuration schema and parameters without disk side effects."""
+    if not isinstance(config, dict):
+        raise Inconclusive('scenario configuration must be a dictionary')
+    from .scenario import validate
+    validate(config)
+    return {"status": "VALID", "entries_count": len(config.get("entries", []))}
+
+
 if __name__=='__main__':
     sys.exit(main())
