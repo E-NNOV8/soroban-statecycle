@@ -529,5 +529,51 @@ def dry_run_validate(config):
     return {"status": "VALID", "entries_count": len(config.get("entries", []))}
 
 
+def export_html_report(report_data):
+    """Export campaign execution results and checkpoint summary to an HTML report."""
+    result = report_data.get("result", "UNKNOWN")
+    reason = report_data.get("reason", "None")
+    phase = report_data.get("phase", "unknown")
+    checkpoints = report_data.get("checkpoints", [])
+    
+    rows = []
+    for i, cp in enumerate(checkpoints):
+        ledger = cp.get("ledger", "-")
+        live_until = cp.get("live_until_ledger", "-")
+        archived = "Yes" if cp.get("archived") else "No"
+        rows.append(f"<tr><td>{i}</td><td>{ledger}</td><td>{live_until}</td><td>{archived}</td></tr>")
+    checkpoint_table = "".join(rows) if rows else "<tr><td colspan='4'>No checkpoints recorded</td></tr>"
+
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Archival Regression Report - {phase}</title>
+  <style>
+    body {{ font-family: sans-serif; margin: 2rem; background: #fdfdfd; }}
+    h1 {{ color: #222; }}
+    .badge {{ display: inline-block; padding: 0.25rem 0.5rem; font-weight: bold; border-radius: 4px; }}
+    .badge-PASS {{ background: #def7ec; color: #03543f; }}
+    .badge-FAIL {{ background: #fde8e8; color: #9b1c1c; }}
+    .badge-INCONCLUSIVE {{ background: #fef08a; color: #713f12; }}
+    table {{ border-collapse: collapse; width: 100%; margin-top: 1rem; }}
+    th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+    th {{ background: #f3f4f6; }}
+  </style>
+</head>
+<body>
+  <h1>Archival Regression Report: <span class="badge badge-{result}">{result}</span></h1>
+  <p><strong>Phase:</strong> {phase}</p>
+  <p><strong>Reason:</strong> {reason}</p>
+  <h2>Checkpoints</h2>
+  <table>
+    <thead><tr><th>Index</th><th>Ledger</th><th>Live Until</th><th>Archived</th></tr></thead>
+    <tbody>{checkpoint_table}</tbody>
+  </table>
+</body>
+</html>
+"""
+
+
 if __name__=='__main__':
     sys.exit(main())
