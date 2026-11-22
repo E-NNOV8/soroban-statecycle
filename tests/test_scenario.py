@@ -176,5 +176,31 @@ class ScenarioTests(unittest.TestCase):
         self.assertFalse(bad_valid)
         self.assertIn('regressed from previous', bad_err)
 
+    def test_contract_durability_verifier(self):
+        from archival_regression.scenario import verify_contract_durability
+        before = {"admin": "GAAA", "balance": 1000, "active": True}
+        after_same = {"admin": "GAAA", "balance": 1000, "active": True}
+        valid, err = verify_contract_durability(before, after_same)
+        self.assertTrue(valid)
+        self.assertIsNone(err)
+
+        # Mutated value
+        after_mutated = {"admin": "GAAA", "balance": 999, "active": True}
+        valid_mut, err_mut = verify_contract_durability(before, after_mutated)
+        self.assertFalse(valid_mut)
+        self.assertIn("Value mismatch for key 'balance'", err_mut)
+
+        # Key mismatch
+        after_missing = {"admin": "GAAA", "balance": 1000}
+        valid_miss, err_miss = verify_contract_durability(before, after_missing)
+        self.assertFalse(valid_miss)
+        self.assertIn("Key set mismatch", err_miss)
+
+        # Type mismatch
+        after_type = {"admin": "GAAA", "balance": "1000", "active": True}
+        valid_type, err_type = verify_contract_durability(before, after_type)
+        self.assertFalse(valid_type)
+        self.assertIn("Type mismatch for key 'balance'", err_type)
+
 if __name__=='__main__':unittest.main()
 
