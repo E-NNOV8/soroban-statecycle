@@ -8,7 +8,8 @@ import unittest
 import tempfile
 from archival_regression.campaign import Campaign, Inconclusive, Violation, compare, require_recovered, scval
 
-EVIDENCE=Path(__file__).resolve().parents[1]/'docs/experiments/stage1/host-resume-20261015'
+ROOT=Path(__file__).resolve().parents[1]
+EVIDENCE=ROOT/'docs/experiments/stage1/host-resume-20261015'
 
 class CampaignTests(unittest.TestCase):
     @classmethod
@@ -146,6 +147,17 @@ class CampaignTests(unittest.TestCase):
         self.assertTrue(csv.startswith("phase,duration_seconds,status\n"))
         self.assertIn("deploy,1.25,COMPLETED", csv)
         self.assertIn("archive,4.50,COMPLETED", csv)
+
+    def test_dry_run_validates_scenario_schema_without_side_effects(self):
+        from archival_regression.campaign import dry_run_validate
+        from archival_regression.scenario import load_scenario
+        cfg = load_scenario(ROOT / 'scenarios/blend-config-admin.json')
+        result = dry_run_validate(cfg)
+        self.assertEqual(result['status'], 'VALID')
+        self.assertGreaterEqual(result['entries_count'], 1)
+
+        with self.assertRaises(Inconclusive):
+            dry_run_validate("not-a-dict")
 
 if __name__=='__main__':unittest.main()
 
