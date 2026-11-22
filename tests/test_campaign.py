@@ -159,5 +159,24 @@ class CampaignTests(unittest.TestCase):
         with self.assertRaises(Inconclusive):
             dry_run_validate("not-a-dict")
 
+    def test_html_summary_report_export(self):
+        from archival_regression.campaign import export_html_report
+        report = {
+            "result": "PASS",
+            "reason": "All verifications succeeded",
+            "phase": "verify",
+            "checkpoints": [
+                {"ledger": 100, "live_until_ledger": 500, "archived": False},
+                {"ledger": 200, "live_until_ledger": 600, "archived": True},
+            ],
+        }
+        html = export_html_report(report)
+        self.assertIn("<!DOCTYPE html>", html)
+        self.assertIn("Archival Regression Report - verify", html)
+        self.assertIn("badge-PASS", html)
+        self.assertIn("All verifications succeeded", html)
+        self.assertIn("<td>100</td><td>500</td><td>No</td>", html)
+        self.assertIn("<td>200</td><td>600</td><td>Yes</td>", html)
+
 if __name__=='__main__':unittest.main()
 
