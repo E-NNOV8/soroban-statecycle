@@ -178,5 +178,27 @@ class CampaignTests(unittest.TestCase):
         self.assertIn("<td>100</td><td>500</td><td>No</td>", html)
         self.assertIn("<td>200</td><td>600</td><td>Yes</td>", html)
 
+    def test_verify_retained_evidence_bundle_passes_on_core_proof(self):
+        from archival_regression.campaign import verify_retained_evidence_bundle
+        res = verify_retained_evidence_bundle(EVIDENCE)
+        self.assertEqual(res['status'], 'PASS')
+        self.assertEqual(res['artifacts_verified'], 3)
+        self.assertTrue(res['has_witness'])
+
+        with tempfile.TemporaryDirectory() as empty:
+            with self.assertRaises(Inconclusive):
+                verify_retained_evidence_bundle(Path(empty))
+
+    def test_compute_ttl_delta_summary(self):
+        from archival_regression.campaign import compute_ttl_delta_summary
+        cps = [
+            {'ledger': 100, 'live_until_ledger': 500, 'archived': False},
+            {'ledger': 250, 'live_until_ledger': 900, 'archived': False},
+        ]
+        deltas = compute_ttl_delta_summary(cps)
+        self.assertEqual(len(deltas), 2)
+        self.assertEqual(deltas[0]['ttl_delta'], 0)
+        self.assertEqual(deltas[1]['ttl_delta'], 400)
+
 if __name__=='__main__':unittest.main()
 
