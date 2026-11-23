@@ -575,5 +575,43 @@ def export_html_report(report_data):
 """
 
 
+def verify_retained_evidence_bundle(evidence_dir):
+    """Self-check retained Core/Blend archival proof artifacts on disk."""
+    evidence_path = Path(evidence_dir)
+    live_p = evidence_path / 'pilot-live-decoded.json'
+    cp_p = evidence_path / 'pilot-checkpoint.json'
+    arch_p = evidence_path / 'pilot-archived.json'
+    for p in (live_p, cp_p, arch_p):
+        if not p.exists():
+            raise Inconclusive(f'missing retained evidence artifact: {p.name}')
+    raw = json.loads(json.loads(live_p.read_text())['stdout'])
+    public = json.loads(cp_p.read_text())['baseline']
+    witness = json.loads(arch_p.read_text()).get('archive_witness')
+    if not witness:
+        raise Inconclusive('retained archive artifact missing archive_witness')
+    compare(raw, public, {'get_config': 'Config', 'get_admin': 'Admin'})
+    return {'status': 'PASS', 'artifacts_verified': 3, 'has_witness': True}
+
+
+def compute_ttl_delta_summary(checkpoints):
+    """Compute ledger-to-ledger TTL deltas across archival and restoration checkpoints."""
+    deltas = []
+    prev = None
+    for idx, cp in enumerate(checkpoints):
+        live_until = cp.get('live_until_ledger')
+        if live_until is None:
+            continue
+        delta = 0 if prev is None else (live_until - prev)
+        deltas.append({
+            'index': idx,
+            'ledger': cp.get('ledger'),
+            'live_until_ledger': live_until,
+            'ttl_delta': delta,
+            'archived': bool(cp.get('archived', False)),
+        })
+        prev = live_until
+    return deltas
+
+
 if __name__=='__main__':
     sys.exit(main())
