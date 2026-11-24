@@ -202,5 +202,22 @@ class ScenarioTests(unittest.TestCase):
         self.assertFalse(valid_type)
         self.assertIn("Type mismatch for key 'balance'", err_type)
 
+    def test_archival_dependency_graph_validation(self):
+        from archival_regression.scenario import verify_archival_dependency_graph
+        clean_graph = {"router": ["pool", "token"], "pool": ["token"], "token": []}
+        ok, err = verify_archival_dependency_graph(clean_graph)
+        self.assertTrue(ok)
+        self.assertIsNone(err)
+
+        cyclic = {"a": ["b"], "b": ["a"]}
+        ok_cyc, err_cyc = verify_archival_dependency_graph(cyclic)
+        self.assertFalse(ok_cyc)
+        self.assertIn("circular archival dependency", err_cyc)
+
+        missing = {"router": ["ghost_pool"]}
+        ok_miss, err_miss = verify_archival_dependency_graph(missing)
+        self.assertFalse(ok_miss)
+        self.assertIn("undeclared contract", err_miss)
+
 if __name__=='__main__':unittest.main()
 
