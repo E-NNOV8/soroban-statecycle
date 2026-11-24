@@ -163,3 +163,38 @@ def verify_contract_durability(before_state, after_state):
             return False, f"Value mismatch for key '{key}': expected {val_before}, got {val_after}"
     return True, None
 
+
+def verify_archival_dependency_graph(graph):
+    """Validate multi-contract archival restoration order has no cycles or missing targets."""
+    if not isinstance(graph, dict):
+        return False, "dependency graph must be a dict mapping contract -> list of dependencies"
+    for node, deps in graph.items():
+        if not isinstance(deps, list):
+            return False, f"dependencies for '{node}' must be a list"
+        for dep in deps:
+            if dep not in graph:
+                return False, f"contract '{node}' depends on undeclared contract '{dep}'"
+
+    visiting = set()
+    visited = set()
+
+    def dfs(n):
+        if n in visiting:
+            return False, f"circular archival dependency detected involving '{n}'"
+        if n in visited:
+            return True, None
+        visiting.add(n)
+        for dep in graph[n]:
+            ok, err = dfs(dep)
+            if not ok:
+                return False, err
+        visiting.remove(n)
+        visited.add(n)
+        return True, None
+
+    for node in graph:
+        ok, err = dfs(node)
+        if not ok:
+            return False, err
+    return True, None
+
