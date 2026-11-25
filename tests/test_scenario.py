@@ -219,5 +219,12 @@ class ScenarioTests(unittest.TestCase):
         self.assertFalse(ok_miss)
         self.assertIn("undeclared contract", err_miss)
 
+    def test_compute_restoration_order_restores_dependencies_first(self):
+        from archival_regression.scenario import compute_restoration_order
+        graph = {"router": ["pool", "token"], "pool": ["token"], "token": []}
+        order = compute_restoration_order(graph)
+        self.assertEqual(order.index("token"), 0)
+        self.assertLess(order.index("pool"), order.index("router"))
+
 if __name__=='__main__':unittest.main()
 
