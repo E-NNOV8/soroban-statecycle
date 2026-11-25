@@ -198,3 +198,24 @@ def verify_archival_dependency_graph(graph):
             return False, err
     return True, None
 
+
+def compute_restoration_order(graph):
+    """Return a dependency-first topological restoration order for multi-contract archival recovery."""
+    ok, err = verify_archival_dependency_graph(graph)
+    if not ok:
+        raise Inconclusive(err)
+    order = []
+    visited = set()
+
+    def visit(n):
+        if n in visited:
+            return
+        visited.add(n)
+        for dep in graph[n]:
+            visit(dep)
+        order.append(n)
+
+    for node in sorted(graph.keys()):
+        visit(node)
+    return order
+
