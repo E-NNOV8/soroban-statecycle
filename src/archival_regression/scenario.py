@@ -219,3 +219,13 @@ def compute_restoration_order(graph):
         visit(node)
     return order
 
+
+def export_restoration_plan(graph):
+    """Export a deterministic multi-contract restoration sequence with dependency metadata."""
+    order = compute_restoration_order(graph)
+    return {
+        "total_contracts": len(order),
+        "restoration_order": order,
+        "dependencies": {k: list(graph[k]) for k in order},
+    }
+
