@@ -226,5 +226,12 @@ class ScenarioTests(unittest.TestCase):
         self.assertEqual(order.index("token"), 0)
         self.assertLess(order.index("pool"), order.index("router"))
 
+    def test_export_restoration_plan_structure(self):
+        from archival_regression.scenario import export_restoration_plan
+        graph = {"router": ["pool"], "pool": ["token"], "token": []}
+        plan = export_restoration_plan(graph)
+        self.assertEqual(plan["total_contracts"], 3)
+        self.assertEqual(plan["restoration_order"], ["token", "pool", "router"])
+
 if __name__=='__main__':unittest.main()
 
